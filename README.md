@@ -2,7 +2,7 @@
 
 # Goal
 
-Using your new skills writing JavaScript, create an interactive online store to display product from an API endpoint. Use one of the three provided API URLs to display products in HTML and allow users to create a basket of items. You may use your existing cross course project code as a starting point or start a fresh project if this is not available. We recommend using an existing project as styling will not be graded, but is nice to have in the final submission.
+Create an engaging, user-centric social media platform that fosters meaningful connections, promotes content discovery, and empowers users to share their ideas and experiences in a safe, secure, and interactive online community. This platform will provide users with a seamless experience to create personalized profiles, share diverse content, engage with others through likes, comments, and direct messaging, and discover new trends and connections, all while maintaining privacy and security. The ultimate goal is to create a thriving online ecosystem where users can express themselves, collaborate, and connect with others globally.
 
 ## User Stories
 
