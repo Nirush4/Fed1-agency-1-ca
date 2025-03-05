@@ -7,7 +7,6 @@ Using your new skills writing JavaScript, create an interactive online store to 
 ## User Stories
 
 - ✅ As a user, I'm able to create, customize, and manage my profile, ensuring a personalized experience.
-- ✅ As a user, I want to filter products by category, gender or genre.
 - ✅ As a user, I want to share my photos as a post within the platform..
 - ✅ As a user, I want to see the feed to discover contents that is relevant to my interests.
 - ✅ As a user, I want to remove my post from my profile.
