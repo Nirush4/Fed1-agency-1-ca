@@ -6,13 +6,13 @@ Using your new skills writing JavaScript, create an interactive online store to 
 
 ## User Stories
 
-- ✅ As a user, I want to view a list of products on the homepage.
+- ✅ As a user, I'm able to create, customize, and manage my profile, ensuring a personalized experience.
 - ✅ As a user, I want to filter products by category, gender or genre.
-- ✅ As a user, I want to view a single product page with more detail.
-- ✅ As a user, I want to add a product to my basket.
-- ✅ As a user, I want to remove a product from my basket.
-- ✅ As a user, I want to view a summary of my cart on the checkout page.
-- ✅ As a user, I want to view an order-confirmation screen after checking out.
+- ✅ As a user, I want to share my photos as a post within the platform..
+- ✅ As a user, I want to see the feed to discover contents that is relevant to my interests.
+- ✅ As a user, I want to remove my post from my profile.
+- ✅ As a user, I want to search for posts, profiles, or hashtags to discover content and people of interest.
+- ✅ As a user, I want to read my privacy policies and ensure that my data is secure.
 
 ## Required Pages
 
