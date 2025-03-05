@@ -67,7 +67,7 @@ Visual Studio Code (VS Code): Recommended code editor for its extensive support 
 
 Clone the repo:
 ```
-gh repo clone NoroffFEU/agency.noroff.dev
+gh repo clone https://github.com/Nirush4/Fed1-agency-1-ca
 ```
 Install dependencies:
 ```
