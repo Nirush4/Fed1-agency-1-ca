@@ -13,22 +13,6 @@ Create an engaging, user-centric social media platform that fosters meaningful c
 - ✅ As a user, I want to search for posts, profiles, or hashtags to discover content and people of interest.
 - ✅ As a user, I want to read my privacy policies and ensure that my data is secure.
 
-## Required Pages
-
-The following pages are required to complete this assignment.
-
-- Home Page containing product list /index.html
-- Product Page showing all details of a specific product /product/index.html
-- Checkout Page showing all items in the basket /checkout/index.html
-- Confirmation Page showing a thank you message /checkout/confirmation/index.html Optional Pages The following pages are not required to complete this assignment but help to improve the realism for those with extra time.
-- Category Pages (e.g. Male/Female Clothing, Movie Genres)
-- Terms and Conditions page (this may be AI generated)
-- Privacy Policy (this may be AI generated) - My Profile Process
-  Decide if you will use your existing project, or a fresh project.
-
----
-
-8. Make any final changes and submit for delivery.
 
 ## Resources
 
@@ -54,7 +38,7 @@ Production is the enviromewnt the end-user experience. This is the final product
 
 ### Staging
 
-Staging is the enviroment where the team can test the latest features and bug fixes. This enviroment is hosted on Netlify.
+Staging is the enviroment where the team can test the latest features and bug fixes. This enviroment is hosted on Vercel.
 
 ## Built with
 
@@ -65,7 +49,79 @@ Staging is the enviroment where the team can test the latest features and bug fi
 - https://validator.w3.org/
 - https://wave.webaim.org/
 
-Note: Resources and templates are provided under the project resources folder.
 
+# Required Software
+
+Node.js: Ensure Node.js is installed on your system. It's required for running the development server and managing project dependencies. Download it from nodejs.org.
+Git: Version control system for tracking changes and collaborating. Download from git-scm.com.
+Visual Studio Code (VS Code): Recommended code editor for its extensive support for JavaScript development. Download from code.visualstudio.com.
+
+## Dependencies in use:
+
+- [Tailwind Css](https://tailwindcss.com)
 - [Prettier](https://prettier.io/) - An opinionated code formatter
 - [Eslint](https://eslint.org/) - Find and fix problems in your JavaScript code
+
+
+## Installation
+
+Clone the repo:
+```
+gh repo clone NoroffFEU/agency.noroff.dev
+```
+Install dependencies:
+```
+npm i
+```
+## Running the Project
+
+Do not use live-server or any other server, as this will not work. The project is configured to run with Vite. Run the project with the following command.
+```
+npm run dev
+```
+This will start a local server on port 5173. You can access the page by going to http://127.0.0.1:5173/.
+
+To build the project, run the following command:
+```
+npm run build
+```
+This will create a dist folder in the root of the project, which contains the compiled project.
+
+You can preview the build by running the following command:
+```
+npm run build-preview
+```
+This is useful to see how the project will look when deployed and to test the build. This is recommended before pushing to the repository, as the build will be tested when creating a PR.
+
+#Contributing
+
+## Step 1: Update the Main Branch
+
+Start by making sure you are working with the most current version of the project:
+
+- Switch to Main Branch: First, switch to the main branch (if you're not there already). This ensures you're updating the right branch.
+  ```
+  git checkout main
+  ```
+- Pull Latest Changes: Then, pull the latest changes from the main repository. This step updates your local main branch.
+  ```
+  git pull
+  ```
+  ## Step 2: Create Your Feature or Fix Branch
+  After updating the main branch, create a new branch for your work. Name your branch descriptively, such as feature/new-listing-page for a new feature or fix/login-issue for a bug fix.
+  ```
+  git checkout -b feature/new-listing-page
+  ```
+ ## Step 3: Make Your Changes
+ Now, it's time to make your changes. Remember to:
+ 
+ - Write clean, well-documented code.
+ - Follow the coding standards of the project.
+ - Test your changes thoroughly.
+
+ ## Step 4: Commit and Push Your Changes
+
+ Once you start making changes, it's good practice to commit often and keep commits small. This approach helps in maintaining a clear history of changes, making it easier to track and understand each modification. Small, frequent commits are also easier to manage in terms of resolving potential conflicts and reviewing changes.
+
+ - Commit Often: After making a meaningful amount of changes or completing a specific task, commit your changes. This could be after fixing a bug, adding a small feature, or even updating documentation.
+ - Write Clear Commit Messages: Each commit message should be clear and descriptive of what the changes entail. This practice is crucial for collaborative work.
