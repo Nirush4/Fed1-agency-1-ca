@@ -7,19 +7,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="/src/style.css" rel="stylesheet">
   <script defer type="module" src="/src/main.js"></script>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.css'
+    integrity='sha512-GmZYQ9SKTnOea030Tbiat0Y+jhnYLIpsGAe6QTnToi8hI2nNbVMETHeK4wm4MuYMQdrc38x+sX77+kVD01eNsQ=='
+    crossorigin='anonymous' />
 
   <title>Vite App</title>
 </head>
 
-<body>
-  <div id="app"></div>
+<body class="bg-black">
+
+  <header class="flex justify-center w-full">
+
+  </header>
 
   <main>
 
-    <h2 class="text-5xl text-orange ">No. Testing</h2>
-    <div class="bg-gradient-to-r from-darkOrange to-brightOrange h-15 w-2xl"></div>
+    <div class="container grid grid-cols-5 min-h-dvh min-w-full">
+      <div class="aside flex flex-col gap-10 h-full w-full border-r-1 border-darkOrange min-h-dvh text-white  ...">
+        <h2 class="text-3xl font-semibold font-logoText2 ps-8 pb-8 mt-10 text-brightOrange">PhotoHub</h2>
+        <div class="flex items-center"><i class="fa-solid fa-house-user cursor-pointer text-2xl ps-8"></i> <span
+            class="ps-4 cursor-pointer">Home</span></div>
+        <div class="flex items-center"> <i class="fa-solid fa-magnifying-glass cursor-pointer text-2xl ps-8"></i> <span
+            class="ps-4 cursor-pointer">Search</span></div>
+
+        <div class="flex items-center"> <i class="fa-solid fa-people-group cursor-pointer text-2xl ps-8"></i> <span
+            class="ps-4 cursor-pointer">Explore</span> </div>
+        <div class="flex items-center"> <i class="fa-solid fa-plus cursor-pointer text-2xl ps-8"></i> <span
+            class="ps-4 cursor-pointer">Create</span>
+        </div>
+      </div>
+
+      <div class="aside grid place-items-center grid-rows-4 h-full w-full col-span-4 overflow-y-scroll ...">
+        <div class="top flex justify-center gap-10 max-w-3xl pb-12 mt-12 border-b-1 border-gray-600 ...">
+          <div class="img-div">
+            <img class="h-40 w-40 rounded-full object-cover" src="/images/Tom Cruise.webp" alt="">
+          </div>
+          <div class="text-div">
+            <h2 class="text-xl font-bold text-white pb-5">Tom Cruise</h2>
+            <div class="post-followers-following flex gap-10">
+              <span class="text-white font-medium"><strong>Posts:</strong> 100</span>
+              <span class="text-white font-medium"><strong>Followers:</strong> 100</span>
+              <span class="text-white font-medium"><strong>Following:</strong> 100</span>
+            </div>
+          </div>
+        </div>
+        <div class="body-content h-full w-full row-span-3">Hei</div>
+      </div>
+
+
   </main>
 
+  <footer>
+
+  </footer>
 </body>
 
 </html>

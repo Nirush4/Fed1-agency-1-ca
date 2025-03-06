@@ -1,7 +1,12 @@
 @import 'tailwindcss';
 
+@import url('https://fonts.googleapis.com/css2?family=Borel&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap');
+
 @theme {
     --font-primary: 'Roboto', 'sans-serif';
+    --font-logo: "Borel", cursive;
+    --font-logoText2: "Yellowtail", cursive;
     --breakpoint-sm: 480px;
     --breakpoint-md: 768px;
     --breakpoint-lg: 1024px;
