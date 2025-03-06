@@ -22,36 +22,111 @@
 
   <main>
 
-    <div class="container grid grid-cols-5 min-h-dvh min-w-full">
-      <div class="aside flex flex-col gap-10 h-full w-full border-r-1 border-darkOrange min-h-dvh text-white  ...">
-        <h2 class="text-3xl font-semibold font-logoText2 ps-8 pb-8 mt-10 text-brightOrange">PhotoHub</h2>
-        <div class="flex items-center"><i class="fa-solid fa-house-user cursor-pointer text-2xl ps-8"></i> <span
-            class="ps-4 cursor-pointer">Home</span></div>
-        <div class="flex items-center"> <i class="fa-solid fa-magnifying-glass cursor-pointer text-2xl ps-8"></i> <span
-            class="ps-4 cursor-pointer">Search</span></div>
+    <!-- imp! left side nav -->
 
-        <div class="flex items-center"> <i class="fa-solid fa-people-group cursor-pointer text-2xl ps-8"></i> <span
-            class="ps-4 cursor-pointer">Explore</span> </div>
-        <div class="flex items-center"> <i class="fa-solid fa-plus cursor-pointer text-2xl ps-8"></i> <span
-            class="ps-4 cursor-pointer">Create</span>
+    <div class="container grid fixed grid-cols-5 min-h-dvh min-w-full ">
+      <div class="aside flex flex-col gap-10 h-full w-full border-r-1 border-gray-300 min-h-dvh text-white ...">
+        <h2 class="text-4xl font-semibold font-logoText2 ps-8 pb-8 mt-10 text-vibPink">Photo</h2>
+        <div class="flex items-center hover:text-darkOrange"><i
+            class="fa-solid fa-house-user cursor-pointer text-xl ps-8"></i> <span
+            class="ps-4 cursor-pointer text-xl">Home</span></div>
+        <div class="flex items-center hover:text-darkOrange"> <i
+            class="fa-solid fa-user cursor-pointer text-xl ps-8"></i>
+          <span class="ps-4 cursor-pointer text-xl">Profile</span>
+        </div>
+        <!-- <div class="flex items-center hover:text-darkOrange"> <i
+            class="fa-solid fa-magnifying-glass cursor-pointer text-xl ps-8"></i> <span
+            class="ps-4 cursor-pointer text-xl">Search</span></div> -->
+
+        <div class="flex items-center hover:text-darkOrange"> <i
+            class="fa-solid fa-people-group cursor-pointer text-xl ps-8"></i> <span
+            class="ps-4 cursor-pointer text-xl">Explore</span> </div>
+        <div class="flex items-center hover:text-darkOrange"> <i
+            class="fa-solid fa-plus cursor-pointer text-xl ps-8"></i> <span
+            class="ps-4 cursor-pointer text-xl">Create</span>
+        </div>
+        <div class="flex-end items-center hover:text-darkOrange"> <i
+            class="fa-solid fa-bars cursor-pointer text-xl ps-8"></i> <span
+            class="ps-4 cursor-pointer text-xl">More</span>
         </div>
       </div>
 
-      <div class="aside grid place-items-center grid-rows-4 h-full w-full col-span-4 overflow-y-scroll ...">
-        <div class="top flex justify-center gap-10 max-w-3xl pb-12 mt-12 border-b-1 border-gray-600 ...">
-          <div class="img-div">
-            <img class="h-40 w-40 rounded-full object-cover" src="/images/Tom Cruise.webp" alt="">
+      <!-- imp! Right side container -->
+
+      <div class="aside grid grid-rows-4 h-dvh w-full pt-10 place-items-center col-span-4 overflow-y-scroll ...">
+
+        <div class="top-container flex flex-col mt-30 items-center">
+          <div class="top flex justify-center gap-10 pb-12 max-w-3xl border-b-1 border-gray-600 ...">
+
+            <div class="text-center">
+              <div class="w-40 h-40 rounded-full overflow-hidden border-4 border-blue-500 mx-auto">
+                <img id="profile-img" src="https://via.placeholder.com/150" alt="Profile Picture"
+                  class="w-full h-full object-cover">
+              </div>
+
+              <label for="file-input" class="mt-4 text-blue-500 cursor-pointer block">
+                Change Profile Picture
+              </label>
+              <input type="file" id="file-input" class="hidden" accept="image/*">
+
+              <p class="mt-2 text-gray-500">Click to upload a new photo.</p>
+            </div>
+
+            <div class="text-div">
+              <div class="flex items-center justify-self-start space-x-4 mt-5 mb-4">
+                <div class="text-xl font-medium text-white">
+                  <span id="profile-name">John Doe</span>
+                </div>
+
+                <button id="edit-btn" class="text-blue-500 hover:text-blue-700">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M17 3l4 4-10 10H7v-4L17 3z"></path>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Input Field for Editing Profile Name -->
+              <div id="edit-section" class="hidden mb-4">
+                <input type="text" id="name-input" class="border text-white border-gray-300 p-2 rounded-md w-full"
+                  placeholder="Enter your name">
+                <div class="mt-4 flex justify-between">
+                  <button id="save-btn"
+                    class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700">Save</button>
+                  <button id="cancel-btn"
+                    class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400">Cancel</button>
+                </div>
+              </div>
+
+
+              <div class="post-followers-following flex gap-10">
+                <span class="text-white font-medium"><strong>Posts:</strong> 100</span>
+                <span class="text-white font-medium"><strong>Followers:</strong> 100</span>
+                <span class="text-white font-medium"><strong>Following:</strong> 100</span>
+              </div>
+              <div class="bio text-white font-light pt-12">Actor / Producer / Running in movies since 1981</div>
+            </div>
           </div>
-          <div class="text-div">
-            <h2 class="text-xl font-bold text-white pb-5">Tom Cruise</h2>
-            <div class="post-followers-following flex gap-10">
-              <span class="text-white font-medium"><strong>Posts:</strong> 100</span>
-              <span class="text-white font-medium"><strong>Followers:</strong> 100</span>
-              <span class="text-white font-medium"><strong>Following:</strong> 100</span>
+
+          <div class="posts-tagged flex gap-15 justify-center">
+            <div
+              class="posts flex justify-center items-center gap-1 text-xs/10 text-md w-fit border-t-1 border-vibPink text-white uppercase cursor-pointer">
+              <i class="fa-solid fa-image"></i>
+              Posts
+            </div>
+            <div
+              class="tagged flex justify-center items-center gap-1 text-xs text-md w-fit text-white uppercase cursor-pointer">
+              <i class="fa-solid fa-people-arrows"></i>
+              Tagged
             </div>
           </div>
         </div>
-        <div class="body-content h-full w-full row-span-3">Hei</div>
+
+        <!-- imp! posts -->
+        <div id="js-grid"
+          class="body-content grid place-items-center grid-cols-3 gap-1 max-w-6xl mt-65 h-full text-9xl text-white w-fullrow-span-4">
+        </div>
       </div>
 
 

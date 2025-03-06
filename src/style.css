@@ -14,4 +14,41 @@
     --color-gradientOrange: linear-gradient(180deg, #f44e00, #fa7300);
     --color-darkOrange: #f44e00;
     --color-brightOrange: #fa7300;
+    --color-brightYellow: #ded300;
+    --color-vibPink: #f08;
+}
+
+
+
+/* style.css */
+
+.grid-item {
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 8px;
+    /* Hide image overflow */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* White background for items */
+}
+
+.img-div {
+    width: 100%;
+    height: auto;
+    max-width: 19rem;
+    max-height: 23rem;
+    overflow: hidden;
+}
+
+.grid-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    /* Prevent small space below image */
+    transition: transform 0.2s;
+    /* Add smooth transform */
+}
+
+.grid-item:hover img {
+    transform: scale(1.05);
+    /* slightly scale image on hover */
 }
