@@ -7,7 +7,7 @@
     --font-primary: 'Roboto', 'sans-serif';
     --font-logo: "Borel", cursive;
     --font-logoText2: "Yellowtail", cursive;
-    --breakpoint-sm: 480px;
+    --breakpoint-s: 480px;
     --breakpoint-md: 768px;
     --breakpoint-lg: 1024px;
     --breakpoint-xl: 1280px;
@@ -25,10 +25,7 @@
 .grid-item {
     display: flex;
     flex-wrap: wrap;
-    border-radius: 8px;
-    /* Hide image overflow */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    /* White background for items */
 }
 
 .img-div {
