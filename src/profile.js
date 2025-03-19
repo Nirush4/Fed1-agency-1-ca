@@ -9,6 +9,17 @@ const nameInput = document.getElementById("name-input");
 const mediaContainer = document.querySelector("#media-gallery-container");
 const cloudinaryGalleryContainer = document.querySelector(".cld-gallery"); // Ensure this is correct
 
+const ERROR_MESSAGE_DEFAULT = 'Something went wrong';
+
+const options = {
+  method: 'GET',
+  headers: {
+    Authorization:
+      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTmlydXNoIiwiZW1haWwiOiJuaXJyYWowMzMyN0BzdHVkLm5vcm9mZi5ubyIsImlhdCI6MTc0MTAwNzAzOH0.e3eJ9TupVI7RCcQsg5Y2ATY3YQ-k0-ac3rT4G_V9BWI',
+    'X-Noroff-API-Key': 'f9c959e7-bfef-453f-a521-ec2ce2545f87',
+  },
+};
+
 setup();
 
 async function setup() {
@@ -24,38 +35,18 @@ async function setup() {
     console.error("JS cannot run!!!");
   } else {
     // NOTE: This is for the first time rendering the page
-    renderGallery(imgList);
-    const savedImage = localStorage.getItem("profileImage");
+
+    // renderGallery(imgList);
+    const imgList = await getImage();
+    createProductsListEl(imgList);
+    const savedImage = localStorage.getItem('profileImage');
+
     if (savedImage) {
       profileImg.src = savedImage;
     }
   }
 }
 
-export const imgList = [
-  "https://plus.unsplash.com/premium_photo-1669725687221-6fe12c2da6b1?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1737396091041-158da644aee5?q=80&w=3648&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1707814240518-b926061788bf?q=80&w=2848&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1535748715526-1941af3fc315?q=80&w=2848&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1604860428762-f55cea62b7a0?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1737562963380-3a7e45c0bf31?q=80&w=3774&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1737625775722-9214c9cddf97?q=80&w=3774&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1737625774333-60d9feaa4d2b?q=80&w=3774&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://plus.unsplash.com/premium_photo-1680995369588-502d70f0e3c8?q=80&w=3648&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://plus.unsplash.com/premium_photo-1674381523950-e63ad02ee451?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-];
-
-renderGallery(imgList);
-
-function renderImage(img) {
-  const newImg = gritItemTemplate(img);
-  const newImgEl = createHTML(newImg);
-  gridEl.appendChild(newImgEl);
-}
-
-function renderGallery(list) {
-  list.forEach(renderImage);
-}
 
 function createHTML(template) {
   const parser = new DOMParser();
@@ -63,19 +54,59 @@ function createHTML(template) {
   return parsedDocument.body.firstChild;
 }
 
-function gritItemTemplate(url, altText = "An image") {
-  return `
-    <div class="grid-item">
-    <div class="img-div">
-      <img
-        src="${url}"
-        alt="${altText}"
-      />
-    </div>
-    </div>
-  `;
+
+async function getImage() {
+  try {
+    const response = await fetch(
+      'https://v2.api.noroff.dev/social/posts',
+      options
+    );
+    const { data } = await response.json();
+    return data
+      .filter(
+        (post) =>
+          post.media && Object.prototype.hasOwnProperty.call(post.media, 'url')
+      )
+      .map((post) => ({
+        id: post.id,
+        image: post.media.url,
+      }));
+  } catch (error) {
+    console.error(ERROR_MESSAGE_DEFAULT, error?.message);
+  }
 }
 
+function productTemplate({ imgUrl }) {
+  // const detailsUrl = `/single/index?id=${id}`;
+
+  return `
+  
+  <div class="grid-item">
+    <div class="img-div">
+      <img
+        src="${imgUrl}"
+      />
+    </div>
+
+ `;
+}
+
+async function createProductsListEl(list = []) {
+  gridEl.innerHTML = '';
+
+  try {
+    list.forEach(({ id, image }) => {
+      const template = productTemplate({
+        id,
+        imgUrl: image,
+      });
+      const newEl = createHTML(template);
+      gridEl.append(newEl);
+    });
+  } catch (error) {
+    console.error(ERROR_MESSAGE_DEFAULT, error?.message);
+  }
+}
 // Profile image upload by Nirushan
 
 const fileInput = document.getElementById("file-input");
@@ -133,6 +164,7 @@ window.addEventListener("load", () => {
     profileName.textContent = storedName;
   }
 });
+
 
 const myGallery = cloudinary.galleryWidget({
   container: mediaContainer,
@@ -206,3 +238,4 @@ setTimeout(() => {
   clearInterval(interval);
   console.log("Interval stopped after 5 seconds.");
 }, 50000);
+
