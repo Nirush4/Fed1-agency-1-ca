@@ -1,41 +1,17 @@
-#main-video-container {
+@import "tailwindcss";
+@plugin "daisyui";
+
+@import url("https://fonts.googleapis.com/css2?family=Borel&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Yellowtail&display=swap");
+
+/* #main-video-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
   height: 100dvh;
-}
-
-#main-video {
-  max-width: 500px;
-}
-
-#main-video-button {
-  height: 50px;
-  width: 50px;
-  background-color: green;
-}
-
-#media-gallery-container {
-  height: 100px;
-}
+} */
 
 .css-148rb4d {
   height: 55rem;
-}
-
-.capture-button-container {
-  display: flex;
-}
-
-#media-gallery-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-}
-
-#media-gallery-container img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  aspect-ratio: 16/10;
 }
