@@ -5,7 +5,7 @@ const recordBtn = document.querySelector("#main-video-button");
 const captureBtn = document.getElementById("captureBtn");
 const submitBtn = document.getElementById("submitBtn");
 const video = document.querySelector("#main-video");
-const mediaContainer = document.querySelector("#media-gallery-container");
+// const mediaContainer = document.querySelector("#media-gallery-container");
 
 const previewContainer = document.getElementById("previewContainer");
 
