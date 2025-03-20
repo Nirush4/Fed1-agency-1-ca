@@ -48,11 +48,6 @@
 }
 
 .grid-item:hover img {
-  transform: scale(1.05);
-  /* slightly scale image on hover */
-}
-
-.image-scale {
-  transform: scale3d(2, 2, 1);
-  height: 1000px;
+    transform: scale(1.05);
+    /* slightly scale image on hover */
 }

@@ -11,14 +11,7 @@ const cloudinaryGalleryContainer = document.querySelector(".cld-gallery"); // En
 
 const ERROR_MESSAGE_DEFAULT = 'Something went wrong';
 
-const options = {
-  method: 'GET',
-  headers: {
-    Authorization:
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTmlydXNoIiwiZW1haWwiOiJuaXJyYWowMzMyN0BzdHVkLm5vcm9mZi5ubyIsImlhdCI6MTc0MTAwNzAzOH0.e3eJ9TupVI7RCcQsg5Y2ATY3YQ-k0-ac3rT4G_V9BWI',
-    'X-Noroff-API-Key': 'f9c959e7-bfef-453f-a521-ec2ce2545f87',
-  },
-};
+const key = import.meta.env.VITE_API_KEY;
 
 setup();
 
@@ -34,9 +27,7 @@ async function setup() {
   ) {
     console.error("JS cannot run!!!");
   } else {
-    // NOTE: This is for the first time rendering the page
 
-    // renderGallery(imgList);
     const imgList = await getImage();
     createProductsListEl(imgList);
     const savedImage = localStorage.getItem('profileImage');
@@ -58,36 +49,31 @@ function createHTML(template) {
 async function getImage() {
   try {
     const response = await fetch(
-      'https://v2.api.noroff.dev/social/posts',
-      options
+      `https://pixabay.com/api/?key=${encodeURIComponent(key)}&orientation=vertical&page=1&per_page=20&category=places`
     );
-    const { data } = await response.json();
-    return data
-      .filter(
-        (post) =>
-          post.media && Object.prototype.hasOwnProperty.call(post.media, 'url')
-      )
-      .map((post) => ({
-        id: post.id,
-        image: post.media.url,
-      }));
+
+    const { hits } = await response.json();
+
+    return hits;
   } catch (error) {
     console.error(ERROR_MESSAGE_DEFAULT, error?.message);
   }
 }
 
-function productTemplate({ imgUrl }) {
-  // const detailsUrl = `/single/index?id=${id}`;
+
+function productTemplate({ id, imgUrl }) {
+  const detailsUrl = `/single/index?id=${id}`;
 
   return `
   
   <div class="grid-item">
     <div class="img-div">
+     <a href="${detailsUrl}">
       <img
         src="${imgUrl}"
       />
+    </a>
     </div>
-
  `;
 }
 
@@ -95,11 +81,12 @@ async function createProductsListEl(list = []) {
   gridEl.innerHTML = '';
 
   try {
-    list.forEach(({ id, image }) => {
+    list.forEach(({ id, largeImageURL }) => {
       const template = productTemplate({
-        id,
-        imgUrl: image,
+        id: id,
+        imgUrl: largeImageURL,
       });
+
       const newEl = createHTML(template);
       gridEl.append(newEl);
     });
@@ -157,14 +144,13 @@ cancelBtn.addEventListener("click", () => {
   profileName.classList.remove("hidden");
 });
 
-// On page load, if there's a saved name in local storage, use it
-window.addEventListener("load", () => {
-  const storedName = localStorage.getItem("profileName");
+window.addEventListener('load', () => {
+  const storedName = localStorage.getItem('profileName');
+
   if (storedName) {
     profileName.textContent = storedName;
   }
 });
-
 
 const myGallery = cloudinary.galleryWidget({
   container: mediaContainer,
