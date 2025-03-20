@@ -2,7 +2,7 @@ const imgContainer = document.querySelector('#img-container'); // Update this se
 
 const ERROR_MESSAGE_DEFAULT = 'Something went wrong';
 
-const key = import.meta.env.VITE_API_KEY;
+// const key = import.meta.env.VITE_API_KEY;
 
 async function fetchImgDetails() {
   const id = getId();
@@ -11,7 +11,7 @@ async function fetchImgDetails() {
   }
   try {
     const response = await fetch(
-      `https://pixabay.com/api/?key=${encodeURIComponent(key)}&orientation=vertical&page=1&per_page=20&category=places&id=${id}`
+      `https://pixabay.com/api/?key=49423799-7939ddd154968d7fb42d51820&orientation=vertical&page=1&per_page=20&category=places&id=${id}`
     );
 
     const { hits } = await response.json();
