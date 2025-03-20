@@ -1,33 +1,33 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
-@import url('https://fonts.googleapis.com/css2?family=Borel&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Borel&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Yellowtail&display=swap");
 
 @theme {
-    --font-primary: 'Roboto', 'sans-serif';
-    --font-logo: "Borel", cursive;
-    --font-logoText2: "Yellowtail", cursive;
-    --breakpoint-s: 480px;
-    --breakpoint-md: 768px;
-    --breakpoint-lg: 1024px;
-    --breakpoint-xl: 1280px;
-    --color-gradientOrange: linear-gradient(180deg, #f44e00, #fa7300);
-    --color-darkOrange: #f44e00;
-    --color-brightOrange: #fa7300;
-    --color-brightYellow: #ded300;
-    --color-vibPink: #f08;
+  --font-primary: "Roboto", "sans-serif";
+  --font-logo: "Borel", cursive;
+  --font-logoText2: "Yellowtail", cursive;
+  --breakpoint-s: 480px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --color-gradientOrange: linear-gradient(180deg, #f44e00, #fa7300);
+  --color-darkOrange: #f44e00;
+  --color-brightOrange: #fa7300;
+  --color-brightYellow: #ded300;
+  --color-vibPink: #f08;
 }
-
 
 /* style.css */
 
 .grid-item {
-    display: flex;
-    flex-wrap: wrap;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .img-div {
+
     width: 100%;
     height: auto;
     max-width: 19rem;
@@ -44,86 +44,10 @@
     /* Prevent small space below image */
     transition: transform 0.2s;
     /* Add smooth transform */
+
 }
 
 .grid-item:hover img {
     transform: scale(1.05);
     /* slightly scale image on hover */
 }
-
-/* 
-.post-container {
-    background-color: white;
-    width: 400px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    margin-top: 20px;
-}
-
-.post-header {
-    display: flex;
-    align-items: center;
-    padding: 15px;
-}
-
-.avatar {
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
-}
-
-.user-info {
-    display: flex;
-    flex-direction: column;
-}
-
-.username {
-    font-weight: bold;
-    font-size: 14px;
-}
-
-.timestamp {
-    font-size: 12px;
-    color: #888;
-}
-
-.post-content {
-    padding: 15px;
-}
-
-.post-text {
-    font-size: 14px;
-    color: #333;
-    margin-bottom: 15px;
-}
-
-.post-image {
-    width: 100%;
-    border-radius: 8px;
-}
-
-.post-actions {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 15px;
-    border-top: 1px solid #f0f0f0;
-}
-
-.post-actions button {
-    background: none;
-    border: none;
-    font-size: 14px;
-    color: #007bff;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.post-actions button:hover {
-    color: #0056b3;
-}
-
-.post-actions button:focus {
-    outline: none;
-} */
