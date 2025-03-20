@@ -16,6 +16,7 @@ export default defineConfig({
         profile: resolve(__dirname, "./profile/index.html"),
         signIn: resolve(__dirname, "./sign-in/index.html"),
         camera: resolve(__dirname, "camera/index.html"),
+        explore: resolve(__dirname, "explore/index.html"),
 
       },
     },

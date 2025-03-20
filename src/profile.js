@@ -88,12 +88,12 @@ async function createProductsListEl(list = []) {
     console.error(ERROR_MESSAGE_DEFAULT, error?.message);
   }
 }
-// Profile image upload by Nirushan
+
 
 const fileInput = document.getElementById('file-input');
 const profileImg = document.getElementById('profile-img');
 
-// Stored profile picture in localStorage and display it
+
 window.onload = function setImageInLS() {
   const savedImage = localStorage.getItem('profileImage');
   if (savedImage) {
@@ -109,14 +109,12 @@ fileInput.addEventListener('change', function (event) {
       const imageSrc = e.target.result;
       profileImg.src = imageSrc;
 
-      // Save the new image to localStorage
       localStorage.setItem('profileImage', imageSrc);
     };
     reader.readAsDataURL(file);
   }
 });
 
-// Profile name edit by Nirushan
 
 editBtn.addEventListener('click', () => {
   editSection.classList.remove('hidden');
@@ -128,7 +126,7 @@ editBtn.addEventListener('click', () => {
 saveBtn.addEventListener('click', () => {
   const newName = nameInput.value;
   profileName.textContent = newName;
-  localStorage.setItem('profileName', newName); // Store the new name in local storage
+  localStorage.setItem('profileName', newName); 
   editSection.classList.add('hidden');
   profileName.classList.remove('hidden');
 });
@@ -176,13 +174,12 @@ var interval = setInterval(function () {
     const images = mediaContainer.querySelectorAll('img');
     const arrImg = Array.from(images);
 
-    // ✅ Fix: Don't reload the page, just wait for images
     if (!arrImg.length || arrImg[0].src.length <= 1) {
       console.warn('No images found yet. Waiting...');
-      return; // Wait instead of reloading
+      return; 
     }
 
-    // ✅ Remove duplicate images
+
     const filterImgs = arrImg.filter(
       (value, index, self) =>
         index === self.findIndex((t) => t.src === value.src)
@@ -192,7 +189,7 @@ var interval = setInterval(function () {
 
     mediaContainer.innerHTML = '';
 
-    // ✅ Wrap each image in a div with class "grid-div"
+
     listOfImgs.forEach((src) => {
       const gridDiv = document.createElement('div');
       gridDiv.classList.add('grid-item');
@@ -209,11 +206,10 @@ var interval = setInterval(function () {
       gridEl.appendChild(gridDiv);
     });
 
-    clearInterval(interval); // ✅ Stop interval after images are loaded
+    clearInterval(interval); 
   }
 }, 100);
 
-// ✅ Stop after 5 seconds to prevent infinite execution
 setTimeout(() => {
   clearInterval(interval);
   console.log('Interval stopped after 5 seconds.');
