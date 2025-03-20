@@ -6,12 +6,12 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="/src/style.css" rel="stylesheet">
-    <script defer type="module" src="/src/profile.js"></script>
+    <script type="module" src="/src/profile.js" defer></script>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.css'
         integrity='sha512-GmZYQ9SKTnOea030Tbiat0Y+jhnYLIpsGAe6QTnToi8hI2nNbVMETHeK4wm4MuYMQdrc38x+sX77+kVD01eNsQ=='
         crossorigin='anonymous' />
 
-    <title>Vite App</title>
+    <title>profile / square pumpkin</title>
 </head>
 
 <body class="bg-black">
@@ -23,12 +23,16 @@
     <main>
 
         <!-- imp! left side nav -->
+        <a href="/single/index.html" class="text-white bg-red-600 text-4xl h-4 w-8">Single page</a>
+
 
         <div class="container grid fixed grid-cols-5 min-h-dvh min-w-full ">
-
             <div
                 class="aside fixed bottom-0 right-0 left-0 z-30 flex  justify-evenly gap-5 h-20 w-full border-r-1 border-gray-300 bg-black text-white ... lg:hidden">
-                <h2 class="flex items-center text-4xl font-semibold font-logoText2 text-vibPink">Photo</h2>
+
+                <a href="/" class="flex items-center text-4xl font-semibold font-logoText2 text-vibPink">square
+                    pumpkin</a>
+
                 <div class="flex items-center hover:text-darkOrange"><i
                         class="fa-solid fa-house-user cursor-pointer text-xl"></i> <span
                         class="ps-4 cursor-pointer text-xl"></span>
@@ -53,8 +57,10 @@
 
             <div
                 class="aside hidden lg:flex flex-col gap-10 h-full w-full border-r-1 border-gray-300 min-h-dvh text-white ...">
-                <h2 class="text-4xl font-semibold font-logoText2 ps-12 pb-8 mt-10 text-vibPink">Photo</h2>
-                <a href="/login.html" class="bg-red text-white w-5 h-4">Click here</a>
+
+                <a href="/profile/index.html"
+                    class="flex items-center text-4xl font-semibold font-logoText2 text-vibPink">square
+                    pumpkin</a>
 
                 <div class="flex items-center hover:text-darkOrange"><i
                         class="fa-solid fa-house-user cursor-pointer text-xl ps-12"></i> <span
@@ -76,7 +82,6 @@
                     <span class="ps-4 cursor-pointer text-xl">More</span>
                 </div>
             </div>
-
 
             <!-- imp! Right side container -->
 

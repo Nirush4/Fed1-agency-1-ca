@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/src/style.css" rel="stylesheet">
+    <script type="module" src="/src/single.js" defer></script>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.css'
+        integrity='sha512-GmZYQ9SKTnOea030Tbiat0Y+jhnYLIpsGAe6QTnToi8hI2nNbVMETHeK4wm4MuYMQdrc38x+sX77+kVD01eNsQ=='
+        crossorigin='anonymous' />
+
+    <title>Vite App</title>
+</head>
+
+<body class="bg-black">
+
+    <header class="flex justify-center w-full">
+
+    </header>
+
+    <main>
+
+        <!-- imp! left side nav -->
+
+        <div class="container grid fixed grid-cols-5 min-h-dvh min-w-full ">
+
+            <div
+                class="aside fixed bottom-0 right-0 left-0 z-30 flex  justify-evenly gap-5 h-20 w-full border-r-1 border-gray-300 bg-black text-white ... lg:hidden">
+                <a href="/profile/index.html"
+                    class="flex items-center text-4xl font-semibold font-logoText2 text-vibPink">square
+                    pumpkin</a>
+                <div class="flex items-center hover:text-darkOrange"><i
+                        class="fa-solid fa-house-user cursor-pointer text-xl"></i> <span
+                        class="ps-4 cursor-pointer text-xl"></span>
+                </div>
+                <div class="flex items-center hover:text-darkOrange"> <i
+                        class="fa-solid fa-user cursor-pointer text-xl"></i>
+                    <span class="ps-4 cursor-pointer text-xl"></span>
+                </div>
+
+                <div class="flex items-center hover:text-darkOrange"> <i
+                        class="fa-solid fa-people-group cursor-pointer text-xl"></i> <span
+                        class="ps-4 cursor-pointer text-xl"></span> </div>
+                <div class="flex items-center hover:text-darkOrange"> <i
+                        class="fa-solid fa-plus cursor-pointer text-xl"></i>
+                    <span class="ps-4 cursor-pointer text-xl"></span>
+                </div>
+                <div class=" flex items-center hover:text-darkOrange"> <i
+                        class="fa-solid fa-bars cursor-pointer text-xl"></i>
+                    <span class="ps-4 cursor-pointer text-xl"></span>
+                </div>
+            </div>
+
+            <div
+                class="aside hidden lg:flex flex-col gap-10 h-full w-full border-r-1 border-gray-300 min-h-dvh text-white ...">
+
+                <a href="/profile/index.html"
+                    class="flex items-center text-4xl font-semibold font-logoText2 text-vibPink">square
+                    pumpkin</a>
+
+                <div class="flex items-center hover:text-darkOrange"><i
+                        class="fa-solid fa-house-user cursor-pointer text-xl ps-12"></i> <span
+                        class="ps-4 cursor-pointer text-xl">Home</span></div>
+                <div class="flex items-center hover:text-darkOrange"> <i
+                        class="fa-solid fa-user cursor-pointer text-xl ps-12"></i>
+                    <span class="ps-4 cursor-pointer text-xl">Profile</span>
+                </div>
+
+                <div class="flex items-center hover:text-darkOrange"> <i
+                        class="fa-solid fa-people-group cursor-pointer text-xl ps-12"></i> <span
+                        class="ps-4 cursor-pointer text-xl">Explore</span> </div>
+                <div class="flex items-center hover:text-darkOrange"> <i
+                        class="fa-solid fa-plus cursor-pointer text-xl ps-12"></i>
+                    <span class="ps-4 cursor-pointer text-xl">Create</span>
+                </div>
+                <div class="flex items-center hover:text-darkOrange"> <i
+                        class="fa-solid fa-bars cursor-pointer text-xl ps-12"></i>
+                    <span class="ps-4 cursor-pointer text-xl">More</span>
+                </div>
+            </div>
+
+
+            <!-- imp! Right side container -->
+
+            <div
+                class="aside grid grid-rows-4 col-span-5 h-dvh w-full px-5 place-items-center overflow-y-scroll bg-black s:px-10 lg:col-span-4 lg:px-0">
+
+                <!-- imp! posts -->
+                <div id="img-container"
+                    class="body-content grid place-items-center items-center grid-cols-3 row-span-4 min-w-1 gap-1 h-full text-9xl text-white w-lg">
+                </div>
+            </div>
+
+
+
+    </main>
+
+    <footer>
+
+    </footer>
+</body>
+
+</html>
