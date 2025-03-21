@@ -61,7 +61,7 @@ function productTemplate({ id, imgUrl }) {
   return `
   
   <div class="grid-item">
-    <div class="img-div">
+    <div class="post-div">
      <a href="${detailsUrl}">
       <img
         src="${imgUrl}"
@@ -88,11 +88,10 @@ async function createProductsListEl(list = []) {
     console.error(ERROR_MESSAGE_DEFAULT, error?.message);
   }
 }
-
+de;
 
 const fileInput = document.getElementById('file-input');
 const profileImg = document.getElementById('profile-img');
-
 
 window.onload = function setImageInLS() {
   const savedImage = localStorage.getItem('profileImage');
@@ -115,7 +114,6 @@ fileInput.addEventListener('change', function (event) {
   }
 });
 
-
 editBtn.addEventListener('click', () => {
   editSection.classList.remove('hidden');
   profileName.classList.add('hidden');
@@ -126,7 +124,7 @@ editBtn.addEventListener('click', () => {
 saveBtn.addEventListener('click', () => {
   const newName = nameInput.value;
   profileName.textContent = newName;
-  localStorage.setItem('profileName', newName); 
+  localStorage.setItem('profileName', newName);
   editSection.classList.add('hidden');
   profileName.classList.remove('hidden');
 });
@@ -150,10 +148,7 @@ const myGallery = cloudinary.galleryWidget({
   carouselStyle: 'none',
   autoplay: false,
   videoProps: { controls: 'all', autoplay: false },
-  displayProps: {
-    mode: 'expanded',
-    columns: 3,
-  },
+
   mediaAssets: [
     {
       tag: 'myImages',
@@ -176,9 +171,8 @@ var interval = setInterval(function () {
 
     if (!arrImg.length || arrImg[0].src.length <= 1) {
       console.warn('No images found yet. Waiting...');
-      return; 
+      return;
     }
-
 
     const filterImgs = arrImg.filter(
       (value, index, self) =>
@@ -188,7 +182,6 @@ var interval = setInterval(function () {
     const listOfImgs = filterImgs.map((i) => i.src);
 
     mediaContainer.innerHTML = '';
-
 
     listOfImgs.forEach((src) => {
       const gridDiv = document.createElement('div');
@@ -206,7 +199,7 @@ var interval = setInterval(function () {
       gridEl.appendChild(gridDiv);
     });
 
-    clearInterval(interval); 
+    clearInterval(interval);
   }
 }, 100);
 
