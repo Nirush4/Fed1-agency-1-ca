@@ -26,8 +26,8 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.post-div {
 
+.post-div {
   width: 100%;
   height: auto;
   max-width: 19rem;
@@ -42,8 +42,23 @@
   object-fit: cover;
   display: block;
   transition: all 0.2s ease-in-out;
-
 }
+
+
+#main-video {
+  transform: scaleX(-1);
+}
+
+#test {
+  transform: scaleX(-1);
+  height: 100%;
+  width: 100%;
+}
+
+#previewContainer {
+  overflow: hidden;
+}
+
 
 .grid-item video {
   transition: all 0.2s ease-in-out;
@@ -52,6 +67,7 @@
 
 .grid-item:hover img {
   transform: scale(1.05);
+
 }
 
 .grid-item:hover video {

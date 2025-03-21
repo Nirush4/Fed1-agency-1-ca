@@ -7,9 +7,11 @@ const profileName = document.getElementById('profile-name');
 const nameInput = document.getElementById('name-input');
 const mediaContainer = document.querySelector('#media-gallery-container');
 
-const ERROR_MESSAGE_DEFAULT = 'Something went wrong';
+const ERROR_MESSAGE_DEFAULT = "Something went wrong";
+
 
 // const key = import.meta.env.VITE_API_KEY;
+
 
 setup();
 
@@ -27,7 +29,7 @@ async function setup() {
   } else {
     const imgList = await getImage();
     createProductsListEl(imgList);
-    const savedImage = localStorage.getItem('profileImage');
+    const savedImage = localStorage.getItem("profileImage");
 
     if (savedImage) {
       profileImg.src = savedImage;
@@ -50,6 +52,7 @@ async function getImage() {
     const { hits } = await response.json();
 
     return hits;
+
   } catch (error) {
     console.error(ERROR_MESSAGE_DEFAULT, error?.message);
   }
@@ -72,7 +75,7 @@ function productTemplate({ id, imgUrl }) {
 }
 
 async function createProductsListEl(list = []) {
-  gridEl.innerHTML = '';
+  gridEl.innerHTML = "";
 
   try {
     list.forEach(({ id, largeImageURL }) => {
@@ -147,14 +150,20 @@ const myGallery = cloudinary.galleryWidget({
   cloudName: 'du2edesv8',
   carouselStyle: 'none',
   autoplay: false,
-  videoProps: { controls: 'all', autoplay: false },
+
+  videoProps: { controls: "all", autoplay: false },
 
   mediaAssets: [
     {
       tag: 'myImages',
       transformation: {
-        quality: 'auto:best',
-        fetch_format: 'auto',
+
+        prefixed: false,
+        quality: "auto:best",
+        width: 800,
+        height: 600,
+        fetch_format: "auto",
+
         x_0: 1,
         crop: 'fill',
       },
@@ -169,10 +178,12 @@ var interval = setInterval(function () {
     const images = mediaContainer.querySelectorAll('img');
     const arrImg = Array.from(images);
 
+
     if (!arrImg.length || arrImg[0].src.length <= 1) {
       console.warn('No images found yet. Waiting...');
       return;
     }
+
 
     const filterImgs = arrImg.filter(
       (value, index, self) =>
@@ -182,6 +193,7 @@ var interval = setInterval(function () {
     const listOfImgs = filterImgs.map((i) => i.src);
 
     mediaContainer.innerHTML = '';
+
 
     listOfImgs.forEach((src) => {
       const gridDiv = document.createElement('div');
@@ -194,16 +206,24 @@ var interval = setInterval(function () {
       imgEl.classList.add('image-scale');
       imgEl.src = src;
 
+      const match = src.match(/blob_[a-zA-Z0-9]+/);
+      if (match) {
+        imgEl.dataset.id = match[0]; // Add as dataset id
+      }
+
       wrapperDiv.appendChild(imgEl);
       gridDiv.appendChild(wrapperDiv);
       gridEl.appendChild(gridDiv);
     });
 
+
     clearInterval(interval);
   }
-}, 100);
+}, 4000);
 
 setTimeout(() => {
   clearInterval(interval);
+
   console.log('Interval stopped after 5 seconds.');
 }, 50000);
+
