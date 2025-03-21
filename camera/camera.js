@@ -9,6 +9,36 @@ const video = document.querySelector("#main-video");
 
 const previewContainer = document.getElementById("previewContainer");
 
+const blurBtn = document.querySelector("#blur-btn");
+const brigtnessBtn = document.querySelector("#brightness-btn");
+const invertBtn = document.querySelector("#invert-btn");
+
+const openCameraBtn = document.getElementById("open-camera");
+
+invertBtn.addEventListener("click", () => {
+  if (video.style.filter === "invert(75%)") {
+    video.style.filter = "none";
+  } else {
+    video.style.filter = "invert(75%)"; // Remove blur
+  }
+});
+
+blurBtn.addEventListener("click", () => {
+  if (video.style.filter === "blur(2px)") {
+    video.style.filter = "none";
+  } else {
+    video.style.filter = "blur(2px)"; // Remove blur
+  }
+});
+
+brigtnessBtn.addEventListener("click", () => {
+  if (video.style.filter === "grayscale(100%)") {
+    video.style.filter = "none";
+  } else {
+    video.style.filter = "grayscale(100%)"; // Remove blur
+  }
+});
+
 let mediaRecorder;
 let recordedChunks = [];
 let stream;
@@ -34,20 +64,29 @@ recordBtn.addEventListener("click", async () => {
     await startRecording();
   } else {
     recordBtn.textContent = "Record";
+    video.style.display = "none";
     stopRecording();
   }
 });
+
+const imageContainer = document.getElementById("video-canvas");
 
 captureBtn.addEventListener("click", () => {
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d");
 
-  // Set canvas size
+  openCameraBtn.classList = "open";
+
   canvas.width = video.videoWidth || 640;
   canvas.height = video.videoHeight || 480;
 
+  context.filter = video.style.filter;
+
   // Draw video frame to canvas
   context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+  video.style.display = "none";
+  canvas.style.display = "block";
 
   // Convert canvas to Blob (JPEG)
   canvas.toBlob((blob) => {
@@ -58,27 +97,41 @@ captureBtn.addEventListener("click", () => {
   }, "image/jpeg");
 });
 
-// ✅ Show Preview
+openCameraBtn.addEventListener("click", () => {
+  video.style.display = "block";
+  openCameraBtn.classList = "closed";
+  previewContainer.remove();
+});
+
+//  Show Preview
 function previewMedia(type, src) {
   previewContainer.innerHTML = ""; // Clear previous preview
+
+  const photoId = Math.floor(10000 + Math.random() * 90000);
 
   if (type === "video") {
     const videoElement = document.createElement("video");
     videoElement.src = src;
     videoElement.controls = true;
     videoElement.width = 400;
+    videoElement.dataset.id = photoId;
     previewContainer.appendChild(videoElement);
+    imageContainer.appendChild(previewContainer);
   } else if (type === "image") {
     const imgElement = document.createElement("img");
+    imgElement.id = "test";
     imgElement.src = src;
     imgElement.width = 400;
+    imgElement.dataset.id = photoId; // Assign a unique ID
+
     previewContainer.appendChild(imgElement);
+    imageContainer.appendChild(previewContainer);
   }
 
   submitBtn.style.display = "block"; // Show submit button
 }
 
-// ✅ Upload on Submit Click
+//  Upload on Submit Click
 submitBtn.addEventListener("click", async () => {
   if (fileToUpload) {
     await uploadToCloudinary(fileToUpload);
@@ -88,7 +141,7 @@ submitBtn.addEventListener("click", async () => {
   }
 });
 
-// ✅ Start Recording
+//  Start Recording
 async function startRecording() {
   recordedChunks = [];
 
@@ -119,17 +172,17 @@ async function startRecording() {
   mediaRecorder.start();
 }
 
-// ✅ Stop Recording
+//  Stop Recording
 function stopRecording() {
   mediaRecorder.stop();
 }
 
-// ✅ Upload to Cloudinary
+// Upload to Cloudinary
 async function uploadToCloudinary(file) {
   const formData = new FormData();
   formData.append("file", file);
   formData.append("upload_preset", uploadPreset);
-  formData.append("tags", "myImages"); // ✅ Add tag for filtering
+  formData.append("tags", "myImages"); //  Add tag for filtering
 
   try {
     const response = await fetch(

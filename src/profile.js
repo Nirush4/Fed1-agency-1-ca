@@ -9,14 +9,14 @@ const nameInput = document.getElementById("name-input");
 const mediaContainer = document.querySelector("#media-gallery-container");
 const cloudinaryGalleryContainer = document.querySelector(".cld-gallery"); // Ensure this is correct
 
-const ERROR_MESSAGE_DEFAULT = 'Something went wrong';
+const ERROR_MESSAGE_DEFAULT = "Something went wrong";
 
 const options = {
-  method: 'GET',
+  method: "GET",
   headers: {
     Authorization:
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTmlydXNoIiwiZW1haWwiOiJuaXJyYWowMzMyN0BzdHVkLm5vcm9mZi5ubyIsImlhdCI6MTc0MTAwNzAzOH0.e3eJ9TupVI7RCcQsg5Y2ATY3YQ-k0-ac3rT4G_V9BWI',
-    'X-Noroff-API-Key': 'f9c959e7-bfef-453f-a521-ec2ce2545f87',
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTmlydXNoIiwiZW1haWwiOiJuaXJyYWowMzMyN0BzdHVkLm5vcm9mZi5ubyIsImlhdCI6MTc0MTAwNzAzOH0.e3eJ9TupVI7RCcQsg5Y2ATY3YQ-k0-ac3rT4G_V9BWI",
+    "X-Noroff-API-Key": "f9c959e7-bfef-453f-a521-ec2ce2545f87",
   },
 };
 
@@ -39,7 +39,7 @@ async function setup() {
     // renderGallery(imgList);
     const imgList = await getImage();
     createProductsListEl(imgList);
-    const savedImage = localStorage.getItem('profileImage');
+    const savedImage = localStorage.getItem("profileImage");
 
     if (savedImage) {
       profileImg.src = savedImage;
@@ -47,25 +47,23 @@ async function setup() {
   }
 }
 
-
 function createHTML(template) {
   const parser = new DOMParser();
   const parsedDocument = parser.parseFromString(template, "text/html");
   return parsedDocument.body.firstChild;
 }
 
-
 async function getImage() {
   try {
     const response = await fetch(
-      'https://v2.api.noroff.dev/social/posts',
+      "https://v2.api.noroff.dev/social/posts",
       options
     );
     const { data } = await response.json();
     return data
       .filter(
         (post) =>
-          post.media && Object.prototype.hasOwnProperty.call(post.media, 'url')
+          post.media && Object.prototype.hasOwnProperty.call(post.media, "url")
       )
       .map((post) => ({
         id: post.id,
@@ -92,7 +90,7 @@ function productTemplate({ imgUrl }) {
 }
 
 async function createProductsListEl(list = []) {
-  gridEl.innerHTML = '';
+  gridEl.innerHTML = "";
 
   try {
     list.forEach(({ id, image }) => {
@@ -165,22 +163,20 @@ window.addEventListener("load", () => {
   }
 });
 
-
 const myGallery = cloudinary.galleryWidget({
   container: mediaContainer,
   cloudName: "du2edesv8",
   carouselStyle: "none",
   autoplay: false,
   videoProps: { controls: "all", autoplay: false },
-  displayProps: {
-    mode: "expanded",
-    columns: 3,
-  },
   mediaAssets: [
     {
       tag: "myImages",
       transformation: {
+        prefixed: false,
         quality: "auto:best",
+        width: 800,
+        height: 600,
         fetch_format: "auto",
         x_0: 1,
         crop: "fill",
@@ -196,13 +192,13 @@ var interval = setInterval(function () {
     const images = mediaContainer.querySelectorAll("img");
     const arrImg = Array.from(images);
 
-    // ✅ Fix: Don't reload the page, just wait for images
+    // Fix: Don't reload the page, just wait for images
     if (!arrImg.length || arrImg[0].src.length <= 1) {
       console.warn("No images found yet. Waiting...");
       return; // Wait instead of reloading
     }
 
-    // ✅ Remove duplicate images
+    // Remove duplicate images
     const filterImgs = arrImg.filter(
       (value, index, self) =>
         index === self.findIndex((t) => t.src === value.src)
@@ -212,7 +208,7 @@ var interval = setInterval(function () {
 
     mediaContainer.innerHTML = "";
 
-    // ✅ Wrap each image in a div with class "grid-div"
+    // Wrap each image in a div with class "grid-div"
     listOfImgs.forEach((src) => {
       const gridDiv = document.createElement("div");
       gridDiv.classList.add("grid-item");
@@ -224,18 +220,21 @@ var interval = setInterval(function () {
       imgEl.classList.add("image-scale");
       imgEl.src = src;
 
+      const match = src.match(/blob_[a-zA-Z0-9]+/);
+      if (match) {
+        imgEl.dataset.id = match[0]; // Add as dataset id
+      }
+
       wrapperDiv.appendChild(imgEl);
       gridDiv.appendChild(wrapperDiv);
       gridEl.appendChild(gridDiv);
     });
 
-    clearInterval(interval); // ✅ Stop interval after images are loaded
+    clearInterval(interval); // Stop interval after images are loaded
   }
-}, 100);
+}, 4000);
 
-// ✅ Stop after 5 seconds to prevent infinite execution
 setTimeout(() => {
   clearInterval(interval);
   console.log("Interval stopped after 5 seconds.");
-}, 50000);
-
+}, 5000);
