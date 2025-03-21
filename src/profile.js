@@ -7,9 +7,11 @@ const profileName = document.getElementById('profile-name');
 const nameInput = document.getElementById('name-input');
 const mediaContainer = document.querySelector('#media-gallery-container');
 
-const ERROR_MESSAGE_DEFAULT = 'Something went wrong';
+const ERROR_MESSAGE_DEFAULT = "Something went wrong";
+
 
 const key = import.meta.env.VITE_API_KEY;
+
 
 setup();
 
@@ -27,7 +29,7 @@ async function setup() {
   } else {
     const imgList = await getImage();
     createProductsListEl(imgList);
-    const savedImage = localStorage.getItem('profileImage');
+    const savedImage = localStorage.getItem("profileImage");
 
     if (savedImage) {
       profileImg.src = savedImage;
@@ -44,12 +46,14 @@ function createHTML(template) {
 async function getImage() {
   try {
     const response = await fetch(
+
       `https://pixabay.com/api/?key=${key}&orientation=vertical&page=1&per_page=20&category=places`
     );
 
     const { hits } = await response.json();
 
     return hits;
+
   } catch (error) {
     console.error(ERROR_MESSAGE_DEFAULT, error?.message);
   }
@@ -72,7 +76,7 @@ function productTemplate({ id, imgUrl }) {
 }
 
 async function createProductsListEl(list = []) {
-  gridEl.innerHTML = '';
+  gridEl.innerHTML = "";
 
   try {
     list.forEach(({ id, largeImageURL }) => {
@@ -151,17 +155,20 @@ const myGallery = cloudinary.galleryWidget({
   cloudName: 'du2edesv8',
   carouselStyle: 'none',
   autoplay: false,
-  videoProps: { controls: 'all', autoplay: false },
-  displayProps: {
-    mode: 'expanded',
-    columns: 3,
-  },
+
+  videoProps: { controls: "all", autoplay: false },
+
   mediaAssets: [
     {
       tag: 'myImages',
       transformation: {
-        quality: 'auto:best',
-        fetch_format: 'auto',
+
+        prefixed: false,
+        quality: "auto:best",
+        width: 800,
+        height: 600,
+        fetch_format: "auto",
+
         x_0: 1,
         crop: 'fill',
       },
@@ -176,13 +183,13 @@ var interval = setInterval(function () {
     const images = mediaContainer.querySelectorAll('img');
     const arrImg = Array.from(images);
 
-    // ✅ Fix: Don't reload the page, just wait for images
+    // Fix: Don't reload the page, just wait for images
     if (!arrImg.length || arrImg[0].src.length <= 1) {
       console.warn('No images found yet. Waiting...');
       return; // Wait instead of reloading
     }
 
-    // ✅ Remove duplicate images
+    // Remove duplicate images
     const filterImgs = arrImg.filter(
       (value, index, self) =>
         index === self.findIndex((t) => t.src === value.src)
@@ -192,7 +199,7 @@ var interval = setInterval(function () {
 
     mediaContainer.innerHTML = '';
 
-    // ✅ Wrap each image in a div with class "grid-div"
+    // Wrap each image in a div with class "grid-div"
     listOfImgs.forEach((src) => {
       const gridDiv = document.createElement('div');
       gridDiv.classList.add('grid-item');
@@ -204,17 +211,23 @@ var interval = setInterval(function () {
       imgEl.classList.add('image-scale');
       imgEl.src = src;
 
+      const match = src.match(/blob_[a-zA-Z0-9]+/);
+      if (match) {
+        imgEl.dataset.id = match[0]; // Add as dataset id
+      }
+
       wrapperDiv.appendChild(imgEl);
       gridDiv.appendChild(wrapperDiv);
       gridEl.appendChild(gridDiv);
     });
 
-    clearInterval(interval); // ✅ Stop interval after images are loaded
+    clearInterval(interval); // Stop interval after images are loaded
   }
-}, 100);
+}, 4000);
 
-// ✅ Stop after 5 seconds to prevent infinite execution
 setTimeout(() => {
   clearInterval(interval);
+
   console.log('Interval stopped after 5 seconds.');
 }, 50000);
+

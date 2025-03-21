@@ -27,27 +27,41 @@
 }
 
 .img-div {
-
-    width: 100%;
-    height: auto;
-    max-width: 19rem;
-    max-height: 23rem;
-    cursor: pointer;
-    overflow: hidden;
+  width: 100%;
+  height: auto;
+  max-width: 19rem;
+  max-height: 23rem;
+  cursor: pointer;
+  overflow: hidden;
 }
 
 .grid-item img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    display: block;
-    /* Prevent small space below image */
-    transition: transform 0.2s;
-    /* Add smooth transform */
-
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  /* Prevent small space below image */
+  transition: transform 0.2s;
+  /* Add smooth transform */
 }
 
 .grid-item:hover img {
+
     transform: scale(1.05);
     /* slightly scale image on hover */
+
+}
+
+#main-video {
+  transform: scaleX(-1);
+}
+
+#test {
+  transform: scaleX(-1);
+  height: 100%;
+  width: 100%;
+}
+
+#previewContainer {
+  overflow: hidden;
 }
