@@ -26,7 +26,8 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.img-div {
+
+.post-div {
   width: 100%;
   height: auto;
   max-width: 19rem;
@@ -36,21 +37,13 @@
 }
 
 .grid-item img {
-  width: 100%;
-  height: auto;
+  width: 19rem;
+  height: 23rem;
   object-fit: cover;
   display: block;
-  /* Prevent small space below image */
-  transition: transform 0.2s;
-  /* Add smooth transform */
+  transition: all 0.2s ease-in-out;
 }
 
-.grid-item:hover img {
-
-    transform: scale(1.05);
-    /* slightly scale image on hover */
-
-}
 
 #main-video {
   transform: scaleX(-1);
@@ -65,3 +58,26 @@
 #previewContainer {
   overflow: hidden;
 }
+
+
+.grid-item video {
+  transition: all 0.2s ease-in-out;
+
+}
+
+.grid-item:hover img {
+  transform: scale(1.05);
+
+}
+
+.grid-item:hover video {
+  transform: scale(1.05);
+}
+
+/* .video-content {
+  height: 21rem;
+  width: 100%;
+  object-fit: cover;
+} */
+
+.product-image {}
