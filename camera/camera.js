@@ -18,7 +18,9 @@ invertBtn.addEventListener("click", () => {
   if (video.style.filter === "invert(75%)") {
     video.style.filter = "none";
   } else {
+
     video.style.filter = "invert(75%)";
+
   }
 });
 
@@ -26,7 +28,9 @@ blurBtn.addEventListener("click", () => {
   if (video.style.filter === "blur(2px)") {
     video.style.filter = "none";
   } else {
+
     video.style.filter = "blur(2px)";
+
   }
 });
 
@@ -34,7 +38,9 @@ brigtnessBtn.addEventListener("click", () => {
   if (video.style.filter === "grayscale(100%)") {
     video.style.filter = "none";
   } else {
+
     video.style.filter = "grayscale(100%)";
+
   }
 });
 
@@ -74,17 +80,22 @@ captureBtn.addEventListener("click", () => {
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d");
 
+
   openCameraBtn.style.display = "block";
+
 
   canvas.width = video.videoWidth || 640;
   canvas.height = video.videoHeight || 480;
 
   context.filter = video.style.filter;
 
+
+
   context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
   video.style.display = "none";
   canvas.style.display = "block";
+
 
   canvas.toBlob((blob) => {
     if (blob) {
@@ -100,8 +111,11 @@ openCameraBtn.addEventListener("click", () => {
   previewContainer.remove();
 });
 
+
 function previewMedia(type, src) {
   previewContainer.innerHTML = "";
+
+  const photoId = Math.floor(10000 + Math.random() * 90000);
 
   const photoId = Math.floor(10000 + Math.random() * 90000);
 
@@ -118,7 +132,9 @@ function previewMedia(type, src) {
     imgElement.id = "test";
     imgElement.src = src;
     imgElement.width = 400;
+
     imgElement.dataset.id = photoId;
+
 
     previewContainer.appendChild(imgElement);
     imageContainer.appendChild(previewContainer);
@@ -126,6 +142,7 @@ function previewMedia(type, src) {
 
   submitBtn.style.display = "block";
 }
+
 
 submitBtn.addEventListener("click", async () => {
   if (fileToUpload) {
@@ -135,6 +152,7 @@ submitBtn.addEventListener("click", async () => {
     submitBtn.style.display = "none";
   }
 });
+
 
 async function startRecording() {
   recordedChunks = [];
@@ -166,15 +184,19 @@ async function startRecording() {
   mediaRecorder.start();
 }
 
+
 function stopRecording() {
   mediaRecorder.stop();
 }
+
 
 async function uploadToCloudinary(file) {
   const formData = new FormData();
   formData.append("file", file);
   formData.append("upload_preset", uploadPreset);
+
   formData.append("tags", "myImages");
+
 
   try {
     const response = await fetch(

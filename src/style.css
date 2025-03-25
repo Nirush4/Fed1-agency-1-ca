@@ -30,8 +30,8 @@
 }
 
 
-.post-div {
 
+.post-div {
   width: 100%;
   height: auto;
   max-width: 19rem;
@@ -47,8 +47,23 @@
   object-fit: cover;
   display: block;
   transition: all 0.2s ease-in-out;
-
 }
+
+
+#main-video {
+  transform: scaleX(-1);
+}
+
+#test {
+  transform: scaleX(-1);
+  height: 100%;
+  width: 100%;
+}
+
+#previewContainer {
+  overflow: hidden;
+}
+
 
 .grid-item video {
   transition: all 0.2s ease-in-out;

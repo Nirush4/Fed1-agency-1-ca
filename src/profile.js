@@ -153,7 +153,9 @@ const myGallery = cloudinary.galleryWidget({
   carouselStyle: 'none',
   autoplay: false,
 
+
   videoProps: { controls: 'all', autoplay: false },
+
 
 
   mediaAssets: [
@@ -181,10 +183,12 @@ var interval = setInterval(function () {
     const images = mediaContainer.querySelectorAll('img');
     const arrImg = Array.from(images);
 
+
     if (!arrImg.length || arrImg[0].src.length <= 1) {
       console.warn('No images found yet. Waiting...');
       return;
     }
+
 
     const filterImgs = arrImg.filter(
       (value, index, self) =>
@@ -194,6 +198,7 @@ var interval = setInterval(function () {
     const listOfImgs = filterImgs.map((i) => i.src);
 
     mediaContainer.innerHTML = '';
+
 
     listOfImgs.forEach((src) => {
       const gridDiv = document.createElement('div');
