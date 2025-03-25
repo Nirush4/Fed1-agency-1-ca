@@ -11,7 +11,7 @@ async function fetchImgDetails() {
   }
   try {
     const response = await fetch(
-      `https://pixabay.com/api/?key=${key}&orientation=vertical&page=1&per_page=20&category=places&id=${id}`
+      `https://pixabay.com/api/?key=49423799-7939ddd154968d7fb42d51820&orientation=vertical&page=1&per_page=20&category=places&id=${id}`
     );
 
     const { hits } = await response.json();
@@ -32,7 +32,7 @@ function getId() {
   return imageId;
 }
 
-function detailsTemplate({ id, largeImageURL }) {
+function detailsTemplate({ id, largeImageURL, likes, comments }) {
   const detailsUrl = `/single/index?id=${id}`;
   return `
 <div class=" flex flex-col justify-between w-lg h-4/5 mx-auto bg-white rounded-t-lg shadow-lg">
@@ -47,9 +47,9 @@ function detailsTemplate({ id, largeImageURL }) {
 
     <!-- Post Actions -->
     <div class="flex justify-between space-x-1 pt-1 border-t w-full bg-gray-200 px-7">
-      <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-lg py-2 px-3 rounded-md focus:outline-none">Like</button>
-      <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-lg py-2 px-3 rounded-md focus:outline-none">Comment</button>
-      <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-lg py-2 px-3 rounded-md focus:outline-none">Share</button>
+      <button class="bg-gray-200 text-gray-800 text-xl py-2 px-3 rounded-md focus:outline-none cursor-pointer"> &#x2665;&#xfe0f; ${likes}</button>
+      <button class="bg-gray-200 text-gray-800 text-xl py-2 px-3 rounded-md focus:outline-none cursor-pointer">💬 ${comments}</button>
+      <button class="bg-gray-200 text-gray-800 text-xl py-2 px-3 rounded-md focus:outline-none cursor-pointer">🔗 </button>
     </div>
 </div>
 
@@ -60,11 +60,13 @@ async function renderImgDetails() {
   const imgDetails = await fetchImgDetails();
 
   if (imgDetails) {
-    const { id, largeImageURL } = imgDetails;
+    const { id, largeImageURL, likes, comments } = imgDetails;
 
     const template = detailsTemplate({
       id: id,
       largeImageURL: largeImageURL,
+      likes,
+      comments,
     });
 
     const detailsEl = createHTML(template);
