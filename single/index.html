@@ -14,7 +14,7 @@
     <title>Single post / Square Pumpkin</title>
 </head>
 
-<body class="bg-black">
+<body class="">
 
     <header class="flex justify-center w-full">
 
@@ -24,68 +24,75 @@
 
         <!-- imp! left side nav -->
 
-        <div class="container grid fixed grid-cols-5 min-h-dvh min-w-full ">
+        <div class="container grid fixed grid-cols-5 min-h-dvh min-w-full  bg-bg-light">
 
             <div
-                class="aside fixed bottom-0 right-0 left-0 z-30 flex  justify-evenly gap-5 h-20 w-full border-r-1 border-gray-300 bg-black text-white ... lg:hidden">
-                <a href="/profile/index.html"
-                    class="flex items-center text-4xl font-semibold font-logoText2 text-vibPink">square
-                    pumpkin</a>
-                <div class="flex items-center hover:text-darkOrange"><i
-                        class="fa-solid fa-house-user cursor-pointer text-xl"></i> <span
-                        class="ps-4 cursor-pointer text-xl"></span>
-                </div>
-                <div class="flex items-center hover:text-darkOrange"> <i
-                        class="fa-solid fa-user cursor-pointer text-xl"></i>
+                class="aside fixed bottom-0 right-0 left-0 z-30 flex justify-evenly items-center gap-5 h-20 w-full border-r-1 border-gray-300 bg-bg-light ... lg:hidden">
+                <a href="/profile/index.html" class="flex items-center pl-2 w-12 h-12">
+                    <img src="/images/logo-mobile.png" alt=""> </a>
+                <a href="/profile/index.html" class="flex items-center hover:text-darkOrange">
+                    <i class="fa-solid fa-house-user cursor-pointer text-xl text-gray-200"></i>
                     <span class="ps-4 cursor-pointer text-xl"></span>
-                </div>
-
-                <div class="flex items-center hover:text-darkOrange"> <i
-                        class="fa-solid fa-people-group cursor-pointer text-xl"></i> <span
-                        class="ps-4 cursor-pointer text-xl"></span> </div>
-                <div class="flex items-center hover:text-darkOrange"> <i
-                        class="fa-solid fa-plus cursor-pointer text-xl"></i>
-                    <span class="ps-4 cursor-pointer text-xl"></span>
-                </div>
-                <div class=" flex items-center hover:text-darkOrange"> <i
-                        class="fa-solid fa-bars cursor-pointer text-xl"></i>
-                    <span class="ps-4 cursor-pointer text-xl"></span>
-                </div>
-            </div>
-
-            <div
-                class="aside hidden lg:flex flex-col gap-10 h-full w-full border-r-1 border-gray-300 min-h-dvh text-white ...">
-
-                <a href="../index.html"
-                    class="flex items-center text-4xl font-semibold font-logoText2 text-vibPink">square
-                    pumpkin</a>
-
-                <div class="flex items-center hover:text-darkOrange"><i
-                        class="fa-solid fa-house-user cursor-pointer text-xl ps-12"></i> <span
-                        class="ps-4 cursor-pointer text-xl">Home</span></div>
-                <a href="../profile/index.html" class="flex items-center hover:text-darkOrange"> <i
-                        class="fa-solid fa-user cursor-pointer text-xl ps-12"></i>
-                    <span class="ps-4 cursor-pointer text-xl">Profile</span>
                 </a>
 
-                <div class="flex items-center hover:text-darkOrange"> <i
-                        class="fa-solid fa-people-group cursor-pointer text-xl ps-12"></i> <span
-                        class="ps-4 cursor-pointer text-xl">Explore</span> </div>
-                <div class="flex items-center hover:text-darkOrange"> <i
-                        class="fa-solid fa-plus cursor-pointer text-xl ps-12"></i>
-                    <span class="ps-4 cursor-pointer text-xl">Create</span>
-                </div>
-                <div class="flex items-center hover:text-darkOrange"> <i
-                        class="fa-solid fa-bars cursor-pointer text-xl ps-12"></i>
-                    <span class="ps-4 cursor-pointer text-xl">More</span>
+                <a href="../profile/index.html" class="flex items-center hover:text-darkOrange">
+                    <i class="fa-solid fa-user cursor-pointer text-xl text-gray-200"></i>
+                    <span class="ps-4 cursor-pointer text-xl"></span>
+                </a>
+
+                <a href="../explore/index.html" class="flex items-center hover:text-darkOrange">
+                    <i class="fa-solid fa-people-group cursor-pointer text-xl text-gray-200"></i>
+                    <span class="ps-4 cursor-pointer text-xl"></span>
+                </a>
+                <a href="../camera/index.html" class="flex items-center hover:text-darkOrange">
+                    <i class="fa-solid fa-plus cursor-pointer text-xl text-gray-200"></i>
+                    <span class="ps-4 cursor-pointer text-xl"></span>
+                </a>
+                <div class="flex items-center hover:text-darkOrange">
+                    <i class="fa-solid fa-bars cursor-pointer text-xl text-gray-200"></i>
+                    <span class="ps-4 cursor-pointer text-xl"></span>
                 </div>
             </div>
+
+
+
+            <div
+                class="aside hidden lg:flex flex-col gap-15 h-full w-full border-r-1 border-gray-300 min-h-dvh text-white ...">
+                <a href="/profile/index.html" class="flex items-center w-55 h-20 py-20 pl-10">
+                    <img src="/images/logo-desktop.png" alt=""> </a>
+
+                <div class="flex items-center hover:text-darkOrange">
+                    <i class="fa-solid fa-house-user cursor-pointer text-xl ps-12 text-gray-200"></i>
+                    <span class="ps-4 cursor-pointer text-xl text-gray-200">Home</span>
+                </div>
+                <a href="/profile/index.html" class="flex items-center hover:text-darkOrange">
+                    <i class="fa-solid fa-user cursor-pointer text-xl ps-12 text-gray-200"></i>
+                    <span class="ps-4 cursor-pointer text-xl text-gray-200">Profile</span>
+                </a>
+
+                <a href="../explore/index.html" class="flex items-center hover:text-darkOrange">
+                    <i class="fa-solid fa-people-group cursor-pointer text-xl ps-12 text-gray-200"></i>
+                    <span class="ps-4 cursor-pointer text-xl text-gray-200">Explore</span>
+                </a>
+
+                <a href="../camera/index.html" class="flex items-center hover:text-darkOrange">
+                    <i class="fa-solid fa-plus cursor-pointer text-xl ps-12 text-gray-200"></i>
+                    <span class="ps-4 cursor-pointer text-xl text-gray-200">Create</span>
+                </a>
+
+                <div class="flex items-center hover:text-darkOrange">
+                    <i class="fa-solid fa-bars cursor-pointer text-xl ps-12 text-gray-200"></i>
+                    <span class="ps-4 cursor-pointer text-xl text-gray-200">More</span>
+                </div>
+            </div>
+
+
 
 
             <!-- imp! Right side container -->
 
             <div
-                class="aside grid grid-rows-4 col-span-5 h-dvh w-full px-5 place-items-center overflow-y-scroll bg-black s:px-10 lg:col-span-4 lg:px-0">
+                class="aside grid grid-rows-4 col-span-5 h-dvh w-full px-5 place-items-center overflow-y-scroll bg-bg  s:px-10 lg:col-span-4 lg:px-0">
 
                 <!-- imp! posts -->
                 <div id="img-container"

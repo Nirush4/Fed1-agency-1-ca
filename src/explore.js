@@ -28,7 +28,7 @@ function createHTML(template) {
 async function getImage() {
   try {
     const response = await fetch(
-      `https://pixabay.com/api/?key=49423799-7939ddd154968d7fb42d51820&orientation=vertical&page=2&per_page=20`
+      `https://pixabay.com/api/?key=49423799-7939ddd154968d7fb42d51820&orientation=vertical&page=2&per_page=50`
     );
 
     const { hits } = await response.json();
@@ -43,7 +43,7 @@ async function getImage() {
 async function getVideo() {
   try {
     const response = await fetch(
-      `https://pixabay.com/api/videos/?key=49423799-7939ddd154968d7fb42d51820&orientation=vertical&page=2&per_page=20`
+      `https://pixabay.com/api/videos/?key=49423799-7939ddd154968d7fb42d51820&orientation=vertical&page=2&per_page=50`
     );
 
     const { hits } = await response.json();
@@ -68,7 +68,7 @@ function productTemplate({ id, imgUrl, videoUrl }) {
             <div class="post-div">
 
           <a href="${detailsUrl}">
-            <video controls autoplay class="video-content w-full h-130 object-cover">
+            <video controls autoplay muted class="video-content w-full h-130 object-cover">
               <source src="${videoUrl}" type="video/mp4">
             </video>
           </a>
