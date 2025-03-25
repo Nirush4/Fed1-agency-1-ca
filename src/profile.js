@@ -88,7 +88,6 @@ async function createProductsListEl(list = []) {
     console.error(ERROR_MESSAGE_DEFAULT, error?.message);
   }
 }
-de;
 
 const fileInput = document.getElementById('file-input');
 const profileImg = document.getElementById('profile-img');

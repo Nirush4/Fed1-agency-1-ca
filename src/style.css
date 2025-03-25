@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "daisyui";
 
 @import url("https://fonts.googleapis.com/css2?family=Borel&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Yellowtail&display=swap");
@@ -16,6 +17,8 @@
   --color-brightOrange: #fa7300;
   --color-brightYellow: #ded300;
   --color-vibPink: #f08;
+  --color-bg: #121320;
+  --color-bg-light: #171927;
 }
 
 /* style.css */
@@ -64,4 +67,28 @@
   object-fit: cover;
 } */
 
-.product-image {}
+
+/*Tablets*/
+@media (max-width:1024px) {
+  .grid-item img {
+    width: 16rem;
+    height: 19rem;
+  }
+}
+
+
+/* Tablet Portrait */
+@media (max-width:768px) {
+  .grid-item img {
+    width: 12rem;
+    height: 15rem;
+  }
+}
+
+/*Mobile */
+@media (max-width:640px) {
+  .grid-item img {
+    width: 9rem;
+    height: 10rem;
+  }
+}
