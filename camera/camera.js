@@ -103,14 +103,12 @@ openCameraBtn.addEventListener("click", () => {
 function previewMedia(type, src) {
   previewContainer.innerHTML = "";
 
-  const photoId = Math.floor(10000 + Math.random() * 90000);
-
   if (type === "video") {
     const videoElement = document.createElement("video");
     videoElement.src = src;
     videoElement.controls = true;
     videoElement.width = 400;
-    videoElement.dataset.id = photoId;
+
     previewContainer.appendChild(videoElement);
     imageContainer.appendChild(previewContainer);
   } else if (type === "image") {
@@ -118,7 +116,6 @@ function previewMedia(type, src) {
     imgElement.id = "test";
     imgElement.src = src;
     imgElement.width = 400;
-    imgElement.dataset.id = photoId;
 
     previewContainer.appendChild(imgElement);
     imageContainer.appendChild(previewContainer);
