@@ -105,7 +105,6 @@ async function createProductsListEl(list = []) {
     console.error(ERROR_MESSAGE_DEFAULT, error?.message);
   }
 }
-// Profile image upload by Nirushan
 
 const fileInput = document.getElementById("file-input");
 const profileImg = document.getElementById("profile-img");
@@ -192,13 +191,11 @@ var interval = setInterval(function () {
     const images = mediaContainer.querySelectorAll("img");
     const arrImg = Array.from(images);
 
-    // Fix: Don't reload the page, just wait for images
     if (!arrImg.length || arrImg[0].src.length <= 1) {
       console.warn("No images found yet. Waiting...");
       return; // Wait instead of reloading
     }
 
-    // Remove duplicate images
     const filterImgs = arrImg.filter(
       (value, index, self) =>
         index === self.findIndex((t) => t.src === value.src)
@@ -208,7 +205,6 @@ var interval = setInterval(function () {
 
     mediaContainer.innerHTML = "";
 
-    // Wrap each image in a div with class "grid-div"
     listOfImgs.forEach((src) => {
       const gridDiv = document.createElement("div");
       gridDiv.classList.add("grid-item");
