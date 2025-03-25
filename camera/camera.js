@@ -171,6 +171,7 @@ async function uploadToCloudinary(file) {
   const formData = new FormData();
   formData.append("file", file);
   formData.append("upload_preset", uploadPreset);
+
   formData.append("tags", "myImages");
 
   try {

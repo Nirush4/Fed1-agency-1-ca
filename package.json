@@ -11,7 +11,7 @@
   "devDependencies": {
     "@eslint/js": "^9.21.0",
     "cypress": "^14.1.0",
-    "daisyui": "^5.0.6",
+    "daisyui": "^5.0.9",
     "eslint": "^9.21.0",
     "globals": "^16.0.0",
     "prettier": "^3.5.3",
