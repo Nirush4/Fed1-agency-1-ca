@@ -46,7 +46,10 @@ function createHTML(template) {
 async function getImage() {
   try {
     const response = await fetch(
-      `https://pixabay.com/api/?key=49423799-7939ddd154968d7fb42d51820&orientation=vertical&page=1&per_page=20&category=places`
+
+
+      `https://pixabay.com/api/?key=${key}&orientation=vertical&page=1&per_page=20&category=places`
+
     );
 
     const { hits } = await response.json();
@@ -150,7 +153,10 @@ const myGallery = cloudinary.galleryWidget({
   carouselStyle: 'none',
   autoplay: false,
 
-  videoProps: { controls: "all", autoplay: false },
+
+  videoProps: { controls: 'all', autoplay: false },
+
+
 
   mediaAssets: [
     {

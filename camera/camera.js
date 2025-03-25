@@ -5,7 +5,6 @@ const recordBtn = document.querySelector("#main-video-button");
 const captureBtn = document.getElementById("captureBtn");
 const submitBtn = document.getElementById("submitBtn");
 const video = document.querySelector("#main-video");
-// const mediaContainer = document.querySelector("#media-gallery-container");
 
 const previewContainer = document.getElementById("previewContainer");
 
@@ -19,7 +18,7 @@ invertBtn.addEventListener("click", () => {
   if (video.style.filter === "invert(75%)") {
     video.style.filter = "none";
   } else {
-    video.style.filter = "invert(75%)"; // Remove blur
+    video.style.filter = "invert(75%)";
   }
 });
 
@@ -27,7 +26,7 @@ blurBtn.addEventListener("click", () => {
   if (video.style.filter === "blur(2px)") {
     video.style.filter = "none";
   } else {
-    video.style.filter = "blur(2px)"; // Remove blur
+    video.style.filter = "blur(2px)";
   }
 });
 
@@ -35,20 +34,20 @@ brigtnessBtn.addEventListener("click", () => {
   if (video.style.filter === "grayscale(100%)") {
     video.style.filter = "none";
   } else {
-    video.style.filter = "grayscale(100%)"; // Remove blur
+    video.style.filter = "grayscale(100%)";
   }
 });
 
 let mediaRecorder;
 let recordedChunks = [];
 let stream;
-let fileToUpload = null; // Stores the latest media (image or video)
+let fileToUpload = null;
 
 async function initialiser() {
   try {
     stream = await navigator.mediaDevices.getUserMedia({
       video: true,
-      audio: false, // Start with NO audio
+      audio: false,
     });
 
     video.srcObject = stream;
@@ -75,23 +74,21 @@ captureBtn.addEventListener("click", () => {
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d");
 
-  openCameraBtn.classList = "open";
+  openCameraBtn.style.display = "block";
 
   canvas.width = video.videoWidth || 640;
   canvas.height = video.videoHeight || 480;
 
   context.filter = video.style.filter;
 
-  // Draw video frame to canvas
   context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
   video.style.display = "none";
   canvas.style.display = "block";
 
-  // Convert canvas to Blob (JPEG)
   canvas.toBlob((blob) => {
     if (blob) {
-      fileToUpload = blob; // Store the captured image
+      fileToUpload = blob;
       previewMedia("image", URL.createObjectURL(blob));
     }
   }, "image/jpeg");
@@ -99,22 +96,19 @@ captureBtn.addEventListener("click", () => {
 
 openCameraBtn.addEventListener("click", () => {
   video.style.display = "block";
-  openCameraBtn.classList = "closed";
+  openCameraBtn.style.display = "none";
   previewContainer.remove();
 });
 
-//  Show Preview
 function previewMedia(type, src) {
-  previewContainer.innerHTML = ""; // Clear previous preview
-
-  const photoId = Math.floor(10000 + Math.random() * 90000);
+  previewContainer.innerHTML = "";
 
   if (type === "video") {
     const videoElement = document.createElement("video");
     videoElement.src = src;
     videoElement.controls = true;
     videoElement.width = 400;
-    videoElement.dataset.id = photoId;
+
     previewContainer.appendChild(videoElement);
     imageContainer.appendChild(previewContainer);
   } else if (type === "image") {
@@ -122,26 +116,23 @@ function previewMedia(type, src) {
     imgElement.id = "test";
     imgElement.src = src;
     imgElement.width = 400;
-    imgElement.dataset.id = photoId; // Assign a unique ID
 
     previewContainer.appendChild(imgElement);
     imageContainer.appendChild(previewContainer);
   }
 
-  submitBtn.style.display = "block"; // Show submit button
+  submitBtn.style.display = "block";
 }
 
-//  Upload on Submit Click
 submitBtn.addEventListener("click", async () => {
   if (fileToUpload) {
     await uploadToCloudinary(fileToUpload);
-    fileToUpload = null; // Reset after upload
-    previewContainer.innerHTML = ""; // Clear preview
-    submitBtn.style.display = "none"; // Hide submit button
+    fileToUpload = null;
+    previewContainer.innerHTML = "";
+    submitBtn.style.display = "none";
   }
 });
 
-//  Start Recording
 async function startRecording() {
   recordedChunks = [];
 
@@ -165,24 +156,23 @@ async function startRecording() {
 
   mediaRecorder.onstop = async () => {
     const videoBlob = new Blob(recordedChunks, { type: "video/webm" });
-    fileToUpload = videoBlob; // Store recorded video
+    fileToUpload = videoBlob;
     previewMedia("video", URL.createObjectURL(videoBlob));
   };
 
   mediaRecorder.start();
 }
 
-//  Stop Recording
 function stopRecording() {
   mediaRecorder.stop();
 }
 
-// Upload to Cloudinary
 async function uploadToCloudinary(file) {
   const formData = new FormData();
   formData.append("file", file);
   formData.append("upload_preset", uploadPreset);
-  formData.append("tags", "myImages"); //  Add tag for filtering
+
+  formData.append("tags", "myImages");
 
   try {
     const response = await fetch(
