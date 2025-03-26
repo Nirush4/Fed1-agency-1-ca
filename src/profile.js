@@ -7,9 +7,8 @@ const profileName = document.getElementById("profile-name");
 const nameInput = document.getElementById("name-input");
 const mediaContainer = document.querySelector("#media-gallery-container");
 
-const ERROR_MESSAGE_DEFAULT = "Something went wrong";
 
-// const key = import.meta.env.VITE_API_KEY;
+const ERROR_MESSAGE_DEFAULT = 'Something went wrong';
 
 setup();
 
@@ -25,9 +24,14 @@ async function setup() {
   ) {
     console.error("JS cannot run!!!");
   } else {
+    const imgFromCloud = await loadImages();
+
     const imgList = await getImage();
-    createProductsListEl(imgList);
-    const savedImage = localStorage.getItem("profileImage");
+
+    const compainedImg = [...imgList, ...imgFromCloud];
+
+    createProductsListEl(compainedImg);
+    const savedImage = localStorage.getItem('profileImage');
 
     if (savedImage) {
       profileImg.src = savedImage;
@@ -54,38 +58,56 @@ async function getImage() {
     console.error(ERROR_MESSAGE_DEFAULT, error?.message);
   }
 }
-
-function productTemplate({ id, imgUrl }) {
-  const detailsUrl = `/single/index?id=${id}`;
+function productTemplate({ id, imgUrl, datasetId }) {
+  const detailsUrl = `/single/index?id=${id}&datasetId=${datasetId || ''}`;
 
   return `
-  
-  <div class="grid-item">
-    <div class="post-div">
-     <a href="${detailsUrl}">
-      <img
-        src="${imgUrl}"
-      />
-    </a>
+    <div class="grid-item">
+      <div class="post-div">
+        <a href="${detailsUrl}">
+          <img src="${imgUrl}" />
+        </a>
+      </div>
     </div>
- `;
+  `;
 }
 
 async function createProductsListEl(list = []) {
-  gridEl.innerHTML = "";
+  gridEl.innerHTML = '';
 
   try {
-    list.forEach(({ id, largeImageURL }) => {
-      const template = productTemplate({
-        id: id,
-        imgUrl: largeImageURL,
-      });
+    list.forEach((item) => {
+      let imgUrl;
+      let datasetId = '';
+      if (typeof item === 'string') {
+        imgUrl = item;
+      } else if (item.largeImageURL) {
+        imgUrl = item.largeImageURL;
+      }
 
-      const newEl = createHTML(template);
-      gridEl.append(newEl);
+      const match = imgUrl.match(/blob_[a-zA-Z0-9]+/);
+      if (match) {
+        datasetId = match[0];
+      }
+
+      if (imgUrl) {
+        const template = productTemplate({
+          id: item.id,
+          imgUrl: imgUrl,
+          datasetId: datasetId,
+        });
+
+        const newEl = createHTML(template);
+
+        const image = newEl.querySelector('img');
+        if (image && datasetId) {
+          image.dataset.id = datasetId;
+        }
+        gridEl.append(newEl);
+      }
     });
   } catch (error) {
-    console.error(ERROR_MESSAGE_DEFAULT, error?.message);
+    console.error('Error creating product list:', error?.message);
   }
 }
 
@@ -147,17 +169,19 @@ const myGallery = cloudinary.galleryWidget({
   carouselStyle: "none",
   autoplay: false,
 
-  videoProps: { controls: "all", autoplay: false },
+
+  videoProps: { controls: 'all', autoplay: false },
+
 
   mediaAssets: [
     {
       tag: "myImages",
       transformation: {
         prefixed: false,
-        quality: "auto:best",
+        quality: 'auto:best',
         width: 800,
         height: 600,
-        fetch_format: "auto",
+        fetch_format: 'auto',
 
         x_0: 1,
         crop: "fill",
@@ -167,6 +191,7 @@ const myGallery = cloudinary.galleryWidget({
 });
 
 myGallery.render();
+
 
 var interval = setInterval(function () {
   if (document.readyState === "complete") {
@@ -217,3 +242,4 @@ var interval = setInterval(function () {
 setTimeout(() => {
   clearInterval(interval);
 }, 5000);
+
