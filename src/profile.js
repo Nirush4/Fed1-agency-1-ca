@@ -25,6 +25,8 @@ async function setup() {
   } else {
     const imgFromCloud = await loadImages();
 
+    const imgFromCloud = await loadImages();
+
     const imgList = await getImage();
 
     const compainedImg = [...imgList, ...imgFromCloud];
@@ -70,12 +72,19 @@ function productTemplate({ id, imgUrl }) {
           <img src="${imgUrl}" />
         </a>
       </div>
+    <div class="grid-item">
+      <div class="post-div">
+        <a href="${detailsUrl}">
+          <img src="${imgUrl}" />
+        </a>
+      </div>
     </div>
+  `;
   `;
 }
 
 async function createProductsListEl(list = []) {
-  gridEl.innerHTML = "";
+  gridEl.innerHTML = '';
 
   try {
     list.forEach((item) => {
@@ -170,17 +179,19 @@ const myGallery = cloudinary.galleryWidget({
   carouselStyle: "none",
   autoplay: false,
 
-  videoProps: { controls: "all", autoplay: false },
+
+  videoProps: { controls: 'all', autoplay: false },
+
 
   mediaAssets: [
     {
       tag: "myImages",
       transformation: {
         prefixed: false,
-        quality: "auto:best",
+        quality: 'auto:best',
         width: 800,
         height: 600,
-        fetch_format: "auto",
+        fetch_format: 'auto',
 
         x_0: 1,
         crop: "fill",
