@@ -152,6 +152,7 @@ const key = import.meta.env.VITE_API_KEY;
 
 async function fetchImageFromSources() {
   const id = getId();
+  debugger;
   if (!id) {
     console.error("No product id was provided.");
     return null;
@@ -192,6 +193,7 @@ async function fetchImageFromSources() {
 
 function getId() {
   return new URLSearchParams(window.location.search).get("id");
+  debugger;
 }
 
 function detailsTemplate({ id, url, largeImageURL, likes, comments }) {
