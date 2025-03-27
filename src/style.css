@@ -19,7 +19,6 @@
   --color-vibPink: #f08;
   --color-bg: #121320;
   --color-bg-light: #1b1d2d;
-}
 
 /* body {
   margin: 0;
@@ -53,6 +52,19 @@
 }
 
 /* style.css */
+
+/* body {
+  width: 100%;
+  background-image: linear-gradient(90deg, #074191, #006473, #0290e2, #006473, #074191);
+  background-size: 200% auto;
+  animation: topAnimation 4s linear infinite;
+}
+
+@keyframes topAnimation {
+  to {
+    background-position: 200%;
+  }
+} */
 
 .grid-item {
   display: flex;

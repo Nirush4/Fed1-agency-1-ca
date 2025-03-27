@@ -1,8 +1,17 @@
-const imgContainer = document.querySelector('#img-container'); // Update this selector to match your HTML
+const imgContainer = document.querySelector('#img-container');
+const mediaContainer = document.querySelector('#media-gallery-container');
 
 const ERROR_MESSAGE_DEFAULT = 'Something went wrong';
 
-const key = import.meta.env.VITE_API_KEY;
+const imgFromCloud = await loadImages();
+
+const imgList = await fetchImgDetails();
+
+const compainedImg = [...imgList, ...imgFromCloud];
+
+function texting(compainedImg) {
+  return compainedImg;
+}
 
 async function fetchImgDetails() {
   const id = getId();
@@ -32,8 +41,8 @@ function getId() {
   return imageId;
 }
 
-function detailsTemplate({ id, largeImageURL, likes, comments }) {
-  const detailsUrl = `/single/index?id=${id}`;
+function detailsTemplate({ id, largeImageURL, likes, comments, datasetId }) {
+  const detailsUrl = `/single/index?id=${id}&datasetId=${datasetId || ''}`;
   return `
 <div class=" flex flex-col justify-between w-lg h-4/5 mx-auto bg-white rounded-t-lg shadow-lg">
   
@@ -57,16 +66,17 @@ function detailsTemplate({ id, largeImageURL, likes, comments }) {
 }
 
 async function renderImgDetails() {
-  const imgDetails = await fetchImgDetails();
+  const imgDetails = texting();
 
   if (imgDetails) {
-    const { id, largeImageURL, likes, comments } = imgDetails;
+    const { id, largeImageURL, likes, comments, datasetId } = imgDetails;
 
     const template = detailsTemplate({
       id: id,
       largeImageURL: largeImageURL,
       likes,
       comments,
+      datasetId: datasetId,
     });
 
     const detailsEl = createHTML(template);
@@ -86,3 +96,68 @@ function createHTML(template) {
   const parsedDocument = parser.parseFromString(template, 'text/html');
   return parsedDocument.body.firstChild;
 }
+
+const myGallery = cloudinary.galleryWidget({
+  container: mediaContainer,
+  cloudName: 'du2edesv8',
+  carouselStyle: 'none',
+  autoplay: false,
+
+  videoProps: { controls: 'all', autoplay: false },
+
+  mediaAssets: [
+    {
+      tag: 'myImages',
+      transformation: {
+        prefixed: false,
+        quality: 'auto:best',
+        width: 800,
+        height: 600,
+        fetch_format: 'auto',
+
+        x_0: 1,
+        crop: 'fill',
+      },
+    },
+  ],
+});
+
+myGallery.render();
+
+let listOfImgs = [];
+
+function loadImages() {
+  return new Promise((resolve, reject) => {
+    var interval = setInterval(function () {
+      if (document.readyState === 'complete') {
+        const images = mediaContainer.querySelectorAll('img');
+        const arrImg = Array.from(images);
+
+        if (!arrImg.length || arrImg[0].src.length <= 1) {
+          console.warn('No images found yet. Waiting...');
+          return;
+        }
+
+        const filterImgs = arrImg.filter(
+          (value, index, self) =>
+            index === self.findIndex((t) => t.src === value.src)
+        );
+
+        listOfImgs = filterImgs.map((i) => i.src);
+
+        mediaContainer.innerHTML = '';
+
+        clearInterval(interval);
+        resolve(listOfImgs);
+      }
+    }, 2500);
+  });
+}
+
+loadImages()
+  .then((images) => {
+    console.log('Images are ready:', images);
+  })
+  .catch((error) => {
+    console.error('Error loading images:', error);
+  });
