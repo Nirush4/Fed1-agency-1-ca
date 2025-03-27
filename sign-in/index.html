@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/src/style.css" rel="stylesheet">
-    <script src="/src/login.js" defer></script>
+    <script defer type="module" src="/src/login.js" defer></script>
     <title>Sign Up / Social Media</title>
 
 
@@ -14,11 +14,11 @@
 
 <body class="bg-bg flex items-center justify-center min-h-screen">
 
-    <div class="w-full max-w-md bg-bg-light p-8 rounded-lg shadow-lg">
-
+    <div class="flex flex-col items-center w-full max-w-md bg-bg-light p-8 rounded-lg shadow-lg">
+        <img src="/images/logo-desktop.png" alt="Logo" class="w-45 h-auto pb-7 items-center">
         <h2 id="formTitle" class="text-2xl text-gray-400 font-semibold text-center mb-6">Sign Up for Your Account</h2>
 
-        <form id="signUpForm" class="space-y-6">
+        <form id="signUpForm" class="space-y-6 w-full">
             <!-- Username -->
             <div>
                 <label for="newUsername" class="block text-m font-medium text-gray-400">Username</label>

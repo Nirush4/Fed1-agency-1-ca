@@ -18,7 +18,38 @@
   --color-brightYellow: #ded300;
   --color-vibPink: #f08;
   --color-bg: #121320;
-  --color-bg-light: #171927;
+  --color-bg-light: #1b1d2d;
+}
+
+/* body {
+  margin: 0;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ff9a4b 0%, #ff6b6b 100%);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+#background-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.pumpkin-icon {
+  position: absolute;
+  opacity: 0.2;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  user-select: none;
+}
+
+.pumpkin-icon:hover {
+  opacity: 0.5;
 }
 
 /* style.css */
