@@ -1,12 +1,11 @@
-// Get DOM elements
 const loginForm = document.getElementById('loginForm');
 const signUpForm = document.getElementById('signUpForm');
 const toggleToSignUp = document.getElementById('toggleToSignUp');
 const toggleToLogin = document.getElementById('toggleToLogin');
 const formTitle = document.getElementById('formTitle');
 const errorMessage = document.getElementById('errorMessage');
+const backgroundAnimation = document.getElementById('background-animation');
 
-// Switch to Sign Up Form
 toggleToSignUp.addEventListener('click', (e) => {
   e.preventDefault();
   loginForm.classList.add('hidden');
@@ -14,7 +13,6 @@ toggleToSignUp.addEventListener('click', (e) => {
   formTitle.textContent = 'Sign Up for an Account';
 });
 
-// Switch to Login Form
 toggleToLogin.addEventListener('click', (e) => {
   e.preventDefault();
   signUpForm.classList.add('hidden');
@@ -22,7 +20,6 @@ toggleToLogin.addEventListener('click', (e) => {
   formTitle.textContent = 'Login to Your Account';
 });
 
-// Login Form Validation & Submission
 loginForm.addEventListener('submit', function (e) {
   e.preventDefault();
   const username = document.getElementById('username').value.trim();
@@ -34,11 +31,9 @@ loginForm.addEventListener('submit', function (e) {
     errorMessage.classList.add('hidden');
     console.log('Logged in with Username:', username);
     console.log('Password:', password);
-    // Further login logic (API calls, redirects, etc.)
   }
 });
 
-// Sign Up Form Validation & Submission
 signUpForm.addEventListener('submit', function (e) {
   e.preventDefault();
   const newUsername = document.getElementById('newUsername').value.trim();
@@ -51,6 +46,40 @@ signUpForm.addEventListener('submit', function (e) {
     console.log('Signed up with Username:', newUsername);
     console.log('Email:', email);
     console.log('Password:', newPassword);
-    // Further sign-up logic (API calls, redirects, etc.)
   }
+});
+
+function createPumpkinIcon() {
+  const pumpkinImg = document.createElement('img');
+  pumpkinImg.src = '/api/placeholder/100/100?text=🎃';
+  pumpkinImg.alt = 'Pumpkin Icon';
+
+  const size = Math.random() * 60 + 30;
+  pumpkinImg.style.width = `${size}px`;
+  pumpkinImg.style.height = `${size}px`;
+
+  pumpkinImg.classList.add('pumpkin-icon');
+
+  pumpkinImg.style.left = `${Math.random() * 100}%`;
+  pumpkinImg.style.top = `${Math.random() * 100}%`;
+
+  pumpkinImg.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+  backgroundAnimation.appendChild(pumpkinImg);
+  return pumpkinImg;
+}
+
+const iconCount = 40;
+const icons = Array.from({ length: iconCount }, createPumpkinIcon);
+
+document.addEventListener('mousemove', (e) => {
+  const centerX = window.innerWidth / 2;
+  const centerY = window.innerHeight / 2;
+
+  icons.forEach((icon, index) => {
+    const multiplier = 1 - index / icons.length;
+    const offsetX = (e.clientX - centerX) * 0.05 * multiplier;
+    const offsetY = (e.clientY - centerY) * 0.05 * multiplier;
+    icon.style.transform = `translate(${offsetX}px, ${offsetY}px) rotate(${Math.random() * 360}deg)`;
+  });
 });
