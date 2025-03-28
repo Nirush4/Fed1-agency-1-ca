@@ -92,22 +92,47 @@
 
     <!-- imp! Right side container -->
 
-    <main
+    <div
       class="aside z-10 pt-10 px-5 place-items-center overflow-y-scroll ... bg-black s:px-10 lg:px-0"
     >
-      <video id="main-video" class="rounded-4xl" autoplay></video>
-      <div class="flex gap-2 py-4">
-        <button class="btn btn-soft btn-success" id="main-video-button">
-          Record
-        </button>
-        <button class="btn btn-soft btn-success" id="captureBtn">
-          Take Photo
-        </button>
+      <div id="video-canvas">
+        <video id="main-video" class="rounded-4xl" autoplay></video>
+        <div class="flex gap-2 relative left-1/3 bottom-12 max-w-max">
+          <button
+            id="submitBtn"
+            style="display: none"
+            class="btn btn-soft btn-success"
+          >
+            Submit
+          </button>
+
+          <button class="btn btn-soft btn-success" id="blur-btn">Blur</button
+          ><button class="btn btn-soft btn-success" id="brightness-btn">
+            black / white</button
+          ><button class="btn btn-soft btn-success" id="invert-btn">
+            Invert
+          </button>
+        </div>
+      </div>
+      <div
+        class="flex flex-col w-160 justify-center content-center items-center gap-2 py-4"
+      >
+        <div class="flex gap-2">
+          <button class="btn btn-soft btn-success" id="main-video-button">
+            Record
+          </button>
+          <button class="btn btn-soft btn-success" id="captureBtn">
+            Take photo
+          </button>
+
+          <button class="btn btn-soft btn-success hidden" id="open-camera">
+            Delete
+          </button>
+        </div>
       </div>
       <div>
-        <div id="previewContainer"></div>
-        <button id="submitBtn" style="display: none">Submit</button>
+        <div id="previewContainer" class="rounded-4xl"></div>
       </div>
-    </main>
+    </div>
   </body>
 </html>
