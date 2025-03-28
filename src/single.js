@@ -47,7 +47,7 @@ function getId() {
   return new URLSearchParams(window.location.search).get("id");
 }
  
-function detailsTemplate({ id, url, largeImageURL, likes, comments, views }) {
+function detailsTemplate({ id, url, largeImageURL,likes=8, views=39, comments,  }) {
   return `
 <div class="flex flex-col justify-between w-lg h-4/5 mx-auto bg-white rounded-t-lg shadow-lg">
     <div class="space-y-4 h-full p-6">
@@ -56,17 +56,16 @@ function detailsTemplate({ id, url, largeImageURL, likes, comments, views }) {
         <img src="${url || largeImageURL}" alt="Post Image" class="w-full h-full object-cover rounded-t-lg">
       </a>
     </div>
+     <!-- Post Actions -->
     <div class="flex justify-between space-x-1 pt-1 border-t w-full bg-gray-200 px-7">
-      <button class="bg-gray-200 text-gray-800 text-xl py-2 px-3 rounded-md cursor-pointer"> &#x2665;&#xfe0f; ${likes} </button>
-      <button class="bg-gray-200 text-gray-800 text-xl py-2 px-3 rounded-md cursor-pointer">💬 ${comments} </button>
-      <button class="bg-gray-200 text-gray-800 text-xl py-2 px-3 rounded-md cursor-pointer">💬 ${views} </button>
-      <button class="bg-gray-200 text-gray-800 text-xl py-2 px-3 rounded-md cursor-pointer">🔗 </button>
+      <button class="text-gray-800 text-xl py-2 px-3 rounded-md focus:outline-none cursor-pointer"> &#x2665;&#xfe0f; ${likes}</button>
+      <button class="text-gray-800 text-xl py-2 px-3 rounded-md focus:outline-none cursor-pointer"> &#x1F441;${views}</button>
     </div>
 </div>
   `;
 }
  
-async function renderImage() {
+/*async function renderImage() {
   const imgDetails = await fetchImageFromSources();
   if (imgDetails) {
     const template = detailsTemplate(imgDetails);
@@ -77,19 +76,41 @@ async function renderImage() {
   } else {
     console.error("No image found from any source.");
   }
+}*/
+
+async function renderImgDetails() {
+  const imgDetails = await fetchImgDetails();
+
+  if (imgDetails) {
+    const { id, largeImageURL, likes, views } = imgDetails;
+
+    const template = detailsTemplate({
+      id: id,
+      largeImageURL: largeImageURL,
+      likes,
+      views,
+    });
+
+    const detailsEl = createHTML(template);
+    clearNode();
+    imgContainer.appendChild(detailsEl);
+  }
 }
- 
+renderImgDetails();
+
 function clearNode() {
   imgContainer.innerHTML = "";
 }
  
 function createHTML(template) {
-  return new DOMParser().parseFromString(template, "text/html").body.firstChild;
+  const parser = new DOMParser();
+  const parsedDocument = parser.parseFromString(template, 'text/html');
+  return parsedDocument.body.firstChild;
 }
  
-renderImage();
- 
-/*
+//renderImage();
+
+
 document.addEventListener('DOMContentLoaded', () => {
   const commentForm = document.querySelector('form');
   const commentsList = document.querySelector('.new-comments');
@@ -151,5 +172,4 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   displayComments();
-}); */
-
+});
