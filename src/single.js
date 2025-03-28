@@ -1,19 +1,4 @@
-
-const imgContainer = document.querySelector('#img-container');
-const mediaContainer = document.querySelector('#media-gallery-container');
-
-const ERROR_MESSAGE_DEFAULT = 'Something went wrong';
-
-const imgFromCloud = await loadImages();
-
-const imgList = await fetchImgDetails();
-
-const compainedImg = [...imgList, ...imgFromCloud];
-
-function texting(compainedImg) {
-  return compainedImg;
-}
-
+const imgContainer = document.querySelector("#imgContainer");
 
 async function fetchImageFromSources() {
   const id = getId();
@@ -61,9 +46,7 @@ function getId() {
   debugger;
 }
 
-
 function detailsTemplate({ id, url, largeImageURL, likes, comments }) {
-
   return `
 <div class="flex flex-col justify-between w-lg h-4/5 mx-auto bg-white rounded-t-lg shadow-lg">
     <div class="space-y-4 h-full p-6">
@@ -80,7 +63,6 @@ function detailsTemplate({ id, url, largeImageURL, likes, comments }) {
 </div>
   `;
 }
-
 
 async function renderImage() {
   const imgDetails = await fetchImageFromSources();
@@ -102,6 +84,5 @@ function clearNode() {
 function createHTML(template) {
   return new DOMParser().parseFromString(template, "text/html").body.firstChild;
 }
-
 
 renderImage();
