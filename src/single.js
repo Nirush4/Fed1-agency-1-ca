@@ -89,7 +89,7 @@ function createHTML(template) {
  
 renderImage();
  
-
+/*
 document.addEventListener('DOMContentLoaded', () => {
   const commentForm = document.querySelector('form');
   const commentsList = document.querySelector('.new-comments');
@@ -151,5 +151,5 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   displayComments();
-});
+}); */
 
