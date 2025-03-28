@@ -1,89 +1,91 @@
-const imgContainer = document.querySelector('#img-container'); // Update this selector to match your HTML
+const imgContainer = document.querySelector('#img-container');
+debugger;
 
-const ERROR_MESSAGE_DEFAULT = 'Something went wrong';
-
-async function fetchImgDetails() {
+async function fetchImageFromSources() {
   const id = getId();
+
   if (!id) {
-    throw new Error('No product id was provided.');
+    console.error('No product id was provided.');
+    return null;
   }
+
   try {
-    const response = await fetch(
+    const cloudinaryResponse = await fetch(
+      `https://res.cloudinary.com/du2edesv8/image/upload/h_600,w_800/${id}`
+    );
+
+    if (cloudinaryResponse.ok) {
+      return { id, url: cloudinaryResponse.url };
+    }
+  } catch (error) {
+    console.error('Cloudinary fetch failed:', error.message);
+  }
+
+  try {
+    const pixabayResponse = await fetch(
       `https://pixabay.com/api/?key=49423799-7939ddd154968d7fb42d51820&orientation=vertical&page=1&per_page=20&category=places&id=${id}`
     );
 
-    const { hits } = await response.json();
+    if (!pixabayResponse.ok) {
+      throw new Error('Failed to fetch Pixabay image');
+    }
+
+    const { hits } = await pixabayResponse.json();
 
     if (hits.length === 0) {
-      throw new Error('No image found');
+      throw new Error('No image found on Pixabay');
     }
     return hits[0];
   } catch (error) {
-    console.error(ERROR_MESSAGE_DEFAULT, error?.message);
+    console.error('Pixabay fetch failed:', error.message);
+    return null;
   }
 }
 
 function getId() {
-  const parameterString = window.location.search;
-  const searchParameters = new URLSearchParams(parameterString);
-  const imageId = searchParameters.get('id');
-  return imageId;
+  return new URLSearchParams(window.location.search).get('id');
 }
 
-function detailsTemplate({ id, largeImageURL, likes, views }) {
-  const detailsUrl = `/single/index?id=${id}`;
+function detailsTemplate({ id, url, largeImageURL, likes = 15, views = 53 }) {
   return `
-<div class=" flex flex-col justify-between w-lg mx-auto mt-7 bg-white rounded-t-lg shadow-lg">
-  
-    <!-- Post Content -->
-
+<div class="flex flex-col justify-between w-lg mx-auto mt-7 bg-white rounded-t-lg shadow-lg">
     <div class="space-y-4 h-180 p-6">
       <p class="text-gray-700 text-xl">Take me back</p>
-      <a class="flex justify-center h-full" href="${detailsUrl}">
-        <img src="${largeImageURL}" alt="Post Image" class="w-full h-full object-cover rounded-t-lg">
+      <a class="flex justify-center h-full" href="/single/index?id=${id}">
+        <img src="${url || largeImageURL}" alt="Post Image" class="w-full h-full object-cover rounded-t-lg">
       </a>
     </div>
-
-    <!-- Post Actions -->
+     <!-- Post Actions -->
     <div class="flex justify-between space-x-1 pt-1 border-t w-full bg-gray-200 px-7">
       <button class="text-gray-800 text-xl py-2 px-3 rounded-md focus:outline-none cursor-pointer"> &#x2665;&#xfe0f; ${likes}</button>
       <button class="text-gray-800 text-xl py-2 px-3 rounded-md focus:outline-none cursor-pointer"> &#x1F441;${views}</button>
     </div>
-
 </div>
   `;
 }
 
-async function renderImgDetails() {
-  const imgDetails = await fetchImgDetails();
-
+async function renderImage() {
+  const imgDetails = await fetchImageFromSources();
   if (imgDetails) {
-    const { id, largeImageURL, likes, views } = imgDetails;
-
-    const template = detailsTemplate({
-      id: id,
-      largeImageURL: largeImageURL,
-      likes,
-      views,
-    });
+    const template = detailsTemplate(imgDetails);
 
     const detailsEl = createHTML(template);
     clearNode();
     imgContainer.appendChild(detailsEl);
+  } else {
+    console.error('No image found from any source.');
   }
 }
-
-renderImgDetails();
 
 function clearNode() {
   imgContainer.innerHTML = '';
 }
 
 function createHTML(template) {
-  const parser = new DOMParser();
-  const parsedDocument = parser.parseFromString(template, 'text/html');
-  return parsedDocument.body.firstChild;
+  return new DOMParser().parseFromString(template, 'text/html').body.firstChild;
 }
+
+renderImage();
 
 document.addEventListener('DOMContentLoaded', () => {
   const commentForm = document.querySelector('form');
@@ -103,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <p class="text-gray-700">${comment.text}</p>
                 <!-- Delete Button - Only visible on hover -->
-                <button 
+                <button
                     onclick="deleteComment(${index})"
                     class="absolute top-2 right-2 text-red-400 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer duration-200"
                     title="Delete comment">

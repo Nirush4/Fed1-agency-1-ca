@@ -9,8 +9,6 @@ const mediaContainer = document.querySelector('#media-gallery-container');
 
 const ERROR_MESSAGE_DEFAULT = 'Something went wrong';
 
-// const key = import.meta.env.VITE_API_KEY;
-
 setup();
 
 async function setup() {
@@ -25,8 +23,16 @@ async function setup() {
   ) {
     console.error('JS cannot run!!!');
   } else {
+    const imgFromCloud = await loadImages();
+
     const imgList = await getImage();
-    createProductsListEl(imgList);
+
+    const compainedImg = [...imgList, ...imgFromCloud];
+
+    const shuffledArray = compainedImg.sort(() => Math.random() - 0.5);
+
+    createProductsListEl(shuffledArray);
+
     const savedImage = localStorage.getItem('profileImage');
 
     if (savedImage) {
@@ -54,38 +60,55 @@ async function getImage() {
     console.error(ERROR_MESSAGE_DEFAULT, error?.message);
   }
 }
-
 function productTemplate({ id, imgUrl }) {
   const detailsUrl = `/single/index?id=${id}`;
 
   return `
-  
-  <div class="grid-item">
-    <div class="post-div">
-     <a href="${detailsUrl}">
-      <img
-        src="${imgUrl}"
-      />
-    </a>
+    <div class="grid-item">
+      <div class="post-div">
+        <a href="${detailsUrl}">
+          <img src="${imgUrl}" />
+        </a>
+      </div>
     </div>
- `;
+  `;
 }
 
 async function createProductsListEl(list = []) {
   gridEl.innerHTML = '';
 
   try {
-    list.forEach(({ id, largeImageURL }) => {
-      const template = productTemplate({
-        id: id,
-        imgUrl: largeImageURL,
-      });
+    list.forEach((item) => {
+      let imgUrl;
+      let Id = '';
+      if (typeof item === 'string') {
+        imgUrl = item;
+      } else if (item.largeImageURL) {
+        imgUrl = item.largeImageURL;
+      }
 
-      const newEl = createHTML(template);
-      gridEl.append(newEl);
+      const match = imgUrl.match(/blob_[a-zA-Z0-9]+/);
+      if (match) {
+        Id = match[0];
+      }
+
+      if (imgUrl) {
+        const template = productTemplate({
+          id: item.id || Id,
+          imgUrl: imgUrl,
+        });
+
+        const newEl = createHTML(template);
+
+        const image = newEl.querySelector('img');
+        if (image && Id) {
+          image.id = Id;
+        }
+        gridEl.append(newEl);
+      }
     });
   } catch (error) {
-    console.error(ERROR_MESSAGE_DEFAULT, error?.message);
+    console.error('Error creating product list:', error?.message);
   }
 }
 
@@ -146,14 +169,19 @@ const myGallery = cloudinary.galleryWidget({
   cloudName: 'du2edesv8',
   carouselStyle: 'none',
   autoplay: false,
+
   videoProps: { controls: 'all', autoplay: false },
 
   mediaAssets: [
     {
       tag: 'myImages',
       transformation: {
+        prefixed: false,
         quality: 'auto:best',
+        width: 800,
+        height: 600,
         fetch_format: 'auto',
+
         x_0: 1,
         crop: 'fill',
       },
@@ -163,46 +191,40 @@ const myGallery = cloudinary.galleryWidget({
 
 myGallery.render();
 
-var interval = setInterval(function () {
-  if (document.readyState === 'complete') {
-    const images = mediaContainer.querySelectorAll('img');
-    const arrImg = Array.from(images);
+let listOfImgs = [];
 
-    if (!arrImg.length || arrImg[0].src.length <= 1) {
-      console.warn('No images found yet. Waiting...');
-      return;
-    }
+function loadImages() {
+  return new Promise((resolve, reject) => {
+    var interval = setInterval(function () {
+      if (document.readyState === 'complete') {
+        const images = mediaContainer.querySelectorAll('img');
+        const arrImg = Array.from(images);
 
-    const filterImgs = arrImg.filter(
-      (value, index, self) =>
-        index === self.findIndex((t) => t.src === value.src)
-    );
+        if (!arrImg.length || arrImg[0].src.length <= 1) {
+          console.warn('No images found yet. Waiting...');
+          return;
+        }
 
-    const listOfImgs = filterImgs.map((i) => i.src);
+        const filterImgs = arrImg.filter(
+          (value, index, self) =>
+            index === self.findIndex((t) => t.src === value.src)
+        );
 
-    mediaContainer.innerHTML = '';
+        listOfImgs = filterImgs.map((i) => i.src);
 
-    listOfImgs.forEach((src) => {
-      const gridDiv = document.createElement('div');
-      gridDiv.classList.add('grid-item');
+        mediaContainer.innerHTML = '';
 
-      const wrapperDiv = document.createElement('div');
-      wrapperDiv.classList.add('img-div');
+        clearInterval(interval);
+        resolve(listOfImgs);
+      }
+    }, 2500);
+  });
+}
 
-      const imgEl = document.createElement('img');
-      imgEl.classList.add('image-scale');
-      imgEl.src = src;
-
-      wrapperDiv.appendChild(imgEl);
-      gridDiv.appendChild(wrapperDiv);
-      gridEl.appendChild(gridDiv);
-    });
-
-    clearInterval(interval);
-  }
-}, 100);
-
-setTimeout(() => {
-  clearInterval(interval);
-  console.log('Interval stopped after 5 seconds.');
-}, 50000);
+loadImages()
+  .then((images) => {
+    console.log('Images are ready:', images);
+  })
+  .catch((error) => {
+    console.error('Error loading images:', error);
+  });
