@@ -103,6 +103,11 @@
     width: 16rem;
     height: 19rem;
   }
+
+  .grid-item video {
+    width: 16rem;
+    height: 19rem;
+  }
 }
 
 
@@ -112,11 +117,21 @@
     width: 12rem;
     height: 15rem;
   }
+
+  .grid-item video {
+    width: 12rem;
+    height: 15rem;
+  }
 }
 
 /*Mobile */
 @media (max-width:640px) {
   .grid-item img {
+    width: 9rem;
+    height: 10rem;
+  }
+
+  .grid-item video {
     width: 9rem;
     height: 10rem;
   }

@@ -28,7 +28,7 @@ function createHTML(template) {
 async function getImage() {
   try {
     const response = await fetch(
-      `https://pixabay.com/api/?key=49423799-7939ddd154968d7fb42d51820&orientation=vertical&page=2&per_page=50`
+      `https://pixabay.com/api/?key=49423799-7939ddd154968d7fb42d51820&orientation=vertical&page=2&per_page=40&category=music`
     );
 
     const { hits } = await response.json();
@@ -43,7 +43,7 @@ async function getImage() {
 async function getVideo() {
   try {
     const response = await fetch(
-      `https://pixabay.com/api/videos/?key=49423799-7939ddd154968d7fb42d51820&orientation=vertical&page=2&per_page=50`
+      `https://pixabay.com/api/videos/?key=49423799-7939ddd154968d7fb42d51820&orientation=vertical&page=2&per_page=30&category=music`
     );
 
     const { hits } = await response.json();
@@ -60,26 +60,25 @@ function productTemplate({ id, imgUrl, videoUrl }) {
 
   return `
     <div class="grid-item">
-      <div class="media-div">
+      <div class="">
         <!-- If there is a video URL, show the video, otherwise show the image -->
         ${
           videoUrl
             ? `
             <div class="post-div">
-
-          <a href="${detailsUrl}">
-            <video controls autoplay muted class="video-content w-full h-130 object-cover">
-              <source src="${videoUrl}" type="video/mp4">
-            </video>
-          </a>
-      </div>
-        `
+                 <a href="${detailsUrl}">
+                   <video controls autoplay muted class="video-content w-full h-130 object-cover">
+                     <source src="${videoUrl}" type="video/mp4">
+                   </video>
+                 </a>
+            </div>
+             `
             : `
             <div class="post-div">
-          <a href="${detailsUrl}">
-            <img src="${imgUrl}" class="video-content w-full h-130 object-cover"/>
-          </a>
-      </div>
+                   <a href="${detailsUrl}">
+                     <img src="${imgUrl}" class="video-content w-full h-130 object-cover"/>
+                   </a>
+            </div>
         `
         }
       </div>
