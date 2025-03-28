@@ -4,14 +4,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Borel&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Yellowtail&display=swap");
 
-/* #main-video-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  height: 100dvh;
-} */
-
 .css-148rb4d {
   height: 55rem;
 }
+
+/* .open {
+
+  display: block;
+}
+
+.closed {
+  display: none;
+} */

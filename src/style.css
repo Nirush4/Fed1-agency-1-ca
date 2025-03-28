@@ -18,10 +18,23 @@
   --color-brightYellow: #ded300;
   --color-vibPink: #f08;
   --color-bg: #121320;
-  --color-bg-light: #171927;
+  --color-bg-light: #1b1d2d;
 }
 
 /* style.css */
+
+/* body {
+  width: 100%;
+  background-image: linear-gradient(90deg, #074191, #006473, #0290e2, #006473, #074191);
+  background-size: 200% auto;
+  animation: topAnimation 4s linear infinite;
+}
+
+@keyframes topAnimation {
+  to {
+    background-position: 200%;
+  }
+} */
 
 .grid-item {
   display: flex;
@@ -29,8 +42,8 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.post-div {
 
+.post-div {
   width: 100%;
   height: auto;
   max-width: 19rem;
@@ -45,8 +58,23 @@
   object-fit: cover;
   display: block;
   transition: all 0.2s ease-in-out;
-
 }
+
+
+#main-video {
+  transform: scaleX(-1);
+}
+
+#test {
+  transform: scaleX(-1);
+  height: 100%;
+  width: 100%;
+}
+
+#previewContainer {
+  overflow: hidden;
+}
+
 
 .grid-item video {
   transition: all 0.2s ease-in-out;
@@ -55,6 +83,7 @@
 
 .grid-item:hover img {
   transform: scale(1.05);
+
 }
 
 .grid-item:hover video {
