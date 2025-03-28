@@ -2,7 +2,7 @@ const imgContainer = document.querySelector("#imgContainer");
 
 const ERROR_MESSAGE_DEFAULT = 'Something went wrong';
 
-async function fetchImageFromSources() {
+async function fetchImgDetails() {
   const id = getId();
  
   if (!id) {
