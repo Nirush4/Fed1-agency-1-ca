@@ -1,13 +1,13 @@
-const gridEl = document.querySelector('#js-grid');
-const editBtn = document.getElementById('edit-btn');
-const editSection = document.getElementById('edit-section');
-const saveBtn = document.getElementById('save-btn');
-const cancelBtn = document.getElementById('cancel-btn');
-const profileName = document.getElementById('profile-name');
-const nameInput = document.getElementById('name-input');
-const mediaContainer = document.querySelector('#media-gallery-container');
+const gridEl = document.querySelector("#js-grid");
+const editBtn = document.getElementById("edit-btn");
+const editSection = document.getElementById("edit-section");
+const saveBtn = document.getElementById("save-btn");
+const cancelBtn = document.getElementById("cancel-btn");
+const profileName = document.getElementById("profile-name");
+const nameInput = document.getElementById("name-input");
+const mediaContainer = document.querySelector("#media-gallery-container");
 
-const ERROR_MESSAGE_DEFAULT = 'Something went wrong';
+const ERROR_MESSAGE_DEFAULT = "Something went wrong";
 
 setup();
 
@@ -21,7 +21,7 @@ async function setup() {
     !profileName ||
     !nameInput
   ) {
-    console.error('JS cannot run!!!');
+    console.error("JS cannot run!!!");
   } else {
     const imgFromCloud = await loadImages();
 
@@ -29,8 +29,11 @@ async function setup() {
 
     const compainedImg = [...imgList, ...imgFromCloud];
 
-    createProductsListEl(compainedImg);
-    const savedImage = localStorage.getItem('profileImage');
+    const shuffledArray = compainedImg.sort(() => Math.random() - 0.5);
+
+    createProductsListEl(shuffledArray);
+
+    const savedImage = localStorage.getItem("profileImage");
 
     if (savedImage) {
       profileImg.src = savedImage;
@@ -40,7 +43,7 @@ async function setup() {
 
 function createHTML(template) {
   const parser = new DOMParser();
-  const parsedDocument = parser.parseFromString(template, 'text/html');
+  const parsedDocument = parser.parseFromString(template, "text/html");
   return parsedDocument.body.firstChild;
 }
 
@@ -57,8 +60,8 @@ async function getImage() {
     console.error(ERROR_MESSAGE_DEFAULT, error?.message);
   }
 }
-function productTemplate({ id, imgUrl, datasetId }) {
-  const detailsUrl = `/single/index?id=${id}&datasetId=${datasetId || ''}`;
+function productTemplate({ id, imgUrl }) {
+  const detailsUrl = `/single/index?id=${id}`;
 
   return `
     <div class="grid-item">
@@ -72,13 +75,13 @@ function productTemplate({ id, imgUrl, datasetId }) {
 }
 
 async function createProductsListEl(list = []) {
-  gridEl.innerHTML = '';
+  gridEl.innerHTML = "";
 
   try {
     list.forEach((item) => {
       let imgUrl;
-      let datasetId = '';
-      if (typeof item === 'string') {
+      let Id = "";
+      if (typeof item === "string") {
         imgUrl = item;
       } else if (item.largeImageURL) {
         imgUrl = item.largeImageURL;
@@ -86,41 +89,40 @@ async function createProductsListEl(list = []) {
 
       const match = imgUrl.match(/blob_[a-zA-Z0-9]+/);
       if (match) {
-        datasetId = match[0];
+        Id = match[0];
       }
 
       if (imgUrl) {
         const template = productTemplate({
-          id: item.id,
+          id: item.id || Id,
           imgUrl: imgUrl,
-          datasetId: datasetId,
         });
 
         const newEl = createHTML(template);
 
-        const image = newEl.querySelector('img');
-        if (image && datasetId) {
-          image.dataset.id = datasetId;
+        const image = newEl.querySelector("img");
+        if (image && Id) {
+          image.id = Id;
         }
         gridEl.append(newEl);
       }
     });
   } catch (error) {
-    console.error('Error creating product list:', error?.message);
+    console.error("Error creating product list:", error?.message);
   }
 }
 
-const fileInput = document.getElementById('file-input');
-const profileImg = document.getElementById('profile-img');
+const fileInput = document.getElementById("file-input");
+const profileImg = document.getElementById("profile-img");
 
 window.onload = function setImageInLS() {
-  const savedImage = localStorage.getItem('profileImage');
+  const savedImage = localStorage.getItem("profileImage");
   if (savedImage) {
     profileImg.src = savedImage;
   }
 };
 
-fileInput.addEventListener('change', function (event) {
+fileInput.addEventListener("change", function (event) {
   const file = event.target.files[0];
   if (file) {
     const reader = new FileReader();
@@ -128,34 +130,34 @@ fileInput.addEventListener('change', function (event) {
       const imageSrc = e.target.result;
       profileImg.src = imageSrc;
 
-      localStorage.setItem('profileImage', imageSrc);
+      localStorage.setItem("profileImage", imageSrc);
     };
     reader.readAsDataURL(file);
   }
 });
 
-editBtn.addEventListener('click', () => {
-  editSection.classList.remove('hidden');
-  profileName.classList.add('hidden');
+editBtn.addEventListener("click", () => {
+  editSection.classList.remove("hidden");
+  profileName.classList.add("hidden");
   nameInput.value = profileName.textContent;
   nameInput.focus();
 });
 
-saveBtn.addEventListener('click', () => {
+saveBtn.addEventListener("click", () => {
   const newName = nameInput.value;
   profileName.textContent = newName;
-  localStorage.setItem('profileName', newName);
-  editSection.classList.add('hidden');
-  profileName.classList.remove('hidden');
+  localStorage.setItem("profileName", newName);
+  editSection.classList.add("hidden");
+  profileName.classList.remove("hidden");
 });
 
-cancelBtn.addEventListener('click', () => {
-  editSection.classList.add('hidden');
-  profileName.classList.remove('hidden');
+cancelBtn.addEventListener("click", () => {
+  editSection.classList.add("hidden");
+  profileName.classList.remove("hidden");
 });
 
-window.addEventListener('load', () => {
-  const storedName = localStorage.getItem('profileName');
+window.addEventListener("load", () => {
+  const storedName = localStorage.getItem("profileName");
 
   if (storedName) {
     profileName.textContent = storedName;
@@ -164,24 +166,24 @@ window.addEventListener('load', () => {
 
 const myGallery = cloudinary.galleryWidget({
   container: mediaContainer,
-  cloudName: 'du2edesv8',
-  carouselStyle: 'none',
+  cloudName: "du2edesv8",
+  carouselStyle: "none",
   autoplay: false,
 
-  videoProps: { controls: 'all', autoplay: false },
+  videoProps: { controls: "all", autoplay: false },
 
   mediaAssets: [
     {
-      tag: 'myImages',
+      tag: "myImages",
       transformation: {
         prefixed: false,
-        quality: 'auto:best',
+        quality: "auto:best",
         width: 800,
         height: 600,
-        fetch_format: 'auto',
+        fetch_format: "auto",
 
         x_0: 1,
-        crop: 'fill',
+        crop: "fill",
       },
     },
   ],
@@ -194,12 +196,12 @@ let listOfImgs = [];
 function loadImages() {
   return new Promise((resolve, reject) => {
     var interval = setInterval(function () {
-      if (document.readyState === 'complete') {
-        const images = mediaContainer.querySelectorAll('img');
+      if (document.readyState === "complete") {
+        const images = mediaContainer.querySelectorAll("img");
         const arrImg = Array.from(images);
 
         if (!arrImg.length || arrImg[0].src.length <= 1) {
-          console.warn('No images found yet. Waiting...');
+          console.warn("No images found yet. Waiting...");
           return;
         }
 
@@ -210,7 +212,7 @@ function loadImages() {
 
         listOfImgs = filterImgs.map((i) => i.src);
 
-        mediaContainer.innerHTML = '';
+        mediaContainer.innerHTML = "";
 
         clearInterval(interval);
         resolve(listOfImgs);
@@ -221,8 +223,8 @@ function loadImages() {
 
 loadImages()
   .then((images) => {
-    console.log('Images are ready:', images);
+    console.log("Images are ready:", images);
   })
   .catch((error) => {
-    console.error('Error loading images:', error);
+    console.error("Error loading images:", error);
   });

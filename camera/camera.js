@@ -58,13 +58,18 @@ async function initialiser() {
 }
 
 recordBtn.addEventListener("click", async () => {
-  if (recordBtn.textContent === "Record") {
-    recordBtn.textContent = "Stop";
-    await startRecording();
-  } else {
-    recordBtn.textContent = "Record";
-    video.style.display = "none";
-    stopRecording();
+  console.log("Current Button Text:", recordBtn.textContent.trim());
+  switch (recordBtn.textContent.trim()) {
+    case "Record":
+      recordBtn.textContent = "Stop";
+      await startRecording();
+      break;
+
+    case "Stop":
+      recordBtn.textContent = "Record";
+      video.style.display = "none";
+      stopRecording();
+      break;
   }
 });
 
@@ -164,7 +169,11 @@ async function startRecording() {
 }
 
 function stopRecording() {
-  mediaRecorder.stop();
+  if (mediaRecorder && mediaRecorder.state !== "inactive") {
+    mediaRecorder.stop();
+  } else {
+    console.warn("Recording has not started or is already stopped.");
+  }
 }
 
 async function uploadToCloudinary(file) {
