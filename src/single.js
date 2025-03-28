@@ -50,7 +50,7 @@ function getId() {
 }
 
 
-function detailsTemplate({ id, url, largeImageURL, likes, comments }) {
+function detailsTemplate({ id, url, largeImageURL, likes, views }) {
   return `
 <div class=" flex flex-col justify-between w-lg mx-auto mt-7 bg-white rounded-t-lg shadow-lg">
  
