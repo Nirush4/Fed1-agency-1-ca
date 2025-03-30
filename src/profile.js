@@ -1,12 +1,17 @@
-const gridEl = document.querySelector("#js-grid");
-const editBtn = document.getElementById("edit-btn");
-const editSection = document.getElementById("edit-section");
-const saveBtn = document.getElementById("save-btn");
-const cancelBtn = document.getElementById("cancel-btn");
-const profileName = document.getElementById("profile-name");
-const nameInput = document.getElementById("name-input");
-const mediaContainer = document.querySelector("#media-gallery-container");
-
+const gridEl = document.querySelector('#js-grid');
+const editBtn = document.getElementById('edit-btn');
+const editSection = document.getElementById('edit-section');
+const saveBtn = document.getElementById('save-btn');
+const cancelBtn = document.getElementById('cancel-btn');
+const profileName = document.getElementById('profile-name');
+const nameInput = document.getElementById('name-input');
+const editBioBtn = document.getElementById('edit-bio-btn');
+const editBioSection = document.getElementById('edit-bio-section');
+const saveBioBtn = document.getElementById('save-bio-btn');
+const cancelBioBtn = document.getElementById('cancel-bio-btn');
+const bioText = document.getElementById('bio-text');
+const bioInput = document.getElementById('bio-input');
+const mediaContainer = document.querySelector('#media-gallery-container');
 
 const ERROR_MESSAGE_DEFAULT = 'Something went wrong';
 
@@ -22,7 +27,7 @@ async function setup() {
     !profileName ||
     !nameInput
   ) {
-    console.error("JS cannot run!!!");
+    console.error('JS cannot run!!!');
   } else {
     const imgFromCloud = await loadImages();
 
@@ -34,7 +39,6 @@ async function setup() {
 
     createProductsListEl(shuffledArray);
 
-
     const savedImage = localStorage.getItem('profileImage');
 
     if (savedImage) {
@@ -45,7 +49,7 @@ async function setup() {
 
 function createHTML(template) {
   const parser = new DOMParser();
-  const parsedDocument = parser.parseFromString(template, "text/html");
+  const parsedDocument = parser.parseFromString(template, 'text/html');
   return parsedDocument.body.firstChild;
 }
 
@@ -77,7 +81,7 @@ function productTemplate({ id, imgUrl }) {
 }
 
 async function createProductsListEl(list = []) {
-  gridEl.innerHTML = "";
+  gridEl.innerHTML = '';
 
   try {
     list.forEach((item) => {
@@ -85,7 +89,6 @@ async function createProductsListEl(list = []) {
 
       let Id = '';
       if (typeof item === 'string') {
-
         imgUrl = item;
       } else if (item.largeImageURL) {
         imgUrl = item.largeImageURL;
@@ -104,7 +107,6 @@ async function createProductsListEl(list = []) {
 
         const newEl = createHTML(template);
 
-
         const image = newEl.querySelector('img');
 
         if (image && Id) {
@@ -118,17 +120,17 @@ async function createProductsListEl(list = []) {
   }
 }
 
-const fileInput = document.getElementById("file-input");
-const profileImg = document.getElementById("profile-img");
+const fileInput = document.getElementById('file-input');
+const profileImg = document.getElementById('profile-img');
 
 window.onload = function setImageInLS() {
-  const savedImage = localStorage.getItem("profileImage");
+  const savedImage = localStorage.getItem('profileImage');
   if (savedImage) {
     profileImg.src = savedImage;
   }
 };
 
-fileInput.addEventListener("change", function (event) {
+fileInput.addEventListener('change', function (event) {
   const file = event.target.files[0];
   if (file) {
     const reader = new FileReader();
@@ -136,52 +138,76 @@ fileInput.addEventListener("change", function (event) {
       const imageSrc = e.target.result;
       profileImg.src = imageSrc;
 
-      localStorage.setItem("profileImage", imageSrc);
+      localStorage.setItem('profileImage', imageSrc);
     };
     reader.readAsDataURL(file);
   }
 });
 
-editBtn.addEventListener("click", () => {
-  editSection.classList.remove("hidden");
-  profileName.classList.add("hidden");
+editBtn.addEventListener('click', () => {
+  editSection.classList.remove('hidden');
+  profileName.classList.add('hidden');
   nameInput.value = profileName.textContent;
   nameInput.focus();
 });
 
-saveBtn.addEventListener("click", () => {
+saveBtn.addEventListener('click', () => {
   const newName = nameInput.value;
   profileName.textContent = newName;
-  localStorage.setItem("profileName", newName);
-  editSection.classList.add("hidden");
-  profileName.classList.remove("hidden");
+  localStorage.setItem('profileName', newName);
+  editSection.classList.add('hidden');
+  profileName.classList.remove('hidden');
 });
 
-cancelBtn.addEventListener("click", () => {
-  editSection.classList.add("hidden");
-  profileName.classList.remove("hidden");
+cancelBtn.addEventListener('click', () => {
+  editSection.classList.add('hidden');
+  profileName.classList.remove('hidden');
 });
 
-window.addEventListener("load", () => {
-  const storedName = localStorage.getItem("profileName");
+editBioBtn.addEventListener('click', () => {
+  editBioSection.classList.remove('hidden');
+  bioText.classList.add('hidden');
+  bioInput.value = bioText.textContent;
+  bioInput.focus();
+});
+
+saveBioBtn.addEventListener('click', () => {
+  const newBio = bioInput.value;
+  bioText.textContent = newBio;
+  localStorage.setItem('profileBio', newBio);
+  editBioSection.classList.add('hidden');
+  bioText.classList.remove('hidden');
+});
+
+cancelBioBtn.addEventListener('click', () => {
+  editBioSection.classList.add('hidden');
+  bioText.classList.remove('hidden');
+});
+
+window.addEventListener('load', () => {
+  const storedName = localStorage.getItem('profileName');
+  const storedBio = localStorage.getItem('profileBio');
 
   if (storedName) {
     profileName.textContent = storedName;
+  }
+
+  if (storedBio) {
+    bioText.textContent = storedBio;
   }
 });
 
 const myGallery = cloudinary.galleryWidget({
   container: mediaContainer,
-  cloudName: "du2edesv8",
-  carouselStyle: "none",
+  cloudName: 'du2edesv8',
+  carouselStyle: 'none',
   autoplay: false,
-
 
   videoProps: { controls: 'all', autoplay: false },
 
   mediaAssets: [
     {
-      tag: "myImages",
+      tag: 'myImages',
       transformation: {
         prefixed: false,
         quality: 'auto:best',
@@ -190,7 +216,7 @@ const myGallery = cloudinary.galleryWidget({
         fetch_format: 'auto',
 
         x_0: 1,
-        crop: "fill",
+        crop: 'fill',
       },
     },
   ],

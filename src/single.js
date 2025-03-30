@@ -1,8 +1,8 @@
-
 const imgContainer = document.querySelector('#img-container');
 
 async function fetchImageFromSources() {
   const id = getId();
+
   if (!id) {
     console.error('No product id was provided.');
     return null;
@@ -40,7 +40,7 @@ async function fetchImageFromSources() {
     return null;
   }
 }
- 
+
 function getId() {
   return new URLSearchParams(window.location.search).get('id');
 }
@@ -77,9 +77,9 @@ async function renderImage() {
 }
 
 function clearNode() {
-  imgContainer.innerHTML = "";
+  imgContainer.innerHTML = '';
 }
- 
+
 function createHTML(template) {
   return new DOMParser().parseFromString(template, 'text/html').body.firstChild;
 }
