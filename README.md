@@ -1,4 +1,4 @@
-# FED1 JavaScript-1 Ca (Rainydays)
+# Fed1-agency-1-ca (Rainydays)
 
 # Goal
 
@@ -16,14 +16,12 @@ Create an engaging, user-centric social media platform that fosters meaningful c
 
 ## Resources
 
-- [Brief](https://lms.noroff.no/pluginfile.php/339034/mod_resource/content/5/HTML__CSS_CA.pdf)
-- [Design-desktop](https://www.figma.com/proto/hgQ4WNNGSHOxg9DViYzdIA/Rainydays-Superman?page-id=0%3A1&node-id=2-2&node-type=canvas&viewport=399%2C197%2C0.11&t=RfCGWTH6doE0euxU-1&scaling=scale-down&content-scaling=fixed)
-- [Production deploy](https://rainydays-webshop-no.netlify.app/)
-- [Deployment CI](https://app.netlify.com/sites/rainydays-webshop-no/overview)
+- [Production deploy](https://squarepumpkin.netlify.app/)
+- [Deployment CI](https://app.netlify.com/sites/squarepumpkin/overview)
 
 ## Report
 
-- [Report](https://docs.google.com/document/d/1H2JoxjCNF8Yf_rbPC38OS2S-pcx8jDSjGrKi3KTpO6E/edit?usp=sharing)
+- [Report]()
 
 ## Features
 
