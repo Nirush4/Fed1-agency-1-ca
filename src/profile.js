@@ -1,5 +1,4 @@
-
-const profileMetrics = document.getElementById("profileMetrics");
+const profileMetrics = document.getElementById('profileMetrics');
 
 const gridEl = document.querySelector('#js-grid');
 const editBtn = document.getElementById('edit-btn');
@@ -16,8 +15,7 @@ const bioText = document.getElementById('bio-text');
 const bioInput = document.getElementById('bio-input');
 const mediaContainer = document.querySelector('#media-gallery-container');
 
-
-const ERROR_MESSAGE_DEFAULT = "Something went wrong";
+const ERROR_MESSAGE_DEFAULT = 'Something went wrong';
 
 setup();
 
@@ -36,18 +34,16 @@ async function setup() {
     const imgFromCloud = await loadImages();
     const imgList = await getImage();
 
-    let storedImages = JSON.parse(localStorage.getItem("combinedImg"));
+    let storedImages = JSON.parse(localStorage.getItem('combinedImg'));
 
     const compainedImg = storedImages || [...imgFromCloud, ...imgList];
 
-
     if (!storedImages) {
-      localStorage.setItem("compainedImg", JSON.stringify(compainedImg));
+      localStorage.setItem('compainedImg', JSON.stringify(compainedImg));
     }
 
     const shuffledArray = compainedImg.sort(() => Math.random() - 0.5);
     createProductsListEl(shuffledArray);
-
 
     if (savedImage) {
       profileImg.src = savedImage;
@@ -89,13 +85,13 @@ function productTemplate({ id, imgUrl }) {
 }
 
 function ProfileMetricTemplate() {
-  const originalArray = JSON.parse(localStorage.getItem("comainedImg")) || [];
-  const storedImages = JSON.parse(localStorage.getItem("combinedImg")) || [];
+  const originalArray = JSON.parse(localStorage.getItem('comainedImg')) || [];
+  const storedImages = JSON.parse(localStorage.getItem('combinedImg')) || [];
 
   return `
 <span class="text-gray-200 font-medium text-s md:text-lg cursor-pointer"><strong>Posts:</strong> ${storedImages.length || originalArray.length}</span>
-<span class="text-gray-200 font-medium text-s md:text-lg cursor-pointer"><strong>Followers:</strong> 100</span>
-<span class="text-gray-200 font-medium text-s md:text-lg cursor-pointer"><strong>Following:</strong> 100</span>
+<span class="text-gray-200 font-medium text-s md:text-lg cursor-pointer"><strong>Followers:</strong>51</span>
+<span class="text-gray-200 font-medium text-s md:text-lg cursor-pointer"><strong>Following:</strong>45</span>
   `;
 }
 
@@ -108,10 +104,8 @@ async function createProductsListEl(list = []) {
     list.forEach((item) => {
       let imgUrl;
 
-
-      let Id = "";
-      if (typeof item === "string") {
-
+      let Id = '';
+      if (typeof item === 'string') {
         imgUrl = item;
       } else if (item.largeImageURL) {
         imgUrl = item.largeImageURL;
@@ -130,9 +124,7 @@ async function createProductsListEl(list = []) {
 
         const newEl = createHTML(template);
 
-
-        const image = newEl.querySelector("img");
-
+        const image = newEl.querySelector('img');
 
         if (image && Id) {
           image.id = Id;
@@ -141,7 +133,7 @@ async function createProductsListEl(list = []) {
       }
     });
   } catch (error) {
-    console.error("Error creating product list:", error?.message);
+    console.error('Error creating product list:', error?.message);
   }
 }
 
@@ -228,19 +220,17 @@ const myGallery = cloudinary.galleryWidget({
   carouselStyle: 'none',
   autoplay: false,
 
-
-  videoProps: { controls: "all", autoplay: false },
-
+  videoProps: { controls: 'all', autoplay: false },
 
   mediaAssets: [
     {
       tag: 'myImages',
       transformation: {
         prefixed: false,
-        quality: "auto:best",
+        quality: 'auto:best',
         width: 800,
         height: 600,
-        fetch_format: "auto",
+        fetch_format: 'auto',
 
         x_0: 1,
         crop: 'fill',
@@ -256,12 +246,12 @@ let listOfImgs = [];
 function loadImages() {
   return new Promise((resolve, reject) => {
     var interval = setInterval(function () {
-      if (document.readyState === "complete") {
-        const images = mediaContainer.querySelectorAll("img");
+      if (document.readyState === 'complete') {
+        const images = mediaContainer.querySelectorAll('img');
         const arrImg = Array.from(images);
 
         if (!arrImg.length || arrImg[0].src.length <= 1) {
-          console.warn("No images found yet. Waiting...");
+          console.warn('No images found yet. Waiting...');
           return;
         }
 
@@ -272,7 +262,7 @@ function loadImages() {
 
         listOfImgs = filterImgs.map((i) => i.src);
 
-        mediaContainer.innerHTML = "";
+        mediaContainer.innerHTML = '';
 
         clearInterval(interval);
         resolve(listOfImgs);
@@ -283,8 +273,8 @@ function loadImages() {
 
 loadImages()
   .then((images) => {
-    console.log("Images are ready:", images);
+    console.log('Images are ready:', images);
   })
   .catch((error) => {
-    console.error("Error loading images:", error);
+    console.error('Error loading images:', error);
   });
