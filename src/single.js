@@ -1,3 +1,4 @@
+
 const imgContainer = document.querySelector("#img-container");
 
 function getImageArrayFromLS() {
@@ -5,8 +6,10 @@ function getImageArrayFromLS() {
 }
 getImageArrayFromLS();
 
+
 async function fetchImageFromSources() {
   const id = getId();
+
   if (!id) {
     console.error("No product id was provided.");
     return null;
@@ -96,7 +99,7 @@ async function renderImage() {
 }
 
 function clearNode() {
-  imgContainer.innerHTML = "";
+  imgContainer.innerHTML = '';
 }
 
 function createHTML(template) {

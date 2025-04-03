@@ -1,8 +1,6 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-@import url("https://fonts.googleapis.com/css2?family=Borel&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Yellowtail&display=swap");
 
 @theme {
   --font-primary: "Roboto", "sans-serif";
@@ -21,20 +19,6 @@
   --color-bg-light: #1b1d2d;
 }
 
-/* style.css */
-
-/* body {
-  width: 100%;
-  background-image: linear-gradient(90deg, #074191, #006473, #0290e2, #006473, #074191);
-  background-size: 200% auto;
-  animation: topAnimation 4s linear infinite;
-}
-
-@keyframes topAnimation {
-  to {
-    background-position: 200%;
-  }
-} */
 
 .grid-item {
   display: flex;
@@ -60,21 +44,26 @@
   transition: all 0.2s ease-in-out;
 }
 
-
 #main-video {
   transform: scaleX(-1);
+  height: 42rem;
 }
 
-#test {
+#capture-img-id {
   transform: scaleX(-1);
-  height: 100%;
+  height: 42rem;
+  width: 100%;
+}
+
+#record-video-id {
+  transform: scaleX(-1);
+  height: 42rem;
   width: 100%;
 }
 
 #previewContainer {
   overflow: hidden;
 }
-
 
 .grid-item video {
   transition: all 0.2s ease-in-out;
@@ -90,15 +79,13 @@
   transform: scale(1.05);
 }
 
-/* .video-content {
-  height: 21rem;
-  width: 100%;
-  object-fit: cover;
-} */
-
 
 /*Tablets*/
 @media (max-width:1024px) {
+  #video-canvas {
+    height: 31rem;
+  }
+
   .grid-item img {
     width: 16rem;
     height: 19rem;
@@ -110,22 +97,10 @@
   }
 }
 
-
-/* Tablet Portrait */
-@media (max-width:768px) {
-  .grid-item img {
-    width: 12rem;
-    height: 15rem;
-  }
-
-  .grid-item video {
-    width: 12rem;
-    height: 15rem;
-  }
-}
 
 /*Mobile */
-@media (max-width:640px) {
+@media (max-width:768px) {
+
   .grid-item img {
     width: 9rem;
     height: 10rem;
@@ -134,5 +109,51 @@
   .grid-item video {
     width: 9rem;
     height: 10rem;
+  }
+
+  .camera-main-div {
+    width: 24rem;
+    height: 100%;
+
+    .filter-component {
+      width: 100%;
+      height: 5rem;
+      padding-right: 3rem;
+    }
+
+    #main-video {
+      border-radius: 0%;
+      scale: 275%;
+      height: 49rem;
+    }
+
+    .control-btn {
+      bottom: 6rem;
+      padding-right: 3rem;
+    }
+
+    .photo-preview {
+      height: 34rem;
+      width: 43rem;
+    }
+  }
+
+  #video-canvas {
+    height: 100%;
+  }
+
+  #capture-img-id {
+    height: 100%;
+    width: 250%;
+  }
+
+  #record-video-id {
+    height: 100%;
+    width: 250%;
+  }
+
+  #previewContainer {
+    height: 100%;
+    width: 293%;
   }
 }

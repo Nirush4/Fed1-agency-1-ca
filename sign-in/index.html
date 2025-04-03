@@ -5,22 +5,22 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/images/logo-mobile.png" type="image/x-icon">
     <link href="/src/style.css" rel="stylesheet">
-    <script src="/src/login.js" defer></script>
-    <title>Sign Up / Social Media</title>
+    <script type="module" src="/src/sign.js" defer></script>
+    <title>Sign Up / Square Pumpkin</title>
 
 
 </head>
 
 <body class="bg-bg flex items-center justify-center min-h-screen">
-
     <div class="flex flex-col items-center w-full max-w-md bg-bg-light p-8 rounded-lg shadow-lg">
         <img src="/images/logo-desktop.png" alt="Logo" class="w-45 h-auto pb-7 items-center">
 
         <h2 id="formTitle" class="text-2xl text-gray-400 font-semibold text-center mb-6">Sign Up for Your Account</h2>
 
         <form id="signUpForm" class="space-y-6 w-full">
-            <!-- Username -->
+
             <div>
                 <label for="newUsername" class="block text-m font-medium text-gray-400">Username</label>
                 <input type="text" id="newUsername" name="newUsername"
@@ -28,7 +28,7 @@
                     placeholder="Choose a username" required>
             </div>
 
-            <!-- Email -->
+
             <div>
                 <label for="email" class="block text-m font-medium text-gray-400">Email</label>
                 <input type="email" id="email" name="email"
@@ -36,7 +36,7 @@
                     placeholder="Enter your email" required>
             </div>
 
-            <!-- Password -->
+
             <div>
                 <label for="newPassword" class="block text-m font-medium text-gray-400">Password</label>
                 <input type="password" id="newPassword" name="newPassword"
@@ -44,7 +44,7 @@
                     placeholder="Create a password" required>
             </div>
 
-            <!-- Sign Up Button -->
+
             <div>
                 <button type="submit"
                     class="w-full py-2 px-4 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer">
@@ -52,7 +52,7 @@
                 </button>
             </div>
 
-            <!-- Toggle Login link -->
+
             <div class="text-center text-sm text-gray-500 mt-4">
                 Already have an account? <a href="/index.html" id="toggleToLogin"
                     class="text-blue-500 hover:text-blue-600">Login</a>
@@ -60,10 +60,6 @@
         </form>
 
     </div>
-
-    </div>
-
-
 </body>
 
 </html>
