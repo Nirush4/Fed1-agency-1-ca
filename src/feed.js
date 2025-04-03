@@ -1,3 +1,5 @@
+import { createHTML } from './explore.js';
+
 const imgContainerEl = document.querySelector('#img-container');
 
 const ERROR_MESSAGE_DEFAULT = 'Something went wrong';
@@ -22,7 +24,7 @@ async function setup() {
 async function getImage() {
   try {
     const response = await fetch(
-      `https://pixabay.com/api/?key=49423799-7939ddd154968d7fb42d51820&orientation=vertical&safesearch=true&image_type=photo&page=2&per_page=100&category=music`
+      `https://pixabay.com/api/?key=49423799-7939ddd154968d7fb42d51820&orientation=vertical&safesearch=true&image_type=photo&page=2&per_page=100&category=travel`
     );
 
     const { hits } = await response.json();
@@ -37,7 +39,7 @@ async function getImage() {
 async function getVideo() {
   try {
     const response = await fetch(
-      `https://pixabay.com/api/videos/?key=49423799-7939ddd154968d7fb42d51820&orientation=vertical&safesearch=true&page=3&per_page=20&category=music`
+      `https://pixabay.com/api/videos/?key=49423799-7939ddd154968d7fb42d51820&orientation=vertical&safesearch=true&page=3&per_page=20&category=people`
     );
 
     const { hits } = await response.json();
@@ -107,10 +109,4 @@ async function createProductsListEl(list = []) {
   } catch (error) {
     console.error(ERROR_MESSAGE_DEFAULT, error?.message);
   }
-}
-
-export function createHTML(template) {
-  const parser = new DOMParser();
-  const parsedDocument = parser.parseFromString(template, 'text/html');
-  return parsedDocument.body.firstChild;
 }

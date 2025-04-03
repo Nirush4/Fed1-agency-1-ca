@@ -4,14 +4,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
+  <link rel="shortcut icon" href="/images/logo-mobile.png" type="image/x-icon">
   <script type="module" src="/src/camera.js" defer></script>
   <script src="https://product-gallery.cloudinary.com/latest/all.js" type="text/javascript"></script>
-  <link rel="stylesheet" href="camera.css" />
   <link rel="stylesheet" href="../src/style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.css"
     integrity="sha512-GmZYQ9SKTnOea030Tbiat0Y+jhnYLIpsGAe6QTnToi8hI2nNbVMETHeK4wm4MuYMQdrc38x+sX77+kVD01eNsQ=="
     crossorigin="anonymous" />
+  <title>Document</title>
 </head>
 
 <body class="container fixed grid min-w-full grid-cols-5 h-dvh bg-bg-light">
@@ -20,10 +20,10 @@
     class="aside fixed bottom-0 right-0 left-0 z-30 flex justify-evenly items-center gap-5 h-20 w-full border-r-1 border-gray-300 bg-bg-light ... lg:hidden">
     <a href="/profile/index.html" class="flex items-center w-12 h-12 pl-2">
       <img src="/images/logo-mobile.png" alt=""> </a>
-    <div class="flex items-center hover:text-darkOrange">
+    <a href="/feed/index.html" class="flex items-center hover:text-darkOrange">
       <i class="text-xl text-gray-200 cursor-pointer fa-solid fa-house-user"></i>
       <span class="text-xl cursor-pointer ps-4"></span>
-    </div>
+    </a>
     <a href="/profile/index.html" class="flex items-center hover:text-darkOrange">
       <i class="text-xl text-gray-200 cursor-pointer fa-solid fa-user"></i>
       <span class="text-xl cursor-pointer ps-4"></span>
@@ -48,10 +48,10 @@
     <a href="/profile/index.html" class="flex items-center h-20 py-20 pl-10 w-55">
       <img src="/images/logo-desktop.png" alt=""> </a>
 
-    <div class="flex items-center hover:text-darkOrange">
+    <a href="/feed/index.html" class="flex items-center hover:text-darkOrange">
       <i class="text-xl text-gray-200 cursor-pointer fa-solid fa-house-user ps-12"></i>
       <span class="text-xl text-gray-200 cursor-pointer ps-4">Home</span>
-    </div>
+    </a>
     <a href="/profile/index.html" class="flex items-center hover:text-darkOrange">
       <i class="text-xl text-gray-200 cursor-pointer fa-solid fa-user ps-12"></i>
       <span class="text-xl text-gray-200 cursor-pointer ps-4">Profile</span>
@@ -79,7 +79,7 @@
     <div class="camera-main-div flex justify-center flex-col items-center h-dvh">
       <div id="video-canvas" class="flex flex-col items-center relative">
         <video id="main-video" class="rounded-4xl" autoplay></video>
-        <div class="filter-component flex justify-center gap-2 absolute bottom-40 flex-wrap md:bottom-7 md:flex-nowrap">
+        <div class="filter-component flex justify-center gap-2 absolute bottom-50 flex-wrap md:bottom-7 md:flex-nowrap">
 
           <button
             class="btn btn-soft btn-success bg-yellow-600 hover:bg-yellow-500 text-white border-transparent rounded-full"
@@ -99,14 +99,14 @@
           </button>
         </div>
       </div>
-      <div class="control-btn absolute bottom-30 flex justify-center items-center flex-wrap gap-2 md:static">
+      <div class="control-btn absolute bottom-30 flex justify-center items-center flex-wrap pt-4 gap-2 md:static">
         <button id="submitBtn" style="display: none" class="btn btn-soft btn-success">
           Submit
         </button>
-        <button class="btn btn-soft btn-success" id="main-video-button">
+        <button class="btn btn-soft btn-success shrink" id="main-video-button">
           Record
         </button>
-        <button class="btn btn-soft btn-success" id="captureBtn">
+        <button class="btn btn-soft btn-success shrink" id="captureBtn">
           Take photo
         </button>
 
