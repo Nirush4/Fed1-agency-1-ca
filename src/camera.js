@@ -134,17 +134,14 @@ function previewMedia(type, src) {
     const videoElement = document.createElement('video');
     videoElement.src = src;
     videoElement.controls = true;
-    videoElement.width = 400;
-    // previewContainer.width = 400;
-    // previewContainer.height = 1056;
+    videoElement.id = 'record-video-id';
 
     previewContainer.appendChild(videoElement);
     imageContainer.appendChild(previewContainer);
   } else if (type === 'image') {
     const imgElement = document.createElement('img');
-    imgElement.id = 'test';
+    imgElement.id = 'capture-img-id';
     imgElement.src = src;
-    // imgElement.width = 400;
 
     previewContainer.appendChild(imgElement);
     imageContainer.appendChild(previewContainer);
@@ -156,10 +153,16 @@ function previewMedia(type, src) {
 submitBtn.addEventListener('click', async () => {
   if (fileToUpload) {
     await uploadToCloudinary(fileToUpload);
+    confirm('Video submitted!');
     fileToUpload = null;
     previewContainer.innerHTML = '';
-    submitBtn.style.display = 'none';
   }
+  submitBtn.style.display = 'none';
+  confirm('Picture submitted!');
+  video.style.display = 'block';
+  recordBtn.style.display = 'block';
+  captureBtn.style.display = 'block';
+  openCameraBtn.style.display = 'none';
 });
 
 async function startRecording() {
@@ -195,6 +198,9 @@ async function startRecording() {
 function stopRecording() {
   if (mediaRecorder && mediaRecorder.state !== 'inactive') {
     mediaRecorder.stop();
+    openCameraBtn.style.display = 'block';
+    captureBtn.style.display = 'none';
+    recordBtn.style.display = 'none';
   } else {
     console.warn('Recording has not started or is already stopped.');
   }
