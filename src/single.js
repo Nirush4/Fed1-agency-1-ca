@@ -1,10 +1,17 @@
-const imgContainer = document.querySelector('#img-container');
+
+const imgContainer = document.querySelector("#img-container");
+
+function getImageArrayFromLS() {
+  localStorage.getItem("compainedImg");
+}
+getImageArrayFromLS();
+
 
 async function fetchImageFromSources() {
   const id = getId();
 
   if (!id) {
-    console.error('No product id was provided.');
+    console.error("No product id was provided.");
     return null;
   }
 
@@ -17,7 +24,7 @@ async function fetchImageFromSources() {
       return { id, url: cloudinaryResponse.url };
     }
   } catch (error) {
-    console.error('Cloudinary fetch failed:', error.message);
+    console.error("Cloudinary fetch failed:", error.message);
   }
 
   try {
@@ -26,30 +33,37 @@ async function fetchImageFromSources() {
     );
 
     if (!pixabayResponse.ok) {
-      throw new Error('Failed to fetch Pixabay image');
+      throw new Error("Failed to fetch Pixabay image");
     }
 
     const { hits } = await pixabayResponse.json();
 
     if (hits.length === 0) {
-      throw new Error('No image found on Pixabay');
+      throw new Error("No image found on Pixabay");
     }
     return hits[0];
   } catch (error) {
-    console.error('Pixabay fetch failed:', error.message);
+    console.error("Pixabay fetch failed:", error.message);
     return null;
   }
 }
 
 function getId() {
-  return new URLSearchParams(window.location.search).get('id');
+  return new URLSearchParams(window.location.search).get("id");
 }
 
 function detailsTemplate({ id, url, largeImageURL, likes = 15, views = 53 }) {
   return `
 <div class="flex flex-col justify-between w-lg mx-auto mt-7 bg-white rounded-t-lg shadow-lg">
     <div class="space-y-4 h-180 p-6">
+     <div class="flex justify-between items-center"> 
       <p class="text-gray-700 text-xl">Take me back</p>
+                      <button id="deleteBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-black" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+     </div>
       <a class="flex justify-center h-full" href="/single/index?id=${id}">
         <img src="${url || largeImageURL}" alt="Post Image" class="w-full h-full object-cover rounded-t-lg">
       </a>
@@ -63,6 +77,11 @@ function detailsTemplate({ id, url, largeImageURL, likes = 15, views = 53 }) {
   `;
 }
 
+function extractBlob(url) {
+  const match = url.match(/blob_([a-zA-Z0-9]+)/);
+  return match ? match[0] : null;
+}
+
 async function renderImage() {
   const imgDetails = await fetchImageFromSources();
   if (imgDetails) {
@@ -71,8 +90,11 @@ async function renderImage() {
     const detailsEl = createHTML(template);
     clearNode();
     imgContainer.appendChild(detailsEl);
+
+    const deleteBtn = document.querySelector("#deleteBtn");
+    deleteBtn.addEventListener("click", deleteImage);
   } else {
-    console.error('No image found from any source.');
+    console.error("No image found from any source.");
   }
 }
 
@@ -81,16 +103,16 @@ function clearNode() {
 }
 
 function createHTML(template) {
-  return new DOMParser().parseFromString(template, 'text/html').body.firstChild;
+  return new DOMParser().parseFromString(template, "text/html").body.firstChild;
 }
 
 renderImage();
 
-document.addEventListener('DOMContentLoaded', () => {
-  const commentForm = document.querySelector('form');
-  const commentsList = document.querySelector('.new-comments');
+document.addEventListener("DOMContentLoaded", () => {
+  const commentForm = document.querySelector("form");
+  const commentsList = document.querySelector(".new-comments");
 
-  let comments = JSON.parse(localStorage.getItem('comments') || '[]');
+  let comments = JSON.parse(localStorage.getItem("comments") || "[]");
 
   function displayComments() {
     commentsList.innerHTML = comments
@@ -115,36 +137,64 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `
       )
-      .join('');
+      .join("");
   }
 
   window.deleteComment = (index) => {
-    if (confirm('Are you sure you want to delete this comment?')) {
+    if (confirm("Are you sure you want to delete this comment?")) {
       comments.splice(index, 1);
-      localStorage.setItem('comments', JSON.stringify(comments));
+      localStorage.setItem("comments", JSON.stringify(comments));
       displayComments();
     }
   };
 
-  commentForm.addEventListener('submit', (e) => {
+  commentForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    const commentInput = commentForm.querySelector('input');
+    const commentInput = commentForm.querySelector("input");
     const commentText = commentInput.value.trim();
 
     if (commentText) {
       const newComment = {
-        username: 'User',
+        username: "User",
         text: commentText,
         timestamp: new Date().toLocaleString(),
       };
 
       comments.unshift(newComment);
-      localStorage.setItem('comments', JSON.stringify(comments));
+      localStorage.setItem("comments", JSON.stringify(comments));
 
-      commentInput.value = '';
+      commentInput.value = "";
       displayComments();
     }
   });
 
   displayComments();
 });
+
+function deleteImage() {
+  const Id = getId();
+
+  let images = JSON.parse(localStorage.getItem("combinedImg"));
+
+  if (!images) {
+    images = JSON.parse(localStorage.getItem("compainedImg")) || [];
+  }
+
+  const index = images.findIndex((img, i) => {
+    if (typeof img === "object" && img.id) {
+      console.log(`Checking object ${i}:`, img);
+      return String(img.id) === String(Id);
+    }
+    return extractBlob(img) === Id;
+  });
+
+  if (index !== -1) {
+    images.splice(index, 1);
+
+    localStorage.setItem("combinedImg", JSON.stringify(images));
+  } else {
+    console.warn("No matching image found for deletion!");
+  }
+
+  window.location.href = "/profile/index.html";
+}
