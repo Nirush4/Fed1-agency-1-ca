@@ -41,7 +41,7 @@ async function getVideo() {
     );
 
     const { hits } = await response.json();
-
+    console.log(hits);
     return hits || [];
   } catch (error) {
     console.error(ERROR_MESSAGE_DEFAULT, error?.message);
@@ -52,10 +52,13 @@ async function getVideo() {
 function productTemplate({ id, imgUrl, videoUrl }) {
   const detailsUrl = `/single/index?id=${id}`;
 
+  const isImageValid =
+    imgUrl && (imgUrl.endsWith('.jpg') || imgUrl.endsWith('.jpeg'));
+
   return `
     <div class="grid-item">
       <div class="">
-        <!-- If there is a video URL, show the video, otherwise show the image -->
+        <!-- If there is a video URL, show the video, otherwise show the image (if valid) -->
         ${
           videoUrl
             ? `
@@ -67,13 +70,15 @@ function productTemplate({ id, imgUrl, videoUrl }) {
                  </a>
             </div>
              `
-            : `
+            : isImageValid
+              ? `
             <div class="post-div">
                    <a href="${detailsUrl}">
                      <img src="${imgUrl}" class="video-content w-full h-130 object-cover"/>
                    </a>
             </div>
-        `
+            `
+              : ''
         }
       </div>
     </div>
