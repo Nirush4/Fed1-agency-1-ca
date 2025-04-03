@@ -85,7 +85,7 @@ function productTemplate({ id, imgUrl }) {
 }
 
 function ProfileMetricTemplate() {
-  const originalArray = JSON.parse(localStorage.getItem('comainedImg')) || [];
+  const originalArray = JSON.parse(localStorage.getItem('compainedImg')) || [];
   const storedImages = JSON.parse(localStorage.getItem('combinedImg')) || [];
 
   return `
