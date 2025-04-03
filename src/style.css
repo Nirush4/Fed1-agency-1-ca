@@ -1,8 +1,6 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-@import url("https://fonts.googleapis.com/css2?family=Borel&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Yellowtail&display=swap");
 
 @theme {
   --font-primary: "Roboto", "sans-serif";
@@ -46,24 +44,26 @@
   transition: all 0.2s ease-in-out;
 }
 
-#video-canvas {
-  height: 31rem;
-}
-
 #main-video {
   transform: scaleX(-1);
+  height: 42rem;
 }
 
-#test {
+#capture-img-id {
   transform: scaleX(-1);
-  height: 100%;
+  height: 42rem;
+  width: 100%;
+}
+
+#record-video-id {
+  transform: scaleX(-1);
+  height: 42rem;
   width: 100%;
 }
 
 #previewContainer {
   overflow: hidden;
 }
-
 
 .grid-item video {
   transition: all 0.2s ease-in-out;
@@ -82,6 +82,10 @@
 
 /*Tablets*/
 @media (max-width:1024px) {
+  #video-canvas {
+    height: 31rem;
+  }
+
   .grid-item img {
     width: 16rem;
     height: 19rem;
@@ -96,6 +100,7 @@
 
 /*Mobile */
 @media (max-width:768px) {
+
   .grid-item img {
     width: 9rem;
     height: 10rem;
@@ -124,7 +129,7 @@
 
     .control-btn {
       bottom: 6rem;
-      padding-right: 6rem;
+      padding-right: 3rem;
     }
 
     .photo-preview {
@@ -137,7 +142,12 @@
     height: 100%;
   }
 
-  #test {
+  #capture-img-id {
+    height: 100%;
+    width: 250%;
+  }
+
+  #record-video-id {
     height: 100%;
     width: 250%;
   }

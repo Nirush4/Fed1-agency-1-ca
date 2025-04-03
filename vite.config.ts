@@ -15,6 +15,7 @@ export default defineConfig({
         camera: resolve(__dirname, 'camera/index.html'),
         explore: resolve(__dirname, 'explore/index.html'),
         single: resolve(__dirname, '/single/index.html'),
+        feed: resolve(__dirname, './feed/index.html'),
       },
     },
   },
