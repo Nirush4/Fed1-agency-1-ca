@@ -1,11 +1,9 @@
-
 const imgContainer = document.querySelector("#img-container");
 
 function getImageArrayFromLS() {
   localStorage.getItem("compainedImg");
 }
 getImageArrayFromLS();
-
 
 async function fetchImageFromSources() {
   const id = getId();
@@ -99,7 +97,7 @@ async function renderImage() {
 }
 
 function clearNode() {
-  imgContainer.innerHTML = '';
+  imgContainer.innerHTML = "";
 }
 
 function createHTML(template) {
