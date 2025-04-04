@@ -72,6 +72,30 @@ async function getImage() {
     console.error(ERROR_MESSAGE_DEFAULT, error?.message);
   }
 }
+function createSkeletonLoader() {
+  return `
+    <div class="grid-item skeleton-loader">
+      <div class="post-div skeleton">
+        <div class="skeleton-image"></div>
+      </div>
+    </div>
+  `;
+}
+
+createSkeletonListEl();
+
+function createSkeletonListEl() {
+  gridEl.innerHTML = '';
+
+  const skeletonCount = 47;
+  let skeletonHTML = '';
+  for (let i = 0; i < skeletonCount; i++) {
+    skeletonHTML += createSkeletonLoader();
+  }
+
+  gridEl.innerHTML = skeletonHTML;
+}
+
 function productTemplate({ id, imgUrl }) {
   const detailsUrl = `/single/index?id=${id}`;
 
