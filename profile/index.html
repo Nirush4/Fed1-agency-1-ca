@@ -215,33 +215,24 @@
                   </button>
                 </div>
 
-                <div id="edit-section" class="hidden mb-4">
-                  <input
-                    type="text"
-                    id="name-input"
-                    class="w-full p-2 text-gray-200 border border-gray-300 rounded-md"
-                    placeholder="Enter your name"
-                  />
-                  <div class="flex justify-between mt-4">
-                    <button
-                      id="save-btn"
-                      class="px-4 py-2 text-gray-200 bg-blue-500 rounded-md hover:bg-blue-700"
-                    >
-                      Save
-                    </button>
-                    <button
-                      id="cancel-btn"
-                      class="px-4 py-2 text-gray-700 bg-gray-300 rounded-md hover:bg-gray-400"
-                    >
-                      Cancel
-                    </button>
-                  </div>
+              </div>
+
+              <div class="post-followers-following flex flex-wrap gap-3 md:gap-10" id="profileMetrics"></div>
+
+              <div class="flex items-center mt-10 mb-4 space-x-4 justify-self-start">
+                <div class="text-gray-200 text-s font-small s:text-m md:text-lg">
+                  <span id="bio-text">Front-end Developer 🚀</span>
                 </div>
 
-                <div
-                  class="post-followers-following flex flex-wrap gap-3 md:gap-10"
-                  id="profileMetrics"
-                ></div>
+                <button id="edit-bio-btn" class="text-blue-300 cursor-pointer hover:text-blue-500">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M17 3l4 4-10 10H7v-4L17 3z"></path>
+                  </svg>
+                </button>
+              </div>
+
 
                 <div
                   class="flex items-center mt-10 mb-4 space-x-4 justify-self-start"
