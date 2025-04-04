@@ -45,6 +45,8 @@ async function setup() {
     const shuffledArray = compainedImg.sort(() => Math.random() - 0.5);
     createProductsListEl(shuffledArray);
 
+    const savedImage = localStorage.getItem('profileImage');
+
     if (savedImage) {
       profileImg.src = savedImage;
     }
