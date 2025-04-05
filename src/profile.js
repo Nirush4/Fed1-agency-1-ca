@@ -100,14 +100,14 @@ function createSkeletonListEl() {
   gridEl.innerHTML = skeletonHTML;
 }
 
-function productTemplate({ id, imgUrl }) {
+function productTemplate({ id, imgUrl, tags }) {
   const detailsUrl = `/single/index?id=${id}`;
 
   return `
     <div class="grid-item">
       <div class="post-div">
         <a href="${detailsUrl}">
-          <img src="${imgUrl}" />
+          <img src="${imgUrl}" alt="${tags}"/>
         </a>
       </div>
     </div>
@@ -151,6 +151,7 @@ async function createProductsListEl(list = []) {
         const template = productTemplate({
           id: item.id || Id,
           imgUrl: imgUrl,
+          tags: item.tags || 'Photo from camera',
         });
 
         const newEl = createHTML(template);

@@ -78,6 +78,7 @@ function detailsTemplate({
   url,
   largeImageURL,
   likes,
+  tags = 'Photo from camera',
   views = 53,
   videos,
 }) {
@@ -105,7 +106,7 @@ function detailsTemplate({
                <source src="${videoUrl || url}" type="video/mp4">
                Your browser does not support the video tag.
              </video>`
-          : `<img src="${url || largeImageURL}" alt="Post Image" class="w-full h-full object-cover rounded-t-lg">`
+          : `<img src="${url || largeImageURL}" alt="${tags}" class="w-full h-full object-cover rounded-t-lg">`
       }
     </a>
   </div>
