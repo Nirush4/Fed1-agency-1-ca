@@ -1,5 +1,10 @@
 const imgContainer = document.querySelector('#img-container');
-debugger;
+
+function getImageArrayFromLS() {
+  localStorage.getItem('compainedImg');
+}
+
+getImageArrayFromLS();
 
 async function fetchImageFromSources() {
   const id = getId();
@@ -23,7 +28,7 @@ async function fetchImageFromSources() {
 
   try {
     const pixabayResponse = await fetch(
-      `https://pixabay.com/api/?key=49423799-7939ddd154968d7fb42d51820&orientation=vertical&page=1&per_page=20&category=places&id=${id}`
+      `https://pixabay.com/api/?key=49423799-7939ddd154968d7fb42d51820&id=${id}`
     );
 
     if (!pixabayResponse.ok) {
@@ -38,6 +43,25 @@ async function fetchImageFromSources() {
     return hits[0];
   } catch (error) {
     console.error('Pixabay fetch failed:', error.message);
+  }
+
+  try {
+    const pixabayResponseVideo = await fetch(
+      `https://pixabay.com/api/videos/?key=49423799-7939ddd154968d7fb42d51820&id=${id}`
+    );
+
+    if (!pixabayResponseVideo.ok) {
+      throw new Error('Failed to fetch Pixabay video');
+    }
+
+    const { hits } = await pixabayResponseVideo.json();
+
+    if (hits.length === 0) {
+      throw new Error('No video found on Pixabay');
+    }
+    return hits[0];
+  } catch (error) {
+    console.error('Pixabay video fetch failed:', error.message);
     return null;
   }
 }
@@ -46,32 +70,108 @@ function getId() {
   return new URLSearchParams(window.location.search).get('id');
 }
 
-function detailsTemplate({ id, url, largeImageURL, likes = 15, views = 53 }) {
+function detailsTemplate({
+  id,
+  url,
+  largeImageURL,
+  likes,
+  tags = 'Photo from camera',
+  views = 53,
+  videos,
+}) {
+  const videoUrl = videos?.tiny?.url || null;
+
+  const isVideo =
+    videoUrl?.match(/\.(mp4|webm|ogg|film)$/) ||
+    url?.match(/\.(mp4|webm|ogg|film)$/);
+
   return `
-<div class="flex flex-col justify-between w-lg mx-auto mt-7 bg-white rounded-t-lg shadow-lg">
-    <div class="space-y-4 h-180 p-6">
-      <p class="text-gray-700 text-xl">Take me back</p>
-      <a class="flex justify-center h-full" href="/single/index?id=${id}">
-        <img src="${url || largeImageURL}" alt="Post Image" class="w-full h-full object-cover rounded-t-lg">
-      </a>
+<div class="main-div flex flex-col justify-between w-xl mx-auto mt-7 bg-white rounded-t-lg shadow-lg">
+  <div class="space-y-4 h-180 p-6">
+    <div class="flex justify-between items-center"> 
+      <p class="text-gray-700 text-xl">Collecting moments,📸 not things.</p>
+      <button id="deleteBtn" class="cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-black" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+        </svg>
+      </button>
     </div>
-     <!-- Post Actions -->
-    <div class="flex justify-between space-x-1 pt-1 border-t w-full bg-gray-200 px-7">
-      <button class="text-gray-800 text-xl py-2 px-3 rounded-md focus:outline-none cursor-pointer"> &#x2665;&#xfe0f; ${likes}</button>
-      <button class="text-gray-800 text-xl py-2 px-3 rounded-md focus:outline-none cursor-pointer"> &#x1F441;${views}</button>
-    </div>
+    <a class="flex justify-center h-full" href="/single/index?id=${id}">
+      ${
+        isVideo
+          ? `<video controls class="w-full h-full object-cover rounded-t-lg">
+               <source src="${videoUrl || url}" type="video/mp4">
+               Your browser does not support the video tag.
+             </video>`
+          : `<img src="${url || largeImageURL}" alt="${tags}" class="w-full h-full object-cover rounded-t-lg">`
+      }
+    </a>
+  </div>
+  <!-- Post Actions -->
+  <div class="flex justify-between space-x-1 pt-1 border-t w-full bg-gray-200 px-7 z-10">
+    <button class="main-likes text-gray-800 text-xl py-2 px-3 rounded-md focus:outline-none cursor-pointer">
+      <i class="fa-regular fa-heart likes-icon"></i> <span class="likes-count">${likes}</span>
+    </button>
+    <button class="text-gray-800 text-xl py-2 px-3 rounded-md focus:outline-none cursor-pointer"> &#x1F441; ${views}</button>
+  </div>
 </div>
+
   `;
+}
+
+function extractBlob(url) {
+  const match = url.match(/blob_([a-zA-Z0-9]+)/);
+  return match ? match[0] : null;
 }
 
 async function renderImage() {
   const imgDetails = await fetchImageFromSources();
+
   if (imgDetails) {
     const template = detailsTemplate(imgDetails);
 
     const detailsEl = createHTML(template);
     clearNode();
     imgContainer.appendChild(detailsEl);
+
+    const likeIcon = document.querySelector('.likes-icon');
+    const likesCountElement = document.querySelector('.likes-count');
+
+    let imgLikes = await fetchImageFromSources();
+    const imageId = imgLikes.id;
+    let currentLikes = imgLikes.likes || 15;
+
+    if (localStorage.getItem(imageId)) {
+      currentLikes = parseInt(localStorage.getItem(imageId), 10);
+    } else {
+      localStorage.setItem(imageId, currentLikes);
+    }
+
+    likesCountElement.textContent = currentLikes;
+
+    let isLiked = false;
+
+    likeIcon.addEventListener('click', () => {
+      if (isLiked) {
+        currentLikes -= 1;
+      } else {
+        currentLikes += 1;
+      }
+
+      likesCountElement.textContent = currentLikes;
+
+      likeIcon.classList.toggle('fa-regular');
+      likeIcon.classList.toggle('fa-solid');
+
+      likeIcon.style.color = isLiked ? '' : 'red';
+
+      localStorage.setItem(imageId, currentLikes);
+
+      isLiked = !isLiked;
+    });
+
+    const deleteBtn = document.querySelector('#deleteBtn');
+    deleteBtn.addEventListener('click', deleteImage);
   } else {
     console.error('No image found from any source.');
   }
@@ -149,3 +249,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
   displayComments();
 });
+
+function deleteImage() {
+  const Id = getId();
+
+  let images = JSON.parse(localStorage.getItem('combinedImg'));
+
+  if (!images) {
+    images = JSON.parse(localStorage.getItem('compainedImg')) || [];
+  }
+
+  const index = images.findIndex((img, i) => {
+    if (typeof img === 'object' && img.id) {
+      console.log(`Checking object ${i}:`, img);
+      return String(img.id) === String(Id);
+    }
+    return extractBlob(img) === Id;
+  });
+
+  if (index !== -1) {
+    images.splice(index, 1);
+
+    localStorage.setItem('combinedImg', JSON.stringify(images));
+  } else {
+    console.warn('No matching image found for deletion!');
+  }
+
+  window.location.href = '/profile/index.html';
+}

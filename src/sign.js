@@ -1,14 +1,14 @@
 const loginForm = document.getElementById('loginForm');
 const signUpForm = document.getElementById('signUpForm');
-const toggleToLogin = document.getElementById('toggleToLogin');
+const toggleToSignUp = document.getElementById('toggleToSignUp');
 const formTitle = document.getElementById('formTitle');
 const errorMessage = document.getElementById('errorMessage');
 
-toggleToLogin.addEventListener('click', (e) => {
+toggleToSignUp.addEventListener('click', (e) => {
   e.preventDefault();
-  signUpForm.classList.add('hidden');
-  loginForm.classList.remove('hidden');
-  formTitle.textContent = 'Login to Your Account';
+  loginForm.classList.add('hidden');
+  signUpForm.classList.remove('hidden');
+  formTitle.textContent = 'Sign Up for an Account';
 });
 
 loginForm.addEventListener('submit', function (e) {

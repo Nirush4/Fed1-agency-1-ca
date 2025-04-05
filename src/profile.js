@@ -1,3 +1,5 @@
+const profileMetrics = document.getElementById('profileMetrics');
+
 const gridEl = document.querySelector('#js-grid');
 const editBtn = document.getElementById('edit-btn');
 const editSection = document.getElementById('edit-section');
@@ -5,6 +7,12 @@ const saveBtn = document.getElementById('save-btn');
 const cancelBtn = document.getElementById('cancel-btn');
 const profileName = document.getElementById('profile-name');
 const nameInput = document.getElementById('name-input');
+const editBioBtn = document.getElementById('edit-bio-btn');
+const editBioSection = document.getElementById('edit-bio-section');
+const saveBioBtn = document.getElementById('save-bio-btn');
+const cancelBioBtn = document.getElementById('cancel-bio-btn');
+const bioText = document.getElementById('bio-text');
+const bioInput = document.getElementById('bio-input');
 const mediaContainer = document.querySelector('#media-gallery-container');
 
 const ERROR_MESSAGE_DEFAULT = 'Something went wrong';
@@ -27,10 +35,15 @@ async function setup() {
 
     const imgList = await getImage();
 
-    const compainedImg = [...imgList, ...imgFromCloud];
+    let storedImages = JSON.parse(localStorage.getItem('combinedImg'));
+
+    const compainedImg = storedImages || [...imgFromCloud, ...imgList];
+
+    if (!storedImages) {
+      localStorage.setItem('compainedImg', JSON.stringify(compainedImg));
+    }
 
     const shuffledArray = compainedImg.sort(() => Math.random() - 0.5);
-
     createProductsListEl(shuffledArray);
 
     const savedImage = localStorage.getItem('profileImage');
@@ -60,19 +73,56 @@ async function getImage() {
     console.error(ERROR_MESSAGE_DEFAULT, error?.message);
   }
 }
-function productTemplate({ id, imgUrl }) {
+function createSkeletonLoader() {
+  return `
+    <div class="grid-item skeleton-loader">
+      <div class="post-div skeleton">
+        <div class="skeleton-image"></div>
+      </div>
+    </div>
+  `;
+}
+
+createSkeletonListEl();
+
+function createSkeletonListEl() {
+  gridEl.innerHTML = '';
+
+  const skeletonCount = 47;
+  let skeletonHTML = '';
+  for (let i = 0; i < skeletonCount; i++) {
+    skeletonHTML += createSkeletonLoader();
+  }
+
+  gridEl.innerHTML = skeletonHTML;
+}
+
+function productTemplate({ id, imgUrl, tags }) {
   const detailsUrl = `/single/index?id=${id}`;
 
   return `
     <div class="grid-item">
       <div class="post-div">
         <a href="${detailsUrl}">
-          <img src="${imgUrl}" />
+          <img src="${imgUrl}" alt="${tags}"/>
         </a>
       </div>
     </div>
   `;
 }
+
+function ProfileMetricTemplate() {
+  const originalArray = JSON.parse(localStorage.getItem('compainedImg')) || [];
+  const storedImages = JSON.parse(localStorage.getItem('combinedImg')) || [];
+
+  return `
+<span class="text-gray-200 font-medium text-s md:text-lg cursor-pointer"><strong>Posts:</strong> ${storedImages.length || originalArray.length}</span>
+<span class="text-gray-200 font-medium text-s md:text-lg cursor-pointer"><strong>Followers:</strong>51</span>
+<span class="text-gray-200 font-medium text-s md:text-lg cursor-pointer"><strong>Following:</strong>45</span>
+  `;
+}
+
+profileMetrics.innerHTML = ProfileMetricTemplate();
 
 async function createProductsListEl(list = []) {
   gridEl.innerHTML = '';
@@ -80,6 +130,7 @@ async function createProductsListEl(list = []) {
   try {
     list.forEach((item) => {
       let imgUrl;
+
       let Id = '';
       if (typeof item === 'string') {
         imgUrl = item;
@@ -96,11 +147,13 @@ async function createProductsListEl(list = []) {
         const template = productTemplate({
           id: item.id || Id,
           imgUrl: imgUrl,
+          tags: item.tags || 'Photo from camera',
         });
 
         const newEl = createHTML(template);
 
         const image = newEl.querySelector('img');
+
         if (image && Id) {
           image.id = Id;
         }
@@ -156,11 +209,36 @@ cancelBtn.addEventListener('click', () => {
   profileName.classList.remove('hidden');
 });
 
+editBioBtn.addEventListener('click', () => {
+  editBioSection.classList.remove('hidden');
+  bioText.classList.add('hidden');
+  bioInput.value = bioText.textContent;
+  bioInput.focus();
+});
+
+saveBioBtn.addEventListener('click', () => {
+  const newBio = bioInput.value;
+  bioText.textContent = newBio;
+  localStorage.setItem('profileBio', newBio);
+  editBioSection.classList.add('hidden');
+  bioText.classList.remove('hidden');
+});
+
+cancelBioBtn.addEventListener('click', () => {
+  editBioSection.classList.add('hidden');
+  bioText.classList.remove('hidden');
+});
+
 window.addEventListener('load', () => {
   const storedName = localStorage.getItem('profileName');
+  const storedBio = localStorage.getItem('profileBio');
 
   if (storedName) {
     profileName.textContent = storedName;
+  }
+
+  if (storedBio) {
+    bioText.textContent = storedBio;
   }
 });
 
@@ -195,13 +273,14 @@ let listOfImgs = [];
 
 function loadImages() {
   return new Promise((resolve, reject) => {
-    var interval = setInterval(function () {
+    setTimeout(() => {
       if (document.readyState === 'complete') {
         const images = mediaContainer.querySelectorAll('img');
         const arrImg = Array.from(images);
 
         if (!arrImg.length || arrImg[0].src.length <= 1) {
-          console.warn('No images found yet. Waiting...');
+          console.log('No images found yet. Waiting...');
+
           return;
         }
 
@@ -214,7 +293,6 @@ function loadImages() {
 
         mediaContainer.innerHTML = '';
 
-        clearInterval(interval);
         resolve(listOfImgs);
       }
     }, 2500);

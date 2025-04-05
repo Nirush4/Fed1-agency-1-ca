@@ -1,0 +1,7 @@
+{
+  "rewrites": [
+    { "source": "/single", "destination": "/single/index.html" },
+    { "source": "/single/", "destination": "/single/index.html" },
+    { "source": "/single/:path*", "destination": "/single/index.html" }
+  ]
+}

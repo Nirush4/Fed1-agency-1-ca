@@ -2,130 +2,124 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="/src/style.css" rel="stylesheet">
-    <script type="module" src="/src/single.js" defer></script>
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.css'
-        integrity='sha512-GmZYQ9SKTnOea030Tbiat0Y+jhnYLIpsGAe6QTnToi8hI2nNbVMETHeK4wm4MuYMQdrc38x+sX77+kVD01eNsQ=='
-        crossorigin='anonymous' />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Connect with friends, share your moments, and discover new content on [YourWebsiteName]. A social platform for meaningful conversations and community building." />
+  <meta property="og:title" content="Square Pumpkin - Connect and Share" />
+  <meta property="og:description"
+    content="Join Square Pumpkin to connect with friends, share updates, and explore exciting content. Your go-to platform for online interaction and social discovery." />
+  <meta name="robots" content="index, follow">
 
-    <title>Single post / Square Pumpkin</title>
+  <link rel="shortcut icon" href="/images/logo-mobile.png" type="image/x-icon">
+  <link href="/src/style.css" rel="stylesheet" />
+  <script type="module" src="/src/single.js" defer></script>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.css'
+    integrity='sha512-GmZYQ9SKTnOea030Tbiat0Y+jhnYLIpsGAe6QTnToi8hI2nNbVMETHeK4wm4MuYMQdrc38x+sX77+kVD01eNsQ=='
+    crossorigin='anonymous' />
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.css'
+    integrity='sha512-GmZYQ9SKTnOea030Tbiat0Y+jhnYLIpsGAe6QTnToi8hI2nNbVMETHeK4wm4MuYMQdrc38x+sX77+kVD01eNsQ=='
+    crossorigin='anonymous' />
+  <title>Single post / Square Pumpkin</title>
 </head>
 
 <body class="">
+  <header class="flex justify-center w-full"></header>
 
-    <header class="flex justify-center w-full">
+  <main>
 
-    </header>
+    <!-- imp! left side nav -->
 
-    <main>
+    <div class="container grid fixed grid-cols-5 min-h-dvh min-w-full bg-bg-light">
 
-        <!-- imp! left side nav -->
+      <div
+        class="aside fixed bottom-0 right-0 left-0 z-30 flex justify-evenly items-center gap-5 h-15 w-full border-r-1 border-gray-300 bg-bg-light ... lg:hidden">
+        <a href="/profile/index.html" class="flex items-center w-12 h-12 pl-2">
+          <img src="/images/logo-mobile.png" alt="Logo"> </a>
+        <a href="/feed/index.html" class="flex items-center hover:text-darkOrange">
+          <i class="text-xl text-gray-200 cursor-pointer fa-solid fa-house-user"></i>
+          <span class="text-xl cursor-pointer ps-4"></span>
+        </a>
+        <a href="../profile/index.html" class="flex items-center hover:text-darkOrange">
+          <i class="text-xl text-gray-200 cursor-pointer fa-solid fa-user"></i>
+          <span class="text-xl cursor-pointer ps-4"></span>
+        </a>
 
-        <div class="container grid fixed grid-cols-5 min-h-dvh min-w-full  bg-bg-light ">
-
-            <div
-                class="aside fixed bottom-0 right-0 left-0 z-30 flex justify-evenly items-center gap-5 h-20 w-full border-r-1 border-gray-300 bg-bg-light ... lg:hidden">
-                <a href="/profile/index.html" class="flex items-center pl-2 w-12 h-12">
-                    <img src="/images/logo-mobile.png" alt=""> </a>
-                <a href="/profile/index.html" class="flex items-center hover:text-darkOrange">
-                    <i class="fa-solid fa-house-user cursor-pointer text-xl text-gray-200"></i>
-                    <span class="ps-4 cursor-pointer text-xl"></span>
-                </a>
-
-                <a href="../profile/index.html" class="flex items-center hover:text-darkOrange">
-                    <i class="fa-solid fa-user cursor-pointer text-xl text-gray-200"></i>
-                    <span class="ps-4 cursor-pointer text-xl"></span>
-                </a>
-
-                <a href="../explore/index.html" class="flex items-center hover:text-darkOrange">
-                    <i class="fa-solid fa-people-group cursor-pointer text-xl text-gray-200"></i>
-                    <span class="ps-4 cursor-pointer text-xl"></span>
-                </a>
-                <a href="../camera/index.html" class="flex items-center hover:text-darkOrange">
-                    <i class="fa-solid fa-plus cursor-pointer text-xl text-gray-200"></i>
-                    <span class="ps-4 cursor-pointer text-xl"></span>
-                </a>
-                <div class="flex items-center hover:text-darkOrange">
-                    <i class="fa-solid fa-bars cursor-pointer text-xl text-gray-200"></i>
-                    <span class="ps-4 cursor-pointer text-xl"></span>
-                </div>
-            </div>
+        <a href="../explore/index.html" class="flex items-center hover:text-darkOrange">
+          <i class="text-xl text-gray-200 cursor-pointer fa-solid fa-people-group"></i>
+          <span class="text-xl cursor-pointer ps-4"></span>
+        </a>
+        <a href="../camera/index.html" class="flex items-center hover:text-darkOrange">
+          <i class="text-xl text-gray-200 cursor-pointer fa fa-camera"></i>
+          <span class="text-xl cursor-pointer ps-4"></span>
+        </a>
+        <div class="flex items-center hover:text-darkOrange">
+          <i class="text-xl text-gray-200 cursor-pointer fa-solid fa-bars"></i>
+          <span class="text-xl cursor-pointer ps-4"></span>
+        </div>
+      </div>
 
 
 
-            <div
-                class="aside hidden lg:flex flex-col gap-15 h-full w-full border-r-1 border-gray-300 min-h-dvh text-white ...">
-                <a href="/profile/index.html" class="flex items-center w-55 h-20 py-20 pl-10">
-                    <img src="/images/logo-desktop.png" alt=""> </a>
+      <div
+        class="aside hidden lg:flex flex-col gap-15 h-full w-full border-r-1 border-gray-300 min-h-dvh text-white ...">
+        <a href="/profile/index.html" class="flex items-center h-20 py-20 pl-10 w-55 shadow-white">
+          <img src="/images/logo-desktop.png" alt="Logo" class="shadow-white"> </a>
 
-                <div class="flex items-center hover:text-darkOrange">
-                    <i class="fa-solid fa-house-user cursor-pointer text-xl ps-12 text-gray-200"></i>
-                    <span class="ps-4 cursor-pointer text-xl text-gray-200">Home</span>
-                </div>
-                <a href="/profile/index.html" class="flex items-center hover:text-darkOrange">
-                    <i class="fa-solid fa-user cursor-pointer text-xl ps-12 text-gray-200"></i>
-                    <span class="ps-4 cursor-pointer text-xl text-gray-200">Profile</span>
-                </a>
+        <a href="/feed/index.html" class="flex items-center hover:text-darkOrange">
+          <i class="text-xl text-gray-200 cursor-pointer fa-solid fa-house-user ps-12"></i>
+          <span class="text-xl text-gray-200 cursor-pointer ps-4">Home</span>
+        </a>
+        <a href="../profile/index.html" class="flex items-center hover:text-darkOrange">
+          <i class="text-xl text-gray-200 cursor-pointer fa-solid fa-user ps-12"></i>
+          <span class="text-xl text-gray-200 cursor-pointer ps-4">Profile</span>
+        </a>
 
-                <a href="../explore/index.html" class="flex items-center hover:text-darkOrange">
-                    <i class="fa-solid fa-people-group cursor-pointer text-xl ps-12 text-gray-200"></i>
-                    <span class="ps-4 cursor-pointer text-xl text-gray-200">Explore</span>
-                </a>
+        <a href="../explore/index.html" class="flex items-center hover:text-darkOrange">
+          <i class="text-xl text-gray-200 cursor-pointer fa-solid fa-people-group ps-12"></i>
+          <span class="text-xl text-gray-200 cursor-pointer ps-4">Explore</span>
+        </a>
 
-                <a href="../camera/index.html" class="flex items-center hover:text-darkOrange">
-                    <i class="fa-solid fa-plus cursor-pointer text-xl ps-12 text-gray-200"></i>
-                    <span class="ps-4 cursor-pointer text-xl text-gray-200">Create</span>
-                </a>
+        <a href="../camera/index.html" class="flex items-center hover:text-darkOrange">
+          <i class="text-xl text-gray-200 cursor-pointer fa fa-camera ps-12"></i>
+          <span class="text-xl text-gray-200 cursor-pointer ps-4">Create</span>
+        </a>
 
-                <div class="flex items-center hover:text-darkOrange">
-                    <i class="fa-solid fa-bars cursor-pointer text-xl ps-12 text-gray-200"></i>
-                    <span class="ps-4 cursor-pointer text-xl text-gray-200">More</span>
-                </div>
-            </div>
+        <div class="flex items-center hover:text-darkOrange">
+          <i class="text-xl text-gray-200 cursor-pointer fa-solid fa-bars ps-12"></i>
+          <span class="text-xl text-gray-200 cursor-pointer ps-4">More</span>
+        </div>
+      </div>
 
+      <!-- imp! Right side container -->
 
+      <div
+        class="aside aside grid grid-rows-auto col-span-5 h-dvh w-full pt-10 px-5 place-items-center overflow-y-scroll ... bg-bg s:px-10 lg:col-span-4 lg:px-0">
+        <!-- imp! posts -->
 
+        <div id="img-container" class="body-content min-w-1 h-auto gap-1 text-9xl text-white w-xl"></div>
+        <div class="comments-container flex flex-col justify-between w-xl h-auto mx-auto bg-white shadow-lg p-5">
+          <div class="py-4">
+            <form class="mb-4">
+              <div class="flex gap-2">
+                <input type="text" placeholder="Add a comment..."
+                  class="flex-1 px-3 py-2 border text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <button type="submit"
+                  class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors">
+                  Post
+                </button>
+              </div>
+            </form>
 
-            <!-- imp! Right side container -->
+            <div class="new-comments space-y-3"></div>
 
-            <div
-                class="aside aside grid grid-rows-auto col-span-5 h-dvh w-full pt-10 px-5 place-items-center overflow-y-scroll ... bg-bg s:px-10 lg:col-span-4 lg:px-0">
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 
-                <!-- imp! posts -->
-
-                <div id="img-container" class="body-content min-w-1 h-auto gap-1 text-9xl text-white w-lg ">
-                </div>
-                <div class="flex flex-col justify-between w-lg h-full mx-auto bg-white shadow-lg p-5">
-                    <div class="py-4">
-                        <form class="mb-4">
-                            <div class="flex gap-2">
-                                <input type="text" placeholder="Add a comment..."
-                                    class="flex-1 px-3 py-2 border text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                <button type="submit"
-                                    class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors">
-                                    Post
-                                </button>
-                            </div>
-                        </form>
-
-                        <div class="new-comments space-y-3">
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-
-
-
-    </main>
-
-    <footer>
-
-    </footer>
+  <footer></footer>
 </body>
 
 </html>
