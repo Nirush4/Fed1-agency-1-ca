@@ -1,4 +1,3 @@
-
 const profileMetrics = document.getElementById('profileMetrics');
 
 const gridEl = document.querySelector('#js-grid');
@@ -18,6 +17,7 @@ const mediaContainer = document.querySelector('#media-gallery-container');
 
 const ERROR_MESSAGE_DEFAULT = 'Something went wrong';
 
+const key = import.meta.env.VITE_API_KEY;
 
 setup();
 
@@ -31,7 +31,7 @@ async function setup() {
     !profileName ||
     !nameInput
   ) {
-    console.error("JS cannot run!!!");
+    console.error('JS cannot run!!!');
   } else {
     const imgFromCloud = await loadImages();
 
@@ -48,7 +48,6 @@ async function setup() {
     const shuffledArray = compainedImg.sort(() => Math.random() - 0.5);
     createProductsListEl(shuffledArray);
 
-
     const savedImage = localStorage.getItem('profileImage');
 
     if (savedImage) {
@@ -59,14 +58,14 @@ async function setup() {
 
 function createHTML(template) {
   const parser = new DOMParser();
-  const parsedDocument = parser.parseFromString(template, "text/html");
+  const parsedDocument = parser.parseFromString(template, 'text/html');
   return parsedDocument.body.firstChild;
 }
 
 async function getImage() {
   try {
     const response = await fetch(
-      `https://pixabay.com/api/?key=49423799-7939ddd154968d7fb42d51820&orientation=vertical&page=1&per_page=20&category=places`
+      `https://pixabay.com/api/?key=${key}&orientation=vertical&page=1&per_page=20&category=places`
     );
 
     const { hits } = await response.json();
@@ -128,12 +127,11 @@ function ProfileMetricTemplate() {
 profileMetrics.innerHTML = ProfileMetricTemplate();
 
 async function createProductsListEl(list = []) {
-  gridEl.innerHTML = "";
+  gridEl.innerHTML = '';
 
   try {
     list.forEach((item) => {
       let imgUrl;
-
 
       let Id = '';
       if (typeof item === 'string') {
@@ -156,7 +154,6 @@ async function createProductsListEl(list = []) {
 
         const newEl = createHTML(template);
 
-
         const image = newEl.querySelector('img');
 
         if (image && Id) {
@@ -170,17 +167,17 @@ async function createProductsListEl(list = []) {
   }
 }
 
-const fileInput = document.getElementById("file-input");
-const profileImg = document.getElementById("profile-img");
+const fileInput = document.getElementById('file-input');
+const profileImg = document.getElementById('profile-img');
 
 window.onload = function setImageInLS() {
-  const savedImage = localStorage.getItem("profileImage");
+  const savedImage = localStorage.getItem('profileImage');
   if (savedImage) {
     profileImg.src = savedImage;
   }
 };
 
-fileInput.addEventListener("change", function (event) {
+fileInput.addEventListener('change', function (event) {
   const file = event.target.files[0];
   if (file) {
     const reader = new FileReader();
@@ -188,55 +185,55 @@ fileInput.addEventListener("change", function (event) {
       const imageSrc = e.target.result;
       profileImg.src = imageSrc;
 
-      localStorage.setItem("profileImage", imageSrc);
+      localStorage.setItem('profileImage', imageSrc);
     };
     reader.readAsDataURL(file);
   }
 });
 
-editBtn.addEventListener("click", () => {
-  editSection.classList.remove("hidden");
-  profileName.classList.add("hidden");
+editBtn.addEventListener('click', () => {
+  editSection.classList.remove('hidden');
+  profileName.classList.add('hidden');
   nameInput.value = profileName.textContent;
   nameInput.focus();
 });
 
-saveBtn.addEventListener("click", () => {
+saveBtn.addEventListener('click', () => {
   const newName = nameInput.value;
   profileName.textContent = newName;
-  localStorage.setItem("profileName", newName);
-  editSection.classList.add("hidden");
-  profileName.classList.remove("hidden");
+  localStorage.setItem('profileName', newName);
+  editSection.classList.add('hidden');
+  profileName.classList.remove('hidden');
 });
 
-cancelBtn.addEventListener("click", () => {
-  editSection.classList.add("hidden");
-  profileName.classList.remove("hidden");
+cancelBtn.addEventListener('click', () => {
+  editSection.classList.add('hidden');
+  profileName.classList.remove('hidden');
 });
 
-editBioBtn.addEventListener("click", () => {
-  editBioSection.classList.remove("hidden");
-  bioText.classList.add("hidden");
+editBioBtn.addEventListener('click', () => {
+  editBioSection.classList.remove('hidden');
+  bioText.classList.add('hidden');
   bioInput.value = bioText.textContent;
   bioInput.focus();
 });
 
-saveBioBtn.addEventListener("click", () => {
+saveBioBtn.addEventListener('click', () => {
   const newBio = bioInput.value;
   bioText.textContent = newBio;
-  localStorage.setItem("profileBio", newBio);
-  editBioSection.classList.add("hidden");
-  bioText.classList.remove("hidden");
+  localStorage.setItem('profileBio', newBio);
+  editBioSection.classList.add('hidden');
+  bioText.classList.remove('hidden');
 });
 
-cancelBioBtn.addEventListener("click", () => {
-  editBioSection.classList.add("hidden");
-  bioText.classList.remove("hidden");
+cancelBioBtn.addEventListener('click', () => {
+  editBioSection.classList.add('hidden');
+  bioText.classList.remove('hidden');
 });
 
-window.addEventListener("load", () => {
-  const storedName = localStorage.getItem("profileName");
-  const storedBio = localStorage.getItem("profileBio");
+window.addEventListener('load', () => {
+  const storedName = localStorage.getItem('profileName');
+  const storedBio = localStorage.getItem('profileBio');
 
   if (storedName) {
     profileName.textContent = storedName;
@@ -249,17 +246,15 @@ window.addEventListener("load", () => {
 
 const myGallery = cloudinary.galleryWidget({
   container: mediaContainer,
-  cloudName: "du2edesv8",
-  carouselStyle: "none",
+  cloudName: 'du2edesv8',
+  carouselStyle: 'none',
   autoplay: false,
-
 
   videoProps: { controls: 'all', autoplay: false },
 
-
   mediaAssets: [
     {
-      tag: "myImages",
+      tag: 'myImages',
       transformation: {
         prefixed: false,
         quality: 'auto:best',
@@ -268,7 +263,7 @@ const myGallery = cloudinary.galleryWidget({
         fetch_format: 'auto',
 
         x_0: 1,
-        crop: "fill",
+        crop: 'fill',
       },
     },
   ],
@@ -280,14 +275,13 @@ let listOfImgs = [];
 
 function loadImages() {
   return new Promise((resolve, reject) => {
-
     setTimeout(() => {
-      if (document.readyState === "complete") {
-        const images = mediaContainer.querySelectorAll("img");
+      if (document.readyState === 'complete') {
+        const images = mediaContainer.querySelectorAll('img');
         const arrImg = Array.from(images);
 
         if (!arrImg.length || arrImg[0].src.length <= 1) {
-          console.log("No images found yet. Waiting...");
+          console.log('No images found yet. Waiting...');
 
           return;
         }

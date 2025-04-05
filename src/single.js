@@ -1,11 +1,10 @@
-
 const imgContainer = document.querySelector('#img-container');
 
+const key = import.meta.env.VITE_API_KEY;
 
 function getImageArrayFromLS() {
   localStorage.getItem('compainedImg');
 }
-
 
 getImageArrayFromLS();
 
@@ -31,7 +30,7 @@ async function fetchImageFromSources() {
 
   try {
     const pixabayResponse = await fetch(
-      `https://pixabay.com/api/?key=49423799-7939ddd154968d7fb42d51820&id=${id}`
+      `https://pixabay.com/api/?key=${key}&id=${id}`
     );
 
     if (!pixabayResponse.ok) {
@@ -50,7 +49,7 @@ async function fetchImageFromSources() {
 
   try {
     const pixabayResponseVideo = await fetch(
-      `https://pixabay.com/api/videos/?key=49423799-7939ddd154968d7fb42d51820&id=${id}`
+      `https://pixabay.com/api/videos/?key=${key}&id=${id}`
     );
 
     if (!pixabayResponseVideo.ok) {
@@ -181,7 +180,7 @@ async function renderImage() {
 }
 
 function clearNode() {
-  imgContainer.innerHTML = "";
+  imgContainer.innerHTML = '';
 }
 
 function createHTML(template) {
