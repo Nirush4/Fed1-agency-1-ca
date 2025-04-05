@@ -39,7 +39,7 @@ Staging is the enviroment where the team can test the latest features and bug fi
 
 ## Built with
 
-<img src="/images/vite-logo.png width="60" height="60"> <img src="/images/html-logo.png" width="60" height="60"> <img src="/images/css-logo.webp" width="60" height="60"> <img src="/images/tailwind-Logo.png" width="60" height="60"> <img src="/images/js-logo.png" width="60" height="60">
+<img src="/images/vite-logo.png" width="50" height="40"> <img src="/images/html-logo.png" width="50" height="50"> <img src="/images/css-logo.webp" width="50" height="50"> <img src="/images/tailwind-Logo.png" width="50" height="30"> <img src="/images/js-logo.png" width="50" height="50">
 
 ## Testing and debug:
 
