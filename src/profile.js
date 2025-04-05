@@ -17,8 +17,6 @@ const mediaContainer = document.querySelector('#media-gallery-container');
 
 const ERROR_MESSAGE_DEFAULT = 'Something went wrong';
 
-const key = import.meta.env.VITE_API_KEY;
-
 setup();
 
 async function setup() {
@@ -65,7 +63,7 @@ function createHTML(template) {
 async function getImage() {
   try {
     const response = await fetch(
-      `https://pixabay.com/api/?key=${key}&orientation=vertical&page=1&per_page=20&category=places`
+      `https://pixabay.com/api/?key=49423799-7939ddd154968d7fb42d51820&orientation=vertical&page=1&per_page=20&category=places`
     );
 
     const { hits } = await response.json();

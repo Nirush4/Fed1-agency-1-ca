@@ -2,8 +2,6 @@ const imgContainerEl = document.querySelector('#img-container');
 
 const ERROR_MESSAGE_DEFAULT = 'Something went wrong';
 
-const key = import.meta.env.VITE_API_KEY;
-
 setup();
 
 async function setup() {
@@ -24,7 +22,7 @@ async function setup() {
 async function getImage() {
   try {
     const response = await fetch(
-      `https://pixabay.com/api/?key=${key}&orientation=vertical&safesearch=true&image_type=photo&page=2&per_page=100&category=music`
+      `https://pixabay.com/api/?key=49423799-7939ddd154968d7fb42d51820&orientation=vertical&safesearch=true&image_type=photo&page=2&per_page=100&category=music`
     );
 
     const { hits } = await response.json();
@@ -39,7 +37,7 @@ async function getImage() {
 async function getVideo() {
   try {
     const response = await fetch(
-      `https://pixabay.com/api/videos/?key=${key}&orientation=vertical&safesearch=true&page=3&per_page=20&category=music`
+      `https://pixabay.com/api/videos/?key=49423799-7939ddd154968d7fb42d51820&orientation=vertical&safesearch=true&page=3&per_page=20&category=music`
     );
 
     const { hits } = await response.json();
