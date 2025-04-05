@@ -20,7 +20,7 @@ Create an engaging, user-centric social media platform that fosters meaningful c
 
 ## Report
 
-- [Report]()
+- [Report](https://docs.google.com/document/d/1WPAOUeC4VgCfYtCfbzz9iHmF238ffcZTLrEwZwUvrJc/edit?usp=sharing)
 
 ## Features
 
