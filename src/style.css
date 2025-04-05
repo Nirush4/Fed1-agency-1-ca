@@ -106,6 +106,33 @@
   border-radius: 10px;
 }
 
+.skeleton-loader-single {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 36rem;
+  max-height: 60rem;
+}
+
+.skeleton-single {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 36rem;
+  height: 60rem;
+  gap: 10px;
+}
+
+.skeleton-image-single {
+  width: 36rem;
+  height: 60rem;
+  background: linear-gradient(90deg, #212437 25%, #2a2d45 50%, #212437 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite linear;
+  border-radius: 7px;
+}
+
 
 
 @keyframes loading {
@@ -141,6 +168,14 @@
     width: 16rem;
     height: 19rem;
   }
+
+  .skeleton-loader-single,
+  .skeleton-single,
+  .skeleton-image-single {
+    width: 32rem;
+    height: 47rem;
+  }
+
 }
 
 
@@ -162,6 +197,13 @@
   .skeleton-image {
     width: 9rem;
     height: 10rem;
+  }
+
+  .skeleton-loader-single,
+  .skeleton-single,
+  .skeleton-image-single {
+    width: 20rem;
+    height: 47rem;
   }
 
   .camera-main-div {
@@ -209,4 +251,5 @@
     height: 100%;
     width: 293%;
   }
+
 }

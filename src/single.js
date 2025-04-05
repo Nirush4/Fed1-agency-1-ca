@@ -70,6 +70,26 @@ function getId() {
   return new URLSearchParams(window.location.search).get('id');
 }
 
+function createSkeletonLoader() {
+  return `
+    <div class="skeleton-loader-single main-div flex flex-col justify-between mx-auto mt-7 bg-white rounded-t-lg shadow-lg">
+      <div class="skeleton-single">
+        <div class="skeleton-image-single"></div>
+      </div> 
+    </div>
+  `;
+}
+
+createSkeletonListEl();
+
+function createSkeletonListEl() {
+  imgContainer.innerHTML = '';
+
+  const skeletonHTML = createSkeletonLoader();
+
+  imgContainer.innerHTML = skeletonHTML;
+}
+
 function detailsTemplate({
   id,
   url,
@@ -86,10 +106,10 @@ function detailsTemplate({
     url?.match(/\.(mp4|webm|ogg|film)$/);
 
   return `
-<div class="main-div flex flex-col justify-between w-xl mx-auto mt-7 bg-white rounded-t-lg shadow-lg">
-  <div class="space-y-4 h-180 p-6">
-    <div class="flex justify-between items-center"> 
-      <p class="text-gray-700 text-xl">Collecting moments,📸 not things.</p>
+<div class="main-div flex flex-col justify-between w-xs mx-auto mt-7 bg-white rounded-t-lg shadow-lg md:w-lg lg:w-xl">
+  <div class="space-y-4 p-4 h-145 md:p-6 md:h-150 lg:h-180">
+    <div class="flex justify-between mb-0 items-center md:mb-3"> 
+      <p class="text-gray-700 text-lg lg:text-xl">Collecting moments,📸 not things.</p>
       <button id="deleteBtn" class="cursor-pointer">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-black" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
@@ -110,9 +130,9 @@ function detailsTemplate({
   <!-- Post Actions -->
   <div class="flex justify-between space-x-1 pt-1 border-t w-full bg-gray-200 px-7 z-10">
     <button class="main-likes text-gray-800 text-xl py-2 px-3 rounded-md focus:outline-none cursor-pointer">
-      <i class="fa-regular fa-heart likes-icon"></i> <span class="likes-count">${likes}</span>
+      <i class="fa-regular fa-heart likes-icon"></i> <span class="likes-count text-lg lg:text-xl">${likes}</span>
     </button>
-    <button class="text-gray-800 text-xl py-2 px-3 rounded-md focus:outline-none cursor-pointer"> &#x1F441; ${views}</button>
+    <button class="text-gray-800 py-2 px-3 rounded-md focus:outline-none cursor-pointer text-lg lg:text-xl"> &#x1F441; ${views}</button>
   </div>
 </div>
 
@@ -197,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
     commentsList.innerHTML = comments
       .map(
         (comment, index) => `
-            <div class=" rounded-lg p-3 shadow-sm relative group bg-gray-100">
+            <div class=" rounded-lg p-3 shadow-sm relative group">
                 <div class="flex items-center gap-2 mb-1">
                     <img src="/images/default-profile-pic.png" alt="user avatar" class="w-8 h-8 rounded-full">
                     <span class="font-medium text-gray-500">${comment.username}</span>
