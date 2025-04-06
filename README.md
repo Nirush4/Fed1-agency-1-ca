@@ -1,8 +1,9 @@
-# Fed1-agency-1-ca (Rainydays)
+# Fed1-agency-1-ca (Square Pumpkin 📸)
 
 # Goal
 
-Create an engaging, user-centric social media platform that fosters meaningful connections, promotes content discovery, and empowers users to share their ideas and experiences in a safe, secure, and interactive online community. This platform will provide users with a seamless experience to create personalized profiles, share diverse content, engage with others through likes, comments, and direct messaging, and discover new trends and connections, all while maintaining privacy and security. The ultimate goal is to create a thriving online ecosystem where users can express themselves, collaborate, and connect with others globally.
+The goal is to create an engaging social media platform that encourage meaningful connections, promotes content discovery, and empowers users to share their ideas and experiences within an online community. This project aims to provide a seamless and personalized experience, enabling users to easily create, customize, and manage their profiles. Users will be able to share their photos as posts, discover content tailored to their interests through a dynamic feed, and engage with others by liking and commenting on posts. The project will also include a feature to take photos using the camera and create new posts directly from the application, providing an engaging and easy-to-use interface for content sharing and interaction.
+
 
 ## User Stories
 
