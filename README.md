@@ -6,12 +6,12 @@ Create an engaging, user-centric social media platform that fosters meaningful c
 
 ## User Stories
 
-- ✅ As a user, I'm able to create, customize, and manage my profile, ensuring a personalized experience.
-- ✅ As a user, I want to share my photos as a post within the platform..
-- ✅ As a user, I want to see the feed to discover contents that is relevant to my interests.
-- ✅ As a user, I want to remove my post from my profile.
-- ✅ As a user, I want to search for posts, profiles, or hashtags to discover content and people of interest.
-- ✅ As a user, I want to read my privacy policies and ensure that my data is secure.
+- ✅ As a user, I want to create, customize, and manage my profile, So that I can ensure a personalized experience on the platform.
+- ✅ As a user, I want to share my photos as a post within the platform, So that I can engage with my followers and share my experiences.
+- ✅ As a user, I want to see the feed of content, So that I can discover posts that are relevant to my interests.
+- ✅ As a user,  I want to remove my post from my profile, So that I can control the content I share and maintain the posts I want visible.
+- ✅ As a user, I want to like and comment on posts, So that I can engage with others and express my opinions on shared content.
+- ✅ As a user, I want to use the camera to take a picture and create a new post, So that I can quickly share fresh content with my followers.
 
 ## Resources
 
