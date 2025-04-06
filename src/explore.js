@@ -41,7 +41,6 @@ async function getVideo() {
     );
 
     const { hits } = await response.json();
-    console.log(hits);
     return hits || [];
   } catch (error) {
     console.error(ERROR_MESSAGE_DEFAULT, error?.message);

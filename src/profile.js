@@ -279,8 +279,6 @@ function loadImages() {
         const arrImg = Array.from(images);
 
         if (!arrImg.length || arrImg[0].src.length <= 1) {
-          console.log('No images found yet. Waiting...');
-
           return;
         }
 
