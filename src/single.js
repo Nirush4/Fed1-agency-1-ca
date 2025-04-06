@@ -281,7 +281,6 @@ function deleteImage() {
 
   const index = images.findIndex((img, i) => {
     if (typeof img === 'object' && img.id) {
-      console.log(`Checking object ${i}:`, img);
       return String(img.id) === String(Id);
     }
     return extractBlob(img) === Id;
