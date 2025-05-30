@@ -63,7 +63,7 @@ function createHTML(template) {
 async function getImage() {
   try {
     const response = await fetch(
-      `https://pixabay.com/api/?key=49423799-7939ddd154968d7fb42d51820&orientation=vertical&page=1&per_page=20&category=travel`
+      `https://pixabay.com/api/?key=49423799-7939ddd154968d7fb42d51820&orientation=vertical&page=1&per_page=20&category=animals`
     );
 
     const { hits } = await response.json();
